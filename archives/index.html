@@ -406,11 +406,37 @@ More...
                 <span>Java初认识锁机制</span>
         </a>
         <div class="abstract-content">
-            锁的概念在介绍锁的概念之前，先了解一下并发的概念。
-举一个例子来说，一个厨师在正常情况下我们不允许厨师同时做两道菜，先做完一道再做另一道。但是如果时间紧迫的情况下（特定情况下），如果希望能同时拿出两道菜，如果按照之前的情况来看，明显完成不了任务，但是我们允许厨师可以做着其中一道菜同时兼顾着其他菜，那就有可能完成任务。这里的厨师能做一道菜同时兼顾其他菜，我们就可以成为“并发”了。
-我对并发的理解就是：对于某个任务，我们能够并行执行多个部分去共同完成这个任务，已达到提高我们完成工作效率效果，这就算作并发。
-有了并发就可以同时做多件事情，多个线程彼此之间的影响的问题也就随着出现了。
-对于并发的...
+            <h3 id="锁的概念"><a href="#锁的概念" class="headerlink" title="锁的概念"></a>锁的概念</h3><p>在介绍锁的概念之前，先了解一下<strong>并发的概念</strong>。</p>
+<p>举一个例子来说，一个厨师在正常情况下我们不允许厨师同时做两道菜，先做完一道再做另一道。但是如果时间紧迫的情况下（特定情况下），如果希望能同时拿出两道菜，如果按照之前的情况来看，明显完成不了任务，但是我们允许厨师可以做着其中一道菜同时兼顾着其他菜，那就有可能完成任务。这里的厨师能做一道菜同时兼顾其他菜，我们就可以成为“并发”了。</p>
+<p><strong>我对并发的理解</strong>就是：对于某个任务，我们能够并行执行多个部分去共同完成这个任务，已达到提高我们完成工作效率效果，这就算作并发。</p>
+<p>有了并发就可以同时做多件事情，多个线程彼此之间的影响的问题也就随着出现了。</p>
+<p>对于并发的工作，需要某种方式来<strong>防止两个或多个任务访问相同的资源</strong>（至少在关键时候不可以），防止这种情况发生的方法就是资源被第一个调用者调用的时候，其它的调用着不能再调用该资源，其它需要调用该资源的调用者们，需要进行等待（阻塞状态），在当前资源调用者说明它已经使用完毕该资源，其它调用者才可以进行调用资源。这里在第一个调用者调用资源 的时候我们为 其加上 “锁”，其它调用者就知道资源给调用了，进入等待状态。好比我们上厕所，如果厕所们关着，说明有人在使用。</p>
+<h3 id="使用锁的时机"><a href="#使用锁的时机" class="headerlink" title="使用锁的时机"></a>使用锁的时机</h3><p>可以运用 Brian 的同步规则：</p>
+<blockquote>
+<p>如果你正在写一个变量，它可能接下来将被另一个线程读取，或者正在读取一个上一次已经被另一个线程写过的变量，那么你必须使用同步，并且，<strong>读写线程都必须使用相同的监视器锁同步</strong>。</p>
+</blockquote>
+<p><strong>注意：</strong><br>我们使用锁，锁的是我们这个项目程序的资源，而不是数据库资源，另外，如果程序是分布式的，要特别注意资源是否需要分布式同步。</p>
+<h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a><em>synchronized</em></h3><p><strong>Java</strong> 提供了<strong><em>synchronized</em></strong> 关键字，在程序要执行到 <strong><em>synchronized</em></strong> 保护的代码时候，它会先检查锁是否可用，确定锁可用然后获取锁，锁不可用则会进行等待其它线程调用完该代码后释放锁，再获取锁。执行完保护的代码片段完后再释放锁。（通过 synchronized 获得的锁为悲观锁）</p>
+<p>synchronized 可用于同步方法和对象</p>
+<h4 id="synchronized-同步方法"><a href="#synchronized-同步方法" class="headerlink" title="synchronized 同步方法"></a><em>synchronized</em> 同步方法</h4><p><strong><em>synchronized</em></strong> 关键字用于锁定特定<strong>方法</strong>的格式如下所示：</p>
+<p>只需要在方法返回类型前加入关键字 synchronized 即可 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//.....</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//.....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<p>在我们同步（锁定）方法的时候，经常将方法定义为 private ，避免其它方法直接调用该方法，减少冲突情况发生。</p>
+<h4 id="synchronized-同步对象"><a href="#synchronized-同步对象" class="headerlink" title="synchronized 同步对象"></a><em>synchronized</em> 同步对象</h4><p>不应该说为同步对象，应该算是通过锁定对象，实现锁定特定代码块。</p>
+<p>使用方法：synchronized 锁定指定提供内部锁的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>)&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MsLunch</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> c1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> c2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> Object lock1 = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">private</span> Object lock2 = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inc1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(lock1) &#123;</span><br><span class="line">            c1++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inc2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(lock2) &#123;</span><br><span class="line">            c2++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="synchronized-和-static-synchronized"><a href="#synchronized-和-static-synchronized" class="headerlink" title="synchronized 和 static synchronized"></a><em>synchronized</em> 和 <em>static synchronized</em></h4><p><em>synchronized</em> 是对类的<strong>当前实例</strong>进行加锁，防止其他线程同时访问该类的该实例的所有 <em>synchronized</em> 块，注意这里是“类的当前实例”，类的两个不同实例就没有这种约束了。</p>
+<p><em>static synchronized</em> 恰好就是要控制类的所有实例的访问了，<em>static synchronized</em> 是限制线程同时访问 <strong>JVM</strong>中该类的所有实例同时访问对应的代码块。</p>
+<p>实际上，在类中如果某方法或某代码块中有 <em>synchronized</em>，那么在生成一个该类实例后，该实例也就有一个<strong>监视块</strong>，防止线程并发访问该实例的 <em>synchronized</em> 保护块，而 <em>static synchronized</em> 则是所有该类的所有实例公用得一个监视块，这就是他们两个的区别。</p>
+<h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>使用 Lock 对象，可以手动地对锁进行创建、锁定和释放。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">next</span><span class="params">()</span></span>&#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">//....</span></span><br><span class="line">        <span class="keyword">return</span> xxx;</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>return 必须在 try 中，确保 unlock() 不会过早发生。</p>
+<p>优点：使用 Lock 可以获得更加细颗粒度的控制。</p>
+<p>有关于Lock锁，推荐两篇文章：</p>
+<p><a href="https://mp.weixin.qq.com/s?src=11&amp;timestamp=1542983170&amp;ver=1262&amp;signature=9iV1wGj2wN9rIcBcGM6gO2P9bdfYSzbbO2ocvoWQDXExvbUz4a1DwcoVkRvwCOZTm4hWINtZ8TOiin*JVKrx3fbAyU3iA2EZ5EnH-EykWHn3EWpzsGUgL*i0Linphnnl&amp;new=1" target="_blank" rel="noopener">高并发编程系列：4种常用Java线程锁的特点，性能比较、使用场景</a></p>
+<p><a href="https://winterbe.com/posts/2015/04/30/java8-concurrency-tutorial-synchronized-locks-examples/" target="_blank" rel="noopener">Java 8 Concurrency Tutorial: Synchronization and Locks</a></p>
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -640,6 +666,8 @@ jsonContent:
     <div class="sidebar-categories-name">
     
         <span class="sidebar-category-name" data-categories="java-锁"><span class="iconfont-archer">&#xe60a;</span>java-锁</span>
+    
+        <span class="sidebar-category-name" data-categories="java"><span class="iconfont-archer">&#xe60a;</span>java</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
