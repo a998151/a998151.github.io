@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>fi3ework&#39;s Studio</title>
+    <title>volatitle 是什么？ · fi3ework&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">fi3ework&#39;s Studio.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name"></a>
+                <a href="#" class="post-name">volatitle 是什么？</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            [Untitled Post]
+            volatitle 是什么？
             <!-- 404 -->
             
         </h1>
@@ -264,14 +264,20 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2.7k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/02/01</span>
+                    <span class="post-intro-time">2019/03/05</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,62 +401,65 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>笔记来源：<a href="https://mp.weixin.qq.com/s?src=11&amp;timestamp=1547081334&amp;ver=1317&amp;signature=D1lVoSu-tV93j4g0T4xZj*vM5Kla-YAd3ZMsCofx7P7FElBVi6yqeobObWAkKHbRunu3FcHv2cZvzWA6TeWiHahe9093oT1b2N7CIq8Ix8yrJmCRE1VbZI2XnXxX-lMb&amp;new=1" target="_blank" rel="noopener">滴滴工程师图文并茂带你深入理解 TCP 握手分手全过程</a></p>
-<h2 id="什么是“3次握手，4次挥手”"><a href="#什么是“3次握手，4次挥手”" class="headerlink" title="什么是“3次握手，4次挥手”"></a>什么是“3次握手，4次挥手”</h2><p>TCP是一种面向连接的<strong>单播协议</strong>，在发送数据前，通信双方必须在彼此间建立一条连接。<u>所谓的“连接”，其实是客户端和服务器的内存里保存的一份关于对方的信息，如ip地址、端口号等。</u></p>
-<p>TCP<u>可以看成</u>是一种<strong>字节流</strong>，它会处理 IP 层或以下的层的丢包、重复以及错误问题。在连接的建立过程中，双方需要交换一些连接的参数。这些参数可以放在TCP头部。</p>
-<p>TCP提供了一种可靠、面向连接、字节流、传输层的服务，<strong>采用三次握手建立一个连接。采用4次挥手来关闭一个连接。</strong></p>
-<p>ps: <a href="https://colobu.com/2014/10/21/udp-and-unicast-multicast-broadcast-anycast/" target="_blank" rel="noopener">单播，组播(多播)，广播以及任播</a></p>
-<h2 id="TCP服务模型"><a href="#TCP服务模型" class="headerlink" title="TCP服务模型"></a>TCP服务模型</h2><p>在了解了建立连接、关闭连接的“三次握手和四次挥手”后，我们再来看下TCP相关的东西。</p>
-<p>一个TCP连接由一个<strong>4元组构成</strong>，分别是<strong>两个IP地址和两个端口号</strong>。一个TCP连接通常分为<strong>三个阶段：启动、数据传输、退出（关闭）。</strong></p>
-<p>当TCP接收到另一端的数据时，它会发送一个确认，但这个确认不会立即发送，一般会延迟一会儿。ACK是累积的，一个确认字节号N的ACK表示所有直到N的字节（不包括N）已经成功被接收了。这样的好处是如果一个ACK丢失，很可能后续的ACK就足以确认前面的报文段了。</p>
-<p>一个完整的TCP连接是双向和对称的，数据可以在两个方向上平等地流动。给上层应用程序提供一种<code>双工服务</code>。一旦建立了一个连接，这个连接的一个方向上的每个TCP报文段都包含了相反方向上的报文段的一个ACK。</p>
-<p>序列号的作用是使得一个TCP接收端可丢弃重复的报文段，记录以杂乱次序到达的报文段。因为TCP使用IP来传输报文段，而IP不提供重复消除或者保证次序正确的功能。另一方面，TCP是一个字节流协议，绝不会以杂乱的次序给上层程序发送数据。因此TCP接收端会被迫先保持大序列号的数据不交给应用程序，直到缺失的小序列号的报文段被填满。</p>
-<h2 id="TCP头部"><a href="#TCP头部" class="headerlink" title="TCP头部"></a>TCP头部</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/bGribGtYC3mKnviawM4d0dtZiaicFibzn3GvGJqa9jTLOBeXXn8rDw2xP7HRxmZHbkXGichibGTJ0TeKH7GfUQ9yloSeA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<p>源端口和目的端口在TCP层确定双方进程，序列号表示的是报文段数据中的第一个字节号，ACK表示确认号，该确认号的发送方期待接收的下一个序列号，即最后被成功接收的数据字节序列号加1，这个字段只有在ACK位被启用的时候才有效。（例如， 主机A发送的当前数据序号是400，数据长度是100，则接收端收到后会返回一个确认号是501的确认号给主机A。 ）</p>
-<p>当新建一个连接时，从客户端发送到服务端的第一个报文段的SYN位被启用，这称为SYN报文段，这时序列号字段包含了在本次连接的这个方向上要使用的第一个序列号，即初始序列号<code>ISN</code>，之后发送的数据是ISN加1，因此SYN位字段会<code>消耗</code>一个序列号，这意味着使用重传进行可靠传输。而不消耗序列号的ACK则不是。</p>
-<p>头部长度（图中的数据偏移）以32位字为单位，也就是以4bytes为单位，它只有4位，最大为15，因此头部最大长度为60字节，而其最小为5，也就是头部最小为20字节（可变选项为空）。</p>
-<p>ACK —— 确认，使得确认号有效。 RST —— 重置连接（经常看到的reset by peer）就是此字段搞的鬼。 SYN —— 用于初如化一个连接的序列号。 FIN —— 该报文段的发送方已经结束向对方发送数据。</p>
-<p>当一个连接被建立或被终止时，交换的报文段只包含TCP头部，而没有数据。</p>
-<h2 id="状态转换"><a href="#状态转换" class="headerlink" title="状态转换"></a>状态转换</h2><p>三次握手和四次挥手的状态转换如下图。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/bGribGtYC3mKnviawM4d0dtZiaicFibzn3GvG27icMiaTE84oaC2TKLuBeBRoPVSe0VvJtKyn3etMeWWGyP2A8y4LludA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<h2 id="为什么要“三次握手，四次挥手”"><a href="#为什么要“三次握手，四次挥手”" class="headerlink" title="为什么要“三次握手，四次挥手”"></a>为什么要“三次握手，四次挥手”</h2><h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><p>换个易于理解的视角来看为什么要3次握手。</p>
-<p>客户端和服务端通信前要进行连接，==“3次握手”的作用就是双方都能明确自己和对方的收、发能力是正常的。==</p>
-<p><code>第一次握手</code>：客户端发送网络包，服务端收到了。这样<strong>服务端就能得出结论</strong>：<strong>客户端的发送能力、服务端的接收能力是正常的。</strong></p>
-<p><code>第二次握手</code>：服务端发包，客户端收到了。这样<strong>客户端</strong>就能得出结论：<strong>服务端的接收、发送能力，客户端的接收、发送能力是正常的。</strong> 从客户端的视角来看，我接到了服务端发送过来的响应数据包，说明服务端接收到了我在第一次握手时发送的网络包，并且成功发送了响应数据包，这就说明，服务端的接收、发送能力正常。而另一方面，我收到了服务端的响应数据包，说明我第一次发送的网络包成功到达服务端，这样，我自己的发送和接收能力也是正常的。</p>
-<p><code>第三次握手</code>：客户端发包，服务端收到了。这样服务端就能得出结论：客户端的接收、发送能力，服务端的发送、接收能力是正常的。 第一、二次握手后，服务端并不知道客户端的接收能力以及自己的发送能力是否正常。而在第三次握手时，服务端收到了客户端对第二次握手作的回应。从服务端的角度，我在第二次握手时的响应数据发送出去了，客户端接收到了。所以，我的发送能力是正常的。而客户端的接收能力也是正常的。</p>
-<p>经历了上面的三次握手过程，客户端和服务端都<strong>确认了自己的接收、发送能力是正常的</strong>。之后就可以正常通信了。</p>
-<p><strong>每次都是接收到数据包的一方可以得到一些结论，发送的一方其实没有任何头绪。我虽然有发包的动作，但是我怎么知道我有没有发出去，而对方有没有接收到呢？</strong></p>
-<p>而从上面的过程可以看到，最少是需要三次握手过程的。<strong>两次达不到让双方都得出自己、对方的接收、发送能力都正常的结论。</strong>其实每次收到网络包的一方至少是可以得到：对方的发送、我方的接收是正常的。而每一步都是有关联的，下一次的“响应”是由于第一次的“请求”触发，因此每次握手其实是可以得到额外的结论的。比如第三次握手时，服务端收到数据包，表明看服务端只能得到客户端的发送能力、服务端的接收能力是正常的，但是结合第二次，说明服务端在第二次发送的响应包，客户端接收到了，并且作出了响应，从而得到额外的结论：客户端的接收、服务端的发送是正常的。</p>
-<p>用表格总结一下：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/bGribGtYC3mKnviawM4d0dtZiaicFibzn3GvGqKL1mR0vd0pAcd4pQEH1F9oEmIic4cvibwxJUQ6NL3RHZf6f25Og7k1w/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><p>TCP连接是双<strong>向传输的对等的模式</strong>，就是说双方都可以同时向对方发送或接收数据。当有一方要关闭连接时，会发送指令告知对方，我要关闭连接了。这时对方会回一个ACK，此时一个方向的连接关闭。但是另一个方向仍然可以继续传输数据，等到发送完了所有的数据后，会发送一个FIN段来关闭此方向上的连接。接收方发送ACK确认关闭连接。注意，<strong>接收到FIN报文的一方只能回复一个ACK, 它是无法马上返回对方一个FIN报文段的</strong>，因为结束数据传输的“指令”是上层应用层给出的，我只是一个“搬运工”，我无法了解<code>“上层的意志”</code>。</p>
-<h4 id="“三次握手，四次挥手”怎么完成？"><a href="#“三次握手，四次挥手”怎么完成？" class="headerlink" title="“三次握手，四次挥手”怎么完成？"></a>“三次握手，四次挥手”怎么完成？</h4><p><strong>其实3次握手的目的并不只是让通信双方都了解到一个连接正在建立，还在于利用数据包的选项来传输特殊的信息，交换初始序列号ISN。</strong></p>
-<p><strong>3次握手是指发送了3个报文段，4次挥手是指发送了4个报文段。</strong>注意，SYN和FIN段都是会利用重传进行可靠传输的</p>
-<p> <img src="https://mmbiz.qpic.cn/mmbiz_jpg/bGribGtYC3mKnviawM4d0dtZiaicFibzn3GvGB6Gtz75Pc7kaOWSJfZnibcXOvxZMOKDy6M7x5licxVhZ73iaGiaMicNFy7A/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"> </p>
-<h2 id="三次握手-1"><a href="#三次握手-1" class="headerlink" title="三次握手"></a>三次握手</h2><ol>
-<li>客户端发送一个SYN段，并指明客户端的初始序列号，即ISN(c).</li>
-<li>服务端发送自己的SYN段作为应答，同样指明自己的ISN(s)。为了确认客户端的SYN，将ISN(c)+1作为ACK数值。这样，每发送一个SYN，序列号就会加1. 如果有丢失的情况，则会重传。</li>
-<li>为了确认服务器端的SYN，客户端将ISN(s)+1作为返回的ACK数值。</li>
-</ol>
-<h2 id="四次挥手-1"><a href="#四次挥手-1" class="headerlink" title="四次挥手"></a>四次挥手</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/bGribGtYC3mKnviawM4d0dtZiaicFibzn3GvG1V8PAwpxMuqEsS5RKjhsGF9XcYR90LXwwia2OAwp6qCdrcWpKtuibrYw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<ol>
-<li>客户端发送一个FIN段，并包含一个希望接收者看到的自己当前的序列号K. 同时还包含一个ACK表示确认对方最近一次发过来的数据。 </li>
-<li>服务端将K值加1作为ACK序号值，表明收到了上一个包。这时上层的应用程序会被告知另一端发起了关闭操作，通常这将引起应用程序发起自己的关闭操作。 </li>
-<li>服务端发起自己的FIN段，ACK=K+1, Seq=L </li>
-<li>客户端确认。ACK=L+1</li>
-</ol>
-<h2 id="为什么建立连接是三次握手，而关闭连接却是四次挥手呢？"><a href="#为什么建立连接是三次握手，而关闭连接却是四次挥手呢？" class="headerlink" title="为什么建立连接是三次握手，而关闭连接却是四次挥手呢？"></a>为什么建立连接是三次握手，而关闭连接却是四次挥手呢？</h2><p>这是因为服务端在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端。</p>
-<p><strong>而关闭连接时，当收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据</strong></p>
-<p><strong>己方是否现在关闭发送数据通道，需要上层应用来决定，因此，己方ACK和FIN一般都会分开发送。</strong></p>
+        <p>文章来源：<a href="https://mp.weixin.qq.com/s/MIsQv8ZWWBzfB-Qhg3l4lA" target="_blank" rel="noopener">大白话聊聊Java并发面试问题之volatile到底是什么？【石杉的架构笔记】</a></p>
+<h4 id="一、写在前面"><a href="#一、写在前面" class="headerlink" title="一、写在前面"></a><strong>一、写在前面</strong></h4><p>前段时间把几年前带过的一个项目架构演进的过程整理了一个系列出来，参见（<a href="http://mp.weixin.qq.com/s?__biz=MzU0OTk3ODQ3Ng==&amp;mid=2247484026&amp;idx=1&amp;sn=32ebf21e0285d3947192d89fbe6a8cb7&amp;chksm=fba6ea79ccd1636f8f9088f448b4a3942de57bf97f582de2feb93da06e4ddfca68a5a88befe0&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">《亿级流量架构系列专栏总结》</a>）。</p>
+<p>不过很多同学看了之后，后台反馈说文章太烧脑，看的云里雾里。其实这个也正常，文章承载的信息毕竟有限，而架构的东西细节太多，想要仅仅通过文章看懂一个系统架构的设计和落地，确实难度不小。</p>
+<p>所以接下来用大白话跟大家聊点轻松的话题，比较易于理解，而且对大家工作和面试都很有帮助。</p>
+<h4 id="二、场景引入，问题初现"><a href="#二、场景引入，问题初现" class="headerlink" title="二、场景引入，问题初现"></a><strong>二、场景引入，问题初现</strong></h4><p><strong>很多同学出去面试，都会被问到一个常见的问题：说说你对volatile的理解？</strong></p>
+<p>不少初出茅庐的同学可能会有点措手不及，因为可能就是之前没关注过这个。但是网上百度一下呢，不少文章写的很好，但是理论扎的太深，文字太多，图太少，让人有点难以理解。</p>
+<p>基于上述痛点，这篇文章尝试站在年轻同学的角度，用最简单的大白话，加上多张图给大家说一下，volatile到底是什么？</p>
+<p>当然本文不会把理论扎的太深，因为一下子扎深了文字太多，很多同学还是会不好理解。</p>
+<p>本文仅仅是定位在用大白话的语言将volatile这个东西解释清楚，而涉及到特别底层的一些原理和技术问题，以后有机会开文再写。</p>
+<p>首先，给大家上一张图，咱们来一起看看：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZicI3B23mHahdibYiaRKicYVVqMXSxviaaZibG2aSGUTcWOJJ8X025g88RRicic9TDjfj5oic0TicUOU1Am0Sw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>如上图，这张图说的是java内存模型中，<strong>每个线程有自己的工作内存，同时还有一个共享的主内存。</strong></p>
+<p>举个例子，比如说有两个线程，他们的代码里都需要读取data这个变量的值，那么他们都会从主内存里加载data变量的值到自己的工作内存，然后才可以使用那个值。</p>
+<p>好了，现在大家从图里看到，每个线程都把data这个变量的副本加载到了自己的工作内存里了，所以每个线程都可以读到data = 0这个值。</p>
+<p>这样，在线程代码运行的过程中，对data的值都可以直接从工作内存里加载了，不需要再从主内存里加载了。</p>
+<p>那问题来了，为啥一定要让每个线程用一个工作内存来存放变量的副本以供读取呢？我直接让线程每次都从主内存加载变量的值不行吗？</p>
+<p>很简单！因为线程运行的代码对应的是一些指令，是由CPU执行的！但是CPU每次执行指令运算的时候，也就是执行我们写的那一大坨代码的时候，要是每次需要一个变量的值，都从主内存加载，性能会比较差！</p>
+<p>所以说后来想了一个办法，就是线程有工作内存的概念，类似于一个<strong>高速的本地缓存。</strong></p>
+<p>这样一来，线程的代码在执行过程中，就可以直接从自己本地缓存里加载变量副本，不需要从主内存加载变量值，性能可以提升很多！</p>
+<p>但是大家思考一下，这样会有什么问题？</p>
+<p>我们来设想一下，假如说线程1修改了data变量的值为1，然后将这个修改写入自己的本地工作内存。那么此时，线程1的工作内存里的data值为1。</p>
+<p>然而，主内存里的data值还是为0！线程2的工作内存里的data值还是0啊？！</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZicI3B23mHahdibYiaRKicYVVqMEqacMPictyw6Gy56icwjjEZA5SkjO3NZ7nZVuPjptgnZAzcAuk3tWwQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>这可尴尬了，那接下来，在线程1的代码运行过程中，他可以直接读到data最新的值是1，但是线程2的代码运行过程中读到的data的值还是0！</p>
+<p>这就导致，线程1和线程2其实都是在操作一个变量data，但是线程1修改了data变量的值之后，线程2是看不到的，一直都是看到自己本地工作内存中的一个旧的副本的值！</p>
+<p>这就是所谓的<strong>java并发编程中的可见性问题</strong>：</p>
+<p><strong>多个线程并发读写一个共享变量的时候，有可能某个线程修改了变量的值，但是其他线程看不到！也就是对其他线程不可见！</strong></p>
+<h4 id="三、volatile的作用及背后的原理"><a href="#三、volatile的作用及背后的原理" class="headerlink" title="三、volatile的作用及背后的原理"></a><strong>三、volatile的作用及背后的原理</strong></h4><p>那如果要解决这个问题怎么办呢？这时就轮到<strong>volatile</strong>闪亮登场了！你只要给data这个变量在定义的时候加一个volatile，就直接可以完美的解决这个可见性的问题。</p>
+<p>比如下面的这样的代码，在加了volatile之后，会有啥作用呢？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZicI3B23mHahdibYiaRKicYVVqcHQETYKe9SH2hrVL7zW8wFayaicaeVadyDpV2SatB2fkWicds9UkW6icg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>完整的作用就不给大家解释了，因为我们定位就是大白话，要是把底层涉及的各种内存屏障、指令重排等概念在这里带出来，不少同学又要蒙圈了！</p>
+<p><strong>我们这里，就说说他最关键的几个作用是啥？</strong></p>
+<p>第一，一旦data变量定义的时候前面加了volatile来修饰的话，那么线程1只要修改data变量的值，就会在修改完自己本地工作内存的data变量值之后，强制将这个data变量最新的值刷回主内存，必须让主内存里的data变量值立马变成最新的值！</p>
+<p>整个过程，如下图所示：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZicI3B23mHahdibYiaRKicYVVq1xj77iayceXiaDHHkicjOBiaM0zRM3ZGmphTwolD2icCX2Zw8nkr95UHc9g/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>第二，如果此时别的线程的工作内存中有这个data变量的本地缓存，也就是一个变量副本的话，那么会强制让其他线程的工作内存中的data变量缓存直接失效过期，不允许再次读取和使用了！</p>
+<p>整个过程，如下图所示：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZicI3B23mHahdibYiaRKicYVVq3n1gLtNhBMfdEiaMic4icZcWVD95shDdwib3WKC4xge12SqdPapZJPOwxA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p>第三，如果线程2在代码运行过程中再次需要读取data变量的值，此时尝试从本地工作内存中读取，就会发现这个data = 0已经过期了！</p>
+<p>此时，他就必须重新从主内存中加载data变量最新的值！那么不就可以读取到data = 1这个最新的值了！整个过程，参见下图：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZicI3B23mHahdibYiaRKicYVVqHCIS4F18UGeSroHvicdUKDf0XkWWmgfftENvjHMU9kP4bnkfQEQ2WDg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p><strong>bingo</strong>！好了，volatile完美解决了java并发中可见性的问题！</p>
+<p>对一个变量加了volatile关键字修饰之后，只要一个线程修改了这个变量的值，立马强制刷回主内存。</p>
+<p>接着强制过期其他线程的本地工作内存中的缓存，最后其他线程读取变量值的时候，强制重新从主内存来加载最新的值！</p>
+<p>这样就保证，任何一个线程修改了变量值，其他线程立马就可以看见了！这就是所谓的volatile保证了可见性的工作原理！</p>
+<h4 id="四、总结-amp-提醒"><a href="#四、总结-amp-提醒" class="headerlink" title="四、总结 &amp; 提醒"></a><strong>四、总结 &amp; 提醒</strong></h4><p>最后给大家提一嘴，<strong>volatile主要作用是保证可见性以及有序性。</strong></p>
+<p>有序性涉及到较为复杂的指令重排、内存屏障等概念，本文没提及，但是<strong>volatile是不能保证原子性的</strong>！</p>
+<p>也就是说，volatile主要解决的是一个线程修改变量值之后，其他线程立马可以读到最新的值，是解决这个问题的，也就是可见性！</p>
+<p>但是如果是多个线程同时修改一个变量的值，那还是可能出现多线程并发的安全问题，导致数据值修改错乱，volatile是不负责解决这个问题的，也就是不负责解决原子性问题！</p>
+<p>原子性问题，得依赖 synchronized、ReentrantLock 等加锁机制来解决。</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://yoursite.com">ALemon</a>
-            </p><p>原文链接：<a href="http://yoursite.com/2019/02/01/TCP握手分析/">http://yoursite.com/2019/02/01/TCP握手分析/</a>
-            </p><p>发表日期：<a href="http://yoursite.com/2019/02/01/TCP握手分析/">February 1st 2019, 1:25:43 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/02/01/TCP握手分析/">January 10th 2019, 10:23:41 am</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/03/05/volatile是什么/">http://yoursite.com/2019/03/05/volatile是什么/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/03/05/volatile是什么/">March 5th 2019, 2:08:45 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/03/05/volatile是什么/">March 16th 2019, 2:15:55 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -459,16 +468,16 @@ height:50vh;
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href="/2019/02/04/final 关键字深入理解/" title="final 关键字的理解">
-                    <div class="nextTitle">final 关键字的理解</div>
+                <a href="/2019/03/16/Java 如何保证原子性/" title="">
+                    <div class="nextTitle">[Untitled Post]</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2019/02/01/hello-world/" title="Hello World">
-                    <div class="prevTitle">Hello World</div>
+                <a href="/2019/03/01/static 多线程/" title="Java中多线程的static">
+                    <div class="prevTitle">Java中多线程的static</div>
                 </a>
             
         </li>
@@ -587,7 +596,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是“3次握手，4次挥手”"><span class="toc-number">1.</span> <span class="toc-text">什么是“3次握手，4次挥手”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP服务模型"><span class="toc-number">2.</span> <span class="toc-text">TCP服务模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP头部"><span class="toc-number">3.</span> <span class="toc-text">TCP头部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#状态转换"><span class="toc-number">4.</span> <span class="toc-text">状态转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要“三次握手，四次挥手”"><span class="toc-number">5.</span> <span class="toc-text">为什么要“三次握手，四次挥手”</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#三次握手"><span class="toc-number">5.0.1.</span> <span class="toc-text">三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四次挥手"><span class="toc-number">5.0.2.</span> <span class="toc-text">四次挥手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#“三次握手，四次挥手”怎么完成？"><span class="toc-number">5.0.3.</span> <span class="toc-text">“三次握手，四次挥手”怎么完成？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三次握手-1"><span class="toc-number">6.</span> <span class="toc-text">三次握手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四次挥手-1"><span class="toc-number">7.</span> <span class="toc-text">四次挥手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么建立连接是三次握手，而关闭连接却是四次挥手呢？"><span class="toc-number">8.</span> <span class="toc-text">为什么建立连接是三次握手，而关闭连接却是四次挥手呢？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、写在前面"><span class="toc-number">1.</span> <span class="toc-text">一、写在前面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、场景引入，问题初现"><span class="toc-number">2.</span> <span class="toc-text">二、场景引入，问题初现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、volatile的作用及背后的原理"><span class="toc-number">3.</span> <span class="toc-text">三、volatile的作用及背后的原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四、总结-amp-提醒"><span class="toc-number">4.</span> <span class="toc-text">四、总结 &amp; 提醒</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
