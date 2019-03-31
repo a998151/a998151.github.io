@@ -346,363 +346,32 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/03/30/Java中的锁/">
+        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
             
-                <span>Java 锁（更新中~）</span>
+                <span>Java 中的 ==、equals 与 hashCode</span>
         </a>
         <div class="abstract-content">
-            1、乐观锁​    乐观锁，认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别的线程不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别的线程有没有去更新这个数据，采取在写的时候先读取当前的版本号，然后加锁操作（比较跟上一次的版本号是否一致，相同则更新）。如果失败则要重复 ==读 - 比较 - 写== 的操作。
-​    Java 中的乐观锁基本是通过 CAS 操作实现的，CAS 是一种原子更新的操作，比较当前值和传入值是否一样，一样则更新，否则失败。
-2、悲观锁​    悲观锁认为写多读少，遇到并发写的可能性比较高，每次去拿数据的时候，都认为别的线程会修改数据，所以...
+            ==
+比较两个基本类型的数据是否相等
+两个引用变量是否相等
+
+​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
+​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
+​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
+1String str = new String();
+​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
+​    对...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/20/Java 多线程（并发）/">
-            
-                <span>Java 多线程（并发）</span>
-        </a>
-        <div class="abstract-content">
-            1.概述有一个大水缸，要和尚去挑水，倒满这个水缸，如果需要挑20趟才能给这个水缸加满水。
-让一个和尚来回跑20趟，挑20次水，就可以倒满。
-另外我也可以让 10 个和尚跑两趟，就可以把水缸的水给倒满。
-第二种场景就是并发。并发编程主要解决的问题为 “速度（效率）”。
-但是一条路就这么宽，十个和尚跑在路上，如果碰倒了，导致水洒了，两趟下来，就保证不了水缸能够装满水。
-所以在并发的情况下，我们需要考虑的在这条挑水的路上各个和尚正常挑水不发生意外，不像一个和尚挑水，在路上不用担心碰倒其它和尚。
-上面提到的地方就是并发需要注意的：阻塞、共享资源。另外为了解决这些问题，而又有涉及到一些概念：原子性...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="多线程">多线程</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/05/volatile是什么/">
-            
-                <span>volatitle 是什么？</span>
-        </a>
-        <div class="abstract-content">
-            文章来源：大白话聊聊Java并发面试问题之volatile到底是什么？【石杉的架构笔记】
-一、写在前面前段时间把几年前带过的一个项目架构演进的过程整理了一个系列出来，参见（《亿级流量架构系列专栏总结》）。
-不过很多同学看了之后，后台反馈说文章太烧脑，看的云里雾里。其实这个也正常，文章承载的信息毕竟有限，而架构的东西细节太多，想要仅仅通过文章看懂一个系统架构的设计和落地，确实难度不小。
-所以接下来用大白话跟大家聊点轻松的话题，比较易于理解，而且对大家工作和面试都很有帮助。
-二、场景引入，问题初现很多同学出去面试，都会被问到一个常见的问题：说说你对volatile的理解？
-不少初出茅庐的同学...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/01/static 多线程/">
-            
-                <span>Java中多线程的static</span>
-        </a>
-        <div class="abstract-content">
-            来说说静态变量、实例变量、局部变量在多线程下的安全问题吧！
-在 Java 中，static 主要强调的是，它在 jvm 中就只有一个
-关于static修饰的变量，静态变量，表示静态变量在内存中只有一个拷贝，JVM只为静态变量分配一次内存，在加载类的过程中便完成静态变量的内存分配，同静态方法一样。
-静态变量
-使用 static 关键字定义的变量。
-
-static 可以修饰变量和方法
-
-static 静态代码块。
-
-
-
-在Java中并不存在全局变量的概念，但是我们可以通过static来实现一个“伪全局”的概念，在Java中static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/02/28/原子性、可见性、有序性/">
-            
-                <span>原子性、可见性、有序性</span>
-        </a>
-        <div class="abstract-content">
-            零、Java 内存模型Java 内存模型的==主要目标==是==定义程序中各个变量的访问规则==。
-Java 内存模型规定了所有变量都存储在主内存中，每条线程还有自己的工作内存（Working Memory），线程的工作内存中保存了需要用到的变量主内存备份。
-线程对普通变量的所有操作，都必须在工作内存中执行，而不能直接读写主内存中的变量
-不同的线程也无法直接访问对方工作内存中的变量
-
-主内存和工作内存之间的交互协议（变量从主拷贝到工作内存，使用完变量后，再从工作内存同步回主内存）
-Java内存模型定义了8种操作来完成，虚拟机实现必须保证每一个操作都是原子性、不可再分的（==double和...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/28</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/02/04/final 关键字深入理解/">
-            
-                <span>final 关键字的理解</span>
-        </a>
-        <div class="abstract-content">
-            final 的初步理解​    通常我们对Java中final关键字的理解是“用final修饰的变量是不可变的”，如果尝试对final变量多次赋值，编译器将报错。
-​    似乎final的作用就是保证变量不可变，这没有错，但是如果我们在Java中灵活应用final的被修饰目标不可变的特性，往往能发掘出很多令人意想不到的效果，而非仅仅保证变量不可变这么粗浅而已。下面我们来说说final关键字的多重用法
-final 修饰变量
-修饰基本类变量
-修饰引用类变量（对象类变量）
-
-对于上面说得两点，先看一下下面的两个程序呗
-12final int myInt = 1;myInt = 2;
-123f...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/04/类型信息/">
-            
-                <span>Java——Class</span>
-        </a>
-        <div class="abstract-content">
-            学习初衷：
-
-想知道程序在运行的时候，如何识别对象和类的信息。
-在基本的框架中随处都可见有使用 Class 对象，弄清楚作用
-如果通过反射去调用类中的属性、方法、构造函数等
-
-写在前头如果看过一些成熟的框架，大家都应该知道 泛型、反射、注解等这些 Java 高级特性是无处不在的，多数都是使用这些特性让程序复用性更高更简洁。如果想要看懂一些成熟的框架源码，这些就是基础。
-==Java 是如何让我们在运行时识别对象和类信息的呢？==
-
-RTTI，它假定我们在编译时已经知道了所有类型
-反射机制
-
-一、RTTI 和反射每个认真读过 B 大的《Thinking in Java》都会有这么一个疑问：...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/12/21/泛型/">
-            
-                <span>泛型使用</span>
-        </a>
-        <div class="abstract-content">
-            这篇文章主要解决的问题：
-
-泛型的简单使用
-泛型的好处，有什么奇怪的地方
-泛型使用场景
-输入的类型是泛型，根据泛型指定的类型，调用的对应方法形参的类型
-
-
-一、使用初衷（场景）1、我们都希望我们的代码复用性高，而在 Java 中，我们想要编写可以应用于多种类型的代码，就需要用到泛型了。
-2、仅一次方法调用就能返回多个对象。
-3、而且在研读一些成熟的框架源码的时候，会发现源码存在着大量的泛型使用，不了解好泛型，很难理解得了框架设计。
-二、泛型的简单使用泛型是在 Java5 提出的，泛型实现了参数化类型（类型参数化）的概念。在你创建参数化类型的一个实例时，编译器会为你负责转型操作，并且保证类...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/21</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/10/TCP握手分析/">
-            
-                <span>TCP 握手分手全过程</span>
-        </a>
-        <div class="abstract-content">
-            笔记来源：滴滴工程师图文并茂带你深入理解 TCP 握手分手全过程
-什么是“3次握手，4次挥手”TCP是一种面向连接的单播协议，在发送数据前，通信双方必须在彼此间建立一条连接。所谓的“连接”，其实是客户端和服务器的内存里保存的一份关于对方的信息，如ip地址、端口号等。
-TCP可以看成是一种字节流，它会处理 IP 层或以下的层的丢包、重复以及错误问题。在连接的建立过程中，双方需要交换一些连接的参数。这些参数可以放在TCP头部。
-TCP提供了一种可靠、面向连接、字节流、传输层的服务，采用三次握手建立一个连接。采用4次挥手来关闭一个连接。
-ps: 单播，组播(多播)，广播以及任播
-TCP服务模型...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/10</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="TCP">TCP</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/10/24/Java初认识锁机制/">
-            
-                <span>Java初认识锁机制</span>
-        </a>
-        <div class="abstract-content">
-            锁的概念在介绍锁的概念之前，先了解一下并发的概念。
-举一个例子来说，一个厨师在正常情况下我们不允许厨师同时做两道菜，先做完一道再做另一道。但是如果时间紧迫的情况下（特定情况下），如果希望能同时拿出两道菜，如果按照之前的情况来看，明显完成不了任务，但是我们允许厨师可以做着其中一道菜同时兼顾着其他菜，那就有可能完成任务。这里的厨师能做一道菜同时兼顾其他菜，我们就可以成为“并发”了。
-我对并发的理解就是：对于某个任务，我们能够并行执行多个部分去共同完成这个任务，已达到提高我们完成工作效率效果，这就算作并发。
-有了并发就可以同时做多件事情，多个线程彼此之间的影响的问题也就随着出现了。
-对于并发的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
     
 </div>
             
@@ -712,7 +381,7 @@ TCP服务模型...
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/tags/Java/page/2/">2</a><a class="extend next" rel="next" href="/tags/Java/page/2/">NEXT &#62;</a>
+        <a class="extend prev" rel="prev" href="/archives/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
     </nav>
     
 </main>
