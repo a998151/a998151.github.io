@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Java 锁（更新中~） · ALemon Blog</title>
+    <title>Java 锁（updating） · ALemon Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">ALemon&#39;s Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Java 锁（更新中~）</a>
+                <a href="#" class="post-name">Java 锁（updating）</a>
             </div>
     </div>
     
@@ -241,13 +241,13 @@ height:50vh;
     <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(http://ww1.sinaimg.cn/large/006D41sGgy1g1lti6opihj328o35yb29.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Java 锁（更新中~）
+            Java 锁（updating）
             <!-- 404 -->
             
         </h1>
@@ -264,17 +264,9 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
-                    <div class="post-intro-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
-    
-</div>
-                
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">718</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">3.5k</span>阅读时长: <span class="post-count reading-time">12 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -410,7 +402,80 @@ height:50vh;
 <p>​    线程自旋是需要消耗 <code>cpu</code> 的，说白了就是让 <code>cpu</code> 做无用功，如果一直获取不到锁，那线程也不能一直占用 <code>cpu</code> 做无用功，所以需要设定一个自旋等待的最大时间。</p>
 <p>​    如果有锁的线程执行时间大于自旋最大等待时间还没有释放锁，就会导致其他争用锁的线程在最大等待时间内还是获取不了锁，这时这个争用锁的线程就会停止自旋而进入阻塞状态。</p>
 <h3 id="3-1、自旋锁的优缺点"><a href="#3-1、自旋锁的优缺点" class="headerlink" title="3.1、自旋锁的优缺点"></a>3.1、自旋锁的优缺点</h3><p>​    自旋锁尽可能的减少线程的阻塞，这对于<strong>锁的竞争不激烈，且占用时间非常短的代码块</strong>来说性能能大幅度提升，因为自旋的消耗会小于线程阻塞挂起再唤醒的操作消耗，这些操作会导致线程发生两次上下文切换。</p>
-<p>​    如果<strong>锁竞争激烈，或者持有锁的线程需要长时间占用锁执行同步块</strong>，这时候就不适合使用自旋锁了，因为自旋锁在获取锁前一直都是占用 <code>cpu</code> 做无用功，</p>
+<p>​    如果<strong>锁竞争激烈，或者持有锁的线程需要长时间占用锁执行同步块</strong>，这时候就不适合使用自旋锁了，因为自旋锁在获取锁前一直都是占用 <code>cpu</code> 做无用功，同时有大量的线程在竞争着一个锁，会导致获取锁的时间很长，线程的自旋消耗大于线程挂起操作的消耗，其它需要 <code>cpu</code>的线程又不能获取到 <code>cpu</code> ，造成 <code>cpu</code>的浪费。所以这种情况我们要关闭自旋锁。</p>
+<h3 id="3-2、自旋锁时间阈值"><a href="#3-2、自旋锁时间阈值" class="headerlink" title="3.2、自旋锁时间阈值"></a>3.2、自旋锁时间阈值</h3><p>​    自旋锁的目的是为了占着 CPU 的资源不释放，等到获取到锁立即进行处理。但是如何去选择自旋的执行时间呢？如果自旋执行时间太长，会有大量的线程处于自旋状态占用 CPU 资源，进而会影响整体系统的性能。因此自旋的周期选的额外重要！</p>
+<p>​    JVM 对于自旋周期的选择，jdk1.5 这个限度是一定的写死的，在 1.6 引入了适应性自旋锁，适应<br>性自旋锁意味着自旋的时间不在是固定的了，而是<strong>由前一次在同一个锁上的自旋时间以及锁的拥有者的状态来决定</strong>，基本认为一个线程上下文切换的时间是最佳的一个时间，同时 JVM 还针对当前 CPU 的负荷情况做了较多的优化，如果平均负载小于 CPUs 则一直自旋，如果有超过(CPUs/2)个线程正在自旋，则后来线程直接阻塞，如果正在自旋的线程发现 Owner 发生了变化则延迟自旋时间（自旋计数）或进入阻塞，如果 CPU 处于节电模式则停止自旋，自旋时间的最坏情况是 CPU的存储延迟（CPU A 存储了一个数据，到 CPU B 得知这个数据直接的时间差），自旋时会适当放弃线程优先级之间的差异。</p>
+<p>​    </p>
+<p><strong>自旋锁的开启</strong><br>JDK1.6 中-XX:+UseSpinning 开启；<br>-XX:PreBlockSpin=10 为自旋次数；<br>JDK1.7 后，去掉此参数，由 jvm 控制； </p>
+<h2 id="4、Synchronized-同步锁"><a href="#4、Synchronized-同步锁" class="headerlink" title="4、Synchronized 同步锁"></a>4、Synchronized 同步锁</h2><p>​    synchronized 它可以把任意一个非 NULL 的对象当作锁。<strong>他属于独占式的悲观锁，同时属于可重入锁。</strong></p>
+<h3 id="4-1-作用范围"><a href="#4-1-作用范围" class="headerlink" title="4.1 作用范围"></a>4.1 作用范围</h3><ul>
+<li>作用于方法，锁住的是对象实例（this）</li>
+<li>作用与静态方法，锁住的是 Class 实例。因为 Class 相关的数据存储在永久带 <code>PermGen</code>（<code>jdk1.8</code> 的是 <code>metaspace</code>），永久带是全局共享的，因此静态方法锁就相当于类的一个全局锁，会锁住所有调用该方法的线程。</li>
+<li>作用于对象实例，锁住的是所有以该对象为锁的代码块。</li>
+</ul>
+<h3 id="4-2-核心组件"><a href="#4-2-核心组件" class="headerlink" title="4.2 核心组件"></a>4.2 核心组件</h3><ul>
+<li><em>Wait Set</em>：那些调用了 wait 方法的线程被放置在这里。</li>
+<li><em>Contention Lis</em>t：竞争队列，所有请求锁的线程首先被放到这个竞争队列中</li>
+<li><em>Entry List</em>：Contention List 中那些有资格称为候选资源被移到 Entry List 中。</li>
+<li><em>OnDeck</em>：任意时刻，最多只有一个线程正在竞争锁资源，该线程被成为 OnDeck；</li>
+<li><em>Owner</em>：当前已经获取到所资源的线程被称为 Owner；</li>
+<li><em>!Owner</em>：当前释放锁的线程。</li>
+</ul>
+<h3 id="4-3-Synchronized-实现"><a href="#4-3-Synchronized-实现" class="headerlink" title="4.3 Synchronized 实现"></a>4.3 Synchronized 实现</h3><p><img src="https://img-blog.csdn.net/20170418221917277?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvenF6X3pxeg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<ol>
+<li><code>JVM</code> 每次进入队列尾部取出一个数据用于锁竞争候选者（<code>OnDeck</code>），但是并发情况下<code>ContentionList</code> 会被大量的并发线程进行 <code>CAS</code> 访问（看是否有资格获取锁），为了降低对尾部元素的竞争，<code>JVM</code> 会将一部分线程移动到<code>EntryList</code> 中作为候选竞争线程。</li>
+<li><code>Owner</code> 线程会在 unlock 时，将 <code>ContentionList</code> 中的部分线程迁移到 <code>EntryList</code> 中，并指定<code>EntryList</code> 中的某个线程为 <code>OnDeck</code> 线程（一般是最先进去的那个线程）。</li>
+<li>Owner 线程并不直接把锁传递给 OnDeck 线程，而是把锁竞争的权利交给 OnDeck，OnDeck需要重新竞争锁。这样虽然牺牲了一些公平性，但是能极大的提升系统的吞吐量，在JVM 中，也把这种选择行为称之为“竞争切换”。</li>
+<li>OnDeck 线程获取到锁资源后会变为 Owner 线程，而没有得到锁资源的仍然停留在 EntryList中。如果Owner线程被wait方法阻塞，则转移到WaitSet队列中，直到某个时刻通过notify或者 notifyAll 唤醒，会重新进去 EntryList 中。</li>
+<li>处于 ContentionList、EntryList、WaitSet 中的线程都处于阻塞状态，该阻塞是由操作系统来完成的（Linux 内核下采用 pthread_mutex_lock 内核函数实现的）。</li>
+<li>Synchronized 是非公平锁。 Synchronized 在线程进入 ContentionList 时，等待的线程会先尝试自旋获取锁，如果获取不到就进入 ContentionList，这明显对于已经进入队列的线程是不公平的，还有一个不公平的事情就是自旋获取锁的线程还可能直接抢占 OnDeck 线程的锁资源。</li>
+<li>每个对象都有个 monitor 对象，加锁就是在竞争 monitor 对象，代码块加锁是在前后分别加上 monitorenter 和 monitorexit 指令来实现的，方法加锁是通过一个标记位来判断的</li>
+<li>synchronized 是一个重量级操作，需要调用操作系统相关接口，性能是低效的，有可能给线程加锁消耗的时间比有用操作消耗的时间更多。</li>
+<li>Java1.6，synchronized 进行了很多的优化，有适应自旋、锁消除、锁粗化、轻量级锁及偏向锁等，效率有了本质上的提高。在之后推出的 Java1.7 与 1.8 中，均对该关键字的实现机理做了优化。引入了偏向锁和轻量级锁。都是在对象头中有标记位，不需要经过操作系统加锁。</li>
+<li>锁可以从偏向锁升级到轻量级锁，再升级到重量级锁。这种升级过程叫做锁膨胀；</li>
+<li>JDK 1.6 中默认是开启偏向锁和轻量级锁，可以通过-XX:-UseBiasedLocking 来禁用偏向锁。</li>
+</ol>
+<h2 id="5、ReententLock"><a href="#5、ReententLock" class="headerlink" title="5、ReententLock"></a>5、ReententLock</h2><p>ReentantLock 继承接口 Lock 并实现了接口中定义的方法，他是一种可重入锁，除了能完成 synchronized 所能完成的所有工作外，还提供了诸如可响应中断锁、可轮询锁请求、定时锁等避免多线程死锁的方法。先尝试 <code>CAS</code> 乐观锁去获取锁，获取不到才会转化为悲观锁。</p>
+<h3 id="5-1-Lock-接口的主要方法"><a href="#5-1-Lock-接口的主要方法" class="headerlink" title="5.1 Lock 接口的主要方法"></a>5.1 Lock 接口的主要方法</h3><ul>
+<li><strong><em>void lock( )</em></strong>：执行此方法时, 如果锁处于空闲状态, 当前线程将获取到锁. 相反, 如果锁已经被其他线程持有, 将禁用当前线程, 直到当前线程获取到锁。</li>
+<li><strong><em>boolean tryLock( )</em></strong>：如果锁可用，则获取锁, 并立即返回 true, 否则返回 false，该方法和lock()的区别在于, tryLock()只是”试图”获取锁，如果锁不可用，不会导致当前线程被禁用，当前线程仍然继续往下执行代码. 而 lock()方法则是一定要获取到锁, 如果锁不可用, 就一直等待, 在未获得锁之前,当前线程并不继续向下执行。</li>
+<li><strong><em>void unlock()</em></strong>：执行此方法时, 当前线程将释放持有的锁. 锁只能由持有者释放, 如果线程并不持有锁, 却执行该方法, 可能导致异常的发生.</li>
+<li><strong><em>Condition newCondition()</em></strong>：条件对象，获取等待通知组件。该组件和当前的锁绑定，当前线程只有获取了锁，才能调用该组件的 await()方法，而调用后，当前线程将释放锁。一般都会将Condition对象作为成员变量。当调用await()方法后，当前线程会释放锁并在此等待，而其他线程调用Condition对象的signal()方法，通知当前线程后，当前线程才从await()方法返回，并且在返回前已经获取了锁。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">Condition condition = lock.newCondition();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">conditionWait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        condition.await();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">conditionSignal</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        condition.signal();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><em>getHoldCount()</em></strong> ：查询当前线程保持此锁的次数，也就是执行此线程执行lock方法的次数。</li>
+<li><strong><em>getQueueLength()</em></strong>：返回正等待获取此锁的线程估计数，比如启动 10 个线程，1 个线程获得锁，此时返回的是 9</li>
+<li><strong><em>getWaitQueueLength（Condition condition）</em></strong>：返回等待与此锁相关的给定条件的线程估计数。比如 10 个线程，用同一个 condition 对象，并且此时这 10 个线程都执行了condition 对象的 await 方法，那么此时执行此方法返回 10</li>
+<li><strong><em>hasWaiters(Condition condition)</em></strong>：查询是否有线程等待与此锁有关的给定条件(condition)，对于指定 contidion 对象，有多少线程执行了 condition.await 方法</li>
+<li><strong><em>hasQueuedThread(Thread thread)</em></strong>：查询给定线程是否等待获取此锁</li>
+<li><strong><em>hasQueuedThreads()</em></strong>：是否有线程等待此锁</li>
+<li><strong><em>isFair()</em></strong>：该锁是否公平锁</li>
+<li><strong><em>isHeldByCurrentThread()</em></strong>： 当前线程是否保持锁锁定，线程的执行 lock 方法的前后分别是 false 和 true</li>
+<li><strong><em>isLock()</em></strong>：此锁是否有任意线程占用</li>
+<li><strong><em>lockInterruptibly()</em></strong>：如果当前线程未被中断，获取锁</li>
+<li><strong><em>tryLock()</em></strong>：尝试获得锁，仅在调用时锁未被线程占用，获得锁</li>
+<li><strong><em>tryLock(long timeout TimeUnit unit)</em></strong>：如果锁在给定等待时间内没有被另一个线程保持，则获取该锁。</li>
+</ul>
+<h3 id="5-2-非公平锁"><a href="#5-2-非公平锁" class="headerlink" title="5.2 非公平锁"></a>5.2 非公平锁</h3><p>JVM 按随机、就近原则分配锁的机制称为非公平锁。<code>ReentrantLock</code> 在构造行数中提供了是否公平锁的初始化方式，默认为非公平锁。非公平锁实际执行的效率远远超出公平锁，除非程序有特殊需要，否则最常用的就是非公平锁的分配机制。</p>
+<h3 id="5-3-公平锁"><a href="#5-3-公平锁" class="headerlink" title="5.3 公平锁"></a>5.3 公平锁</h3><p>公平锁指的是锁的分配机制是公平的，通常先对锁提出获取申请的线程会被分配到锁，<code>ReentrantLock</code> 在构造函数中提供到了是否公平锁初始化的方式来定义公平锁。</p>
+<h3 id="5-4-ReentrantLock-与-synchronized-区别"><a href="#5-4-ReentrantLock-与-synchronized-区别" class="headerlink" title="5.4 ReentrantLock 与 synchronized 区别"></a>5.4 <em>ReentrantLock</em> 与 <em>synchronized</em> 区别</h3><ol>
+<li><code>ReentrantLock</code> 通过方法<code>lock()</code> 与 <code>unclock()</code> 来进行加锁和解锁操作，<u>与 <code>synchronized</code> 会被 JVM 自动解锁的机制不同， <code>ReentrantLock</code> 加锁后需要手动进行解锁。</u><strong>为了避免程序出现异常而无法正常解锁的情况，使用 <code>ReentrantLock</code> 必须在<code>finally</code> 控制块进行解锁操作。</strong></li>
+<li><code>RenentrantLock</code>相比 <code>synchronized</code> 的优势是可中断、公平锁、多个锁。这种情况下需要使用 <code>ReentrantLock</code></li>
+</ol>
+<h3 id="5-5-Condition-类和-Object-类锁方法区别"><a href="#5-5-Condition-类和-Object-类锁方法区别" class="headerlink" title="5.5 Condition 类和 Object 类锁方法区别"></a>5.5 Condition 类和 Object 类锁方法区别</h3><ol>
+<li>Condition 类的 await 方法和 Object 类的 wait 方法等效</li>
+<li>Condition 类的 signal 方法和 Object 类的 notify 方法等效</li>
+<li>Condition 类的 signalAll 方法和 Object 类的 notifyAll 方法等效</li>
+<li>ReentrantLock 类可以唤醒指定条件的线程，而 object 的唤醒是随机的</li>
+</ol>
+<h3 id="5-6-tryLock-和-lock-和-lockInterruptibly-的区别"><a href="#5-6-tryLock-和-lock-和-lockInterruptibly-的区别" class="headerlink" title="5.6 tryLock 和 lock 和 lockInterruptibly 的区别"></a>5.6 tryLock 和 lock 和 lockInterruptibly 的区别</h3><ol>
+<li>tryLock 能获取锁就返回 true ，不能就立即返回 false ，tryLock(long timeout , TimeUnit unit) 可以添加时间限制，如果超过该事件段还没获取锁就返回 false</li>
+<li>lock 能够获取锁就返回 true，不能的话就一直等待获取锁</li>
+<li>lock 和 lockInterruptibly，如果两个线程分别执行这两个方法，但此时中断这两个线程，lock 不会抛出异常，而 lockInterruptibly 会抛出异常。</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
+<p><a href="https://blog.csdn.net/fuyuwei2015/article/details/72602182" target="_blank" rel="noopener">Java多线程Condition接口原理详解</a></p>
 
     </article>
     <!-- license  -->
@@ -419,7 +484,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">ALemon</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/03/30/Java中的锁/">http://yoursite.com/2019/03/30/Java中的锁/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/03/30/Java中的锁/">March 30th 2019, 2:38:00 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/03/30/Java中的锁/">March 31st 2019, 11:32:18 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/03/30/Java中的锁/">April 7th 2019, 11:55:59 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -544,7 +609,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、乐观锁"><span class="toc-number">1.</span> <span class="toc-text">1、乐观锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、悲观锁"><span class="toc-number">2.</span> <span class="toc-text">2、悲观锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、自旋锁"><span class="toc-number">3.</span> <span class="toc-text">3、自旋锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、自旋锁的优缺点"><span class="toc-number">3.1.</span> <span class="toc-text">3.1、自旋锁的优缺点</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、乐观锁"><span class="toc-number">1.</span> <span class="toc-text">1、乐观锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、悲观锁"><span class="toc-number">2.</span> <span class="toc-text">2、悲观锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、自旋锁"><span class="toc-number">3.</span> <span class="toc-text">3、自旋锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、自旋锁的优缺点"><span class="toc-number">3.1.</span> <span class="toc-text">3.1、自旋锁的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、自旋锁时间阈值"><span class="toc-number">3.2.</span> <span class="toc-text">3.2、自旋锁时间阈值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Synchronized-同步锁"><span class="toc-number">4.</span> <span class="toc-text">4、Synchronized 同步锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-作用范围"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 作用范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-核心组件"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 核心组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-Synchronized-实现"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 Synchronized 实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、ReententLock"><span class="toc-number">5.</span> <span class="toc-text">5、ReententLock</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Lock-接口的主要方法"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 Lock 接口的主要方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-非公平锁"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 非公平锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-公平锁"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 公平锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-ReentrantLock-与-synchronized-区别"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 ReentrantLock 与 synchronized 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-Condition-类和-Object-类锁方法区别"><span class="toc-number">5.5.</span> <span class="toc-text">5.5 Condition 类和 Object 类锁方法区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-tryLock-和-lock-和-lockInterruptibly-的区别"><span class="toc-number">5.6.</span> <span class="toc-text">5.6 tryLock 和 lock 和 lockInterruptibly 的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -692,7 +757,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/30</span><a class="archive-post-title" href="/2019/03/30/Java中的锁/">Java 锁（更新中~）</a>
+            <span class="archive-post-date">03/30</span><a class="archive-post-title" href="/2019/03/30/Java中的锁/">Java 锁（updating）</a>
         </li>
     
     

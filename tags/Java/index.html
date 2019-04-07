@@ -346,39 +346,6 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/03/30/Java中的锁/">
-            
-                <span>Java 锁（更新中~）</span>
-        </a>
-        <div class="abstract-content">
-            1、乐观锁​    乐观锁，认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别的线程不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别的线程有没有去更新这个数据，采取在写的时候先读取当前的版本号，然后加锁操作（比较跟上一次的版本号是否一致，相同则更新）。如果失败则要重复 ==读 - 比较 - 写== 的操作。
-​    Java 中的乐观锁基本是通过 CAS 操作实现的，CAS 是一种原子更新的操作，比较当前值和传入值是否一样，一样则更新，否则失败。
-2、悲观锁​    悲观锁认为写多读少，遇到并发写的可能性比较高，每次去拿数据的时候，都认为别的线程会修改数据，所以...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href="/2019/03/20/Java 多线程（并发）/">
             
                 <span>Java 多线程（并发）</span>
@@ -709,11 +676,45 @@ TCP服务模型...
         </div>
     </article>
     
-    <!-- paginator  -->
     
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/tags/Java/page/2/">2</a><a class="extend next" rel="next" href="/tags/Java/page/2/">NEXT &#62;</a>
-    </nav>
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
+            
+                <span>Java 中的 ==、equals 与 hashCode</span>
+        </a>
+        <div class="abstract-content">
+            ==
+比较两个基本类型的数据是否相等
+两个引用变量是否相等
+
+​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
+​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
+​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
+1String str = new String();
+​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
+​    对...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    <!-- paginator  -->
     
 </main>
             <!-- profile -->
@@ -938,7 +939,7 @@ TCP服务模型...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/30</span><a class="archive-post-title" href="/2019/03/30/Java中的锁/">Java 锁（更新中~）</a>
+            <span class="archive-post-date">03/30</span><a class="archive-post-title" href="/2019/03/30/Java中的锁/">Java 锁（updating）</a>
         </li>
     
     
