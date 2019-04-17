@@ -346,84 +346,25 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/03/30/Java中的锁/">
+        <a class="abstract-title" href="/2019/02/04/final 关键字深入理解/">
             
-                <span>Java 锁（updating）</span>
+                <span>final 关键字的理解</span>
         </a>
         <div class="abstract-content">
-            1、乐观锁​    乐观锁，认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别的线程不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别的线程有没有去更新这个数据，采取在写的时候先读取当前的版本号，然后加锁操作（比较跟上一次的版本号是否一致，相同则更新）。如果失败则要重复 ==读 - 比较 - 写== 的操作。
-​    Java 中的乐观锁基本是通过 CAS 操作实现的，CAS 是一种原子更新的操作，比较当前值和传入值是否一样，一样则更新，否则失败。
-2、悲观锁​    悲观锁认为写多读少，遇到并发写的可能性比较高，每次去拿数据的时候，都认为别的线程会修改数据，所以...
+            final 的初步理解​    通常我们对Java中final关键字的理解是“用final修饰的变量是不可变的”，如果尝试对final变量多次赋值，编译器将报错。
+​    似乎final的作用就是保证变量不可变，这没有错，但是如果我们在Java中灵活应用final的被修饰目标不可变的特性，往往能发掘出很多令人意想不到的效果，而非仅仅保证变量不可变这么粗浅而已。下面我们来说说final关键字的多重用法
+final 修饰变量
+修饰基本类变量
+修饰引用类变量（对象类变量）
+
+对于上面说得两点，先看一下下面的两个程序呗
+12final int myInt = 1;myInt = 2;
+123f...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/20/Java 多线程（并发）/">
-            
-                <span>Java 多线程（并发）</span>
-        </a>
-        <div class="abstract-content">
-            1.概述有一个大水缸，要和尚去挑水，倒满这个水缸，如果需要挑20趟才能给这个水缸加满水。
-让一个和尚来回跑20趟，挑20次水，就可以倒满。
-另外我也可以让 10 个和尚跑两趟，就可以把水缸的水给倒满。
-第二种场景就是并发。并发编程主要解决的问题为 “速度（效率）”。
-但是一条路就这么宽，十个和尚跑在路上，如果碰倒了，导致水洒了，两趟下来，就保证不了水缸能够装满水。
-所以在并发的情况下，我们需要考虑的在这条挑水的路上各个和尚正常挑水不发生意外，不像一个和尚挑水，在路上不用担心碰倒其它和尚。
-上面提到的地方就是并发需要注意的：阻塞、共享资源。另外为了解决这些问题，而又有涉及到一些概念：原子性...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="多线程">多线程</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/05/volatile是什么/">
-            
-                <span>volatitle 是什么？</span>
-        </a>
-        <div class="abstract-content">
-            文章来源：大白话聊聊Java并发面试问题之volatile到底是什么？【石杉的架构笔记】
-一、写在前面前段时间把几年前带过的一个项目架构演进的过程整理了一个系列出来，参见（《亿级流量架构系列专栏总结》）。
-不过很多同学看了之后，后台反馈说文章太烧脑，看的云里雾里。其实这个也正常，文章承载的信息毕竟有限，而架构的东西细节太多，想要仅仅通过文章看懂一个系统架构的设计和落地，确实难度不小。
-所以接下来用大白话跟大家聊点轻松的话题，比较易于理解，而且对大家工作和面试都很有帮助。
-二、场景引入，问题初现很多同学出去面试，都会被问到一个常见的问题：说说你对volatile的理解？
-不少初出茅庐的同学...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/05</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/04</span>
             </div>
             <!-- tags  -->
             
@@ -442,29 +383,29 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/03/01/static 多线程/">
+        <a class="abstract-title" href="/2019/01/04/类型信息/">
             
-                <span>Java中多线程的static</span>
+                <span>Java——Class</span>
         </a>
         <div class="abstract-content">
-            来说说静态变量、实例变量、局部变量在多线程下的安全问题吧！
-在 Java 中，static 主要强调的是，它在 jvm 中就只有一个
-关于static修饰的变量，静态变量，表示静态变量在内存中只有一个拷贝，JVM只为静态变量分配一次内存，在加载类的过程中便完成静态变量的内存分配，同静态方法一样。
-静态变量
-使用 static 关键字定义的变量。
+            学习初衷：
 
-static 可以修饰变量和方法
+想知道程序在运行的时候，如何识别对象和类的信息。
+在基本的框架中随处都可见有使用 Class 对象，弄清楚作用
+如果通过反射去调用类中的属性、方法、构造函数等
 
-static 静态代码块。
+写在前头如果看过一些成熟的框架，大家都应该知道 泛型、反射、注解等这些 Java 高级特性是无处不在的，多数都是使用这些特性让程序复用性更高更简洁。如果想要看懂一些成熟的框架源码，这些就是基础。
+==Java 是如何让我们在运行时识别对象和类信息的呢？==
 
+RTTI，它假定我们在编译时已经知道了所有类型
+反射机制
 
-
-在Java中并不存在全局变量的概念，但是我们可以通过static来实现一个“伪全局”的概念，在Java中static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法...
+一、RTTI 和反射每个认真读过 B 大的《Thinking in Java》都会有这么一个疑问：...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/01</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/04</span>
             </div>
             <!-- tags  -->
             
@@ -478,6 +419,10 @@ static 静态代码块。
     </article>
     
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/archives/2019/">&#60; PREV</a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span>
+    </nav>
     
 </main>
             <!-- profile -->

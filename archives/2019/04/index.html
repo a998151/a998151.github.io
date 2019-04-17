@@ -346,7 +346,141 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/04/13/数据库管理系统（DBMS）——读现象/">
+            
+                <span>数据库管理系统（DBMS）——读现象</span>
+        </a>
+        <div class="abstract-content">
+            事务的四种隔离级别说明之前，先简单介绍一下 MySQL 四级事务隔离级别，每个级别都有字符或数字编号
+
+
+
+名称
+编号
+说明
+
+
+
+
+读未提交 READ-UNCOMMITTED
+0
+存在脏读，不可重复读，幻读的问题
+
+
+读已提交 READ-COMMITTED
+1
+解决脏读的问题，存在不可重复读，幻读的问题
+
+
+可重复读 REPEATABLE-READ
+2
+解决脏读，不可重复读的问题，存在幻读的问题，默认隔离级别，使用 MMVC机制 实现可重复读
+
+
+序列化 SERIALIZABLE
+3
+解决脏读，不可重复读，幻读，可保证事务安全，但完全串行执行，性能最低
+
+
+
+注意（重点）：
+RR 级别...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/04/11/数据库管理系统（DBMS）——共享锁与排他锁/">
+            
+                <span>数据库管理系统（DBMS）——共享锁与排他锁</span>
+        </a>
+        <div class="abstract-content">
+            之前介绍过行锁，行级锁是 MySQL中颗粒度最小的一种锁，行级锁能大大减少数据库操作冲突。行级锁分为共享锁和排他锁两种，本文将详细介绍共享锁及排他锁的概念、使用方式及注意事项等。
+共享锁(Share Lock)共享锁又称读锁，是读取操作创建的锁。其他用户可以并发读取数据，但任何事务都不能对数据进行修改（获取数据上的排他锁），直到已释放所有共享锁。
+如果事务T对数据A加上共享锁后，则其他事务只能对A再加共享锁，不能加排他锁。获准共享锁的事务只能读数据，不能修改数据。
+用法1SELECT ... LOCK IN SHARE MODE;
+在查询语句后面增加LOCK IN SHARE MODE，...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/11</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）中的锁——行锁、表锁、页锁/">
+            
+                <span>数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</span>
+        </a>
+        <div class="abstract-content">
+            0、什么是锁？例1 ： 现有两处火车票售票点，同时读取某一趟列车车票数据库中车票余额为 X。两处售票点同时卖出一张车票，同时修改余额为 X -1写回数据库，这样就造成了实际卖出两张火车票而数据库中的记录却只少了一张。 
+例2 ： 事务A将某张表中的数据修改了，但是因为某些原因，撤销对该值的修改。但是在撤销之前，事务B读取了这个修改过后的值，导致读到错误的数据的情况发生。
+产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。
+对于这些情况，可以去了解一下DBMS ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">
+            
+                <span>数据库管理系统（DBMS）——死锁</span>
+        </a>
+        <div class="abstract-content">
+            行级锁与死锁(非自己写，需要修改)MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
+在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。
+当两...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">
             
                 <span>数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</span>
         </a>
@@ -586,9 +720,61 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 12
+        Total : 16
         </div>
         <!-- search  -->
         
@@ -604,7 +790,27 @@
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href="/2019/04/13/数据库管理系统（DBMS）——读现象/">数据库管理系统（DBMS）——读现象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/11</span><a class="archive-post-title" href="/2019/04/11/数据库管理系统（DBMS）——共享锁与排他锁/">数据库管理系统（DBMS）——共享锁与排他锁</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">04/10</span><a class="archive-post-title" href="/2019/04/10/数据库管理系统（DBMS）中的锁——行锁、表锁、页锁/">数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">数据库管理系统（DBMS）——死锁</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</a>
         </li>
     
     
