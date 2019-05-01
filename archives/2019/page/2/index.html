@@ -346,6 +346,41 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/02/28/原子性、可见性、有序性/">
+            
+                <span>原子性、可见性、有序性</span>
+        </a>
+        <div class="abstract-content">
+            零、Java 内存模型Java 内存模型的==主要目标==是==定义程序中各个变量的访问规则==。
+Java 内存模型规定了所有变量都存储在主内存中，每条线程还有自己的工作内存（Working Memory），线程的工作内存中保存了需要用到的变量主内存备份。
+线程对普通变量的所有操作，都必须在工作内存中执行，而不能直接读写主内存中的变量
+不同的线程也无法直接访问对方工作内存中的变量
+
+主内存和工作内存之间的交互协议（变量从主拷贝到工作内存，使用完变量后，再从工作内存同步回主内存）
+Java内存模型定义了8种操作来完成，虚拟机实现必须保证每一个操作都是原子性、不可再分的（==double和...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/02/04/final 关键字深入理解/">
             
                 <span>final 关键字的理解</span>
@@ -694,9 +729,24 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 16
+        Total : 17
         </div>
         <!-- search  -->
         
@@ -709,6 +759,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span><a class="archive-post-title" href="/2019/05/01/数据库管理系统（DBMS）——事务隔离级别/">数据库管理系统（DBMS）——事务与隔离级别</a>
+        </li>
     
     
         <li class="archive-post-item">
