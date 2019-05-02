@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Java 中的 ==、equals 与 hashCode · ALemon Blog</title>
+    <title>Java集合——List · ALemon Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">ALemon&#39;s Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Java 中的 ==、equals 与 hashCode</a>
+                <a href="#" class="post-name">Java集合——List</a>
             </div>
     </div>
     
@@ -241,13 +241,13 @@ height:50vh;
     <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(http://ww1.sinaimg.cn/large/006D41sGly1g2m20uawlbj32dc3k0e81.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Java 中的 ==、equals 与 hashCode
+            Java集合——List
             <!-- 404 -->
             
         </h1>
@@ -264,20 +264,14 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
-                    <div class="post-intro-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-                
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">606</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.5k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/10/04</span>
+                    <span class="post-intro-time">2019/05/02</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,30 +395,90 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h3 id=""><a href="#" class="headerlink" title="=="></a>==</h3><ul>
-<li>比较两个基本类型的数据是否相等</li>
-<li>两个引用变量是否相等</li>
+        <h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>Java 的 List 是常用的数据结构类型。List 是<strong>有序的</strong> Collection。Java List 一共三个实现类：<br>分别是 <strong><em>ArrayList</em></strong>、<strong><em>Vector</em></strong> 和 <strong><em>LinkedList</em></strong>。</p>
+<h3 id="ArrayList-（数组实现）"><a href="#ArrayList-（数组实现）" class="headerlink" title="ArrayList （数组实现）"></a>ArrayList （数组实现）</h3><p>​    ArrayList 是一个<strong>数组队列</strong>，相当于 <strong>动态数组</strong>。</p>
+<p>​    <strong>与Java中的数组相比，它的容量能动态增长。</strong></p>
+<h4 id="ArrayList-继承的类与实现的接口"><a href="#ArrayList-继承的类与实现的接口" class="headerlink" title="ArrayList 继承的类与实现的接口"></a>ArrayList 继承的类与实现的接口</h4><ul>
+<li>ArrayList <em>继承了AbstractList，实现了List</em>：它是一个数组队列，提供了相关的添加、删除、修改、遍历等功能。</li>
+<li>ArrayList <em>实现了RandmoAccess接口：即提供了随机访问功能。</em>RandmoAccess是java中用来被List实现，为List提供快速访问功能的。在ArrayList中，我们即可以通过元素的序号快速获取元素对象；这就是快速随机访问。稍后，我们会比较List的“快速随机访问”和“通过Iterator迭代器访问”的效率。</li>
+<li>ArrayList 实现了Cloneable接口：即覆盖了函数clone()，能被克隆。</li>
+<li>ArrayList 实现java.io.Serializable接口：这意味着ArrayList支持序列化，能通过序列化去传输。</li>
 </ul>
-<p>​    如果两个变量是基本数据类型，可以直接使用“<code>==</code>”运算符来比较其<strong>对应的值</strong>是否相等。</p>
-<p>​    但是不可以用 ”<code>==</code>“ 来比较应用类型变量的值是否相等。具体原因如下：</p>
-<p>​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="keyword">new</span> String();</span><br></pre></td></tr></table></figure>
-<p>​    变量 <code>str</code> 占用一块内存，而 <code>new String()</code> 占用另外一块内存，此时变量 <code>str</code> 所对应内存中存储的数值就是对象占用的那块内存的首地址。</p>
-<p>​    对于指向对象类型的变量，如果想要比较两个变量是否指向同一对象，即要看这两个变量所对应的内存中的数值是否相等（<strong>这两个对象是否指向同一块存储空间</strong>），这时候就可以用“<code>==</code>”运算符进行比较。但是，如果要比较这两个对象的内容是否相等，那么用“<code>==</code>”运算符就无法实现了。</p>
-<h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a><em>equals</em></h3><p>​    <code>equals()</code>是 Object 类提供的方法之一。每一个 Java 类都集成 Object 类，所以每一个对象都有 equals 这个方法。</p>
-<p>​    Object类中定义的equals(Object)方法的情况下，equals(Object)与“<code>==</code>”运算符一样，<strong>比较的是引用</strong>。</p>
-<p>​    相比“<code>==</code>”运算符，<code>equals(Object)</code>方法的特殊之处就在于它可以被覆盖，所以可以通过覆盖的方法让它不是比较引用而是比较数据内容，例如String类的<code>equals</code>方法是用于比较两个独立对象的内容是否相同，即堆中的内容是否相同</p>
-<p>​    如果一个类没有自己定义<code>equals()</code>方法，它默认的<code>equals()</code>方法（从Object类继承的）就是使用“<code>==</code>”运算符，也是在比较两个变量指向的对象是否是同一对象，此时使用<code>equals()</code>方法和使用“<code>==</code>”运算符会得到同样的结果。</p>
-<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a><em>hashCode</em></h3><p><code>hashCode()</code>方法是从Object类中继承过来的，它也用来鉴定两个对象是否相等。<strong>Object类中的<code>hashCode()</code>方法返回对象在内存中地址转换成的一个int值</strong>，所以如果没有重写<code>hashCode()</code>方法，任何对象的<code>hashCode()</code>方法都是不相等的。</p>
+<h4 id="ArrayList-分析"><a href="#ArrayList-分析" class="headerlink" title="ArrayList 分析"></a>ArrayList 分析</h4><p>​    ArrayList 是最常用的 List 实现类，内部是通过数组实现的，它允许对元素进行快速随机访问。数组的缺点是每个元素之间不能有间隔，<strong>当数组大小不满足时需要增加存储能力，就要将已经有数组的数据复制到新的存储空间中。</strong>随着向 ArrayList 中不断添加元素，其容量也自动增长。</p>
+<ul>
+<li><strong>ArrayList 查询</strong>：<strong>自动增长会带来数据向新数组的重新拷贝</strong>，因此，如果可预知数据量的多少，可在构造 ArrayList 时指定其容量。在添加大量元素前，应用程序也可以使用 ensureCapacity 操作来增加 ArrayList 实例的容量，这可以减少递增式再分配的数量。</li>
+<li><strong>ArrayList 修改</strong>：当从 ArrayList 的中间位置插入或者删除元素时，需要对数组进行复制、移动、代价比较高。因此，它适合随机查找和遍历，不适合插入和删除。</li>
+</ul>
+<p>​    和Vector不同，<strong>ArrayList中的操作不是线程安全的</strong>！所以，<strong>建议在单线程中才使用</strong><code>ArrayList</code>，而在多线程中可以选择 <code>Vector</code>、<code>synchronizedList()</code>对<code>ArrayList</code>进行调用或者<code>CopyOnWriteArrayList</code>。</p>
+<h3 id="Vector（数组实现，线程同步）"><a href="#Vector（数组实现，线程同步）" class="headerlink" title="Vector（数组实现，线程同步）"></a>Vector（数组实现，线程同步）</h3><ol>
+<li>Vector也是一个类似于ArrayList的可变长度的数组类型，它的内部也是使用数组来存放数据对象的。</li>
+<li><strong>值得注意的是Vector与ArrayList唯一的区别是，Vector是线程安全的，它的大部分方法都包含有关键字synchronized</strong>，因此，若对于<strong>单一线程</strong>的应用来说，<strong>最好使用ArrayList代替Vector</strong>，因为这样效率会快很多（类似的情况有StringBuffer与StringBuilder）；</li>
+<li>而在多线程程序中，为了保证数据的同步和一致性，可以使用Vector代替ArrayList实现同样的功能。</li>
+</ol>
+<h3 id="LinkedList（链表）"><a href="#LinkedList（链表）" class="headerlink" title="LinkedList（链表）"></a>LinkedList（链表）</h3><ol>
+<li>LinkedList 是用链表数据结构存储数据的，很适合数据的动态插入和删除，随机访问和遍历速度比较慢。</li>
+<li>另外，他还提供了 List 接口中没有定义的方法，专门用于操作表头和表尾元素，可以当作堆栈、队列和双向队列使用。</li>
+</ol>
+<p>在类中包含了 <code>first</code>和 <code>last</code>两个指针(Node)。<strong>Node 中包含了上一个节点和下一个节点的引用</strong>，这样就构成了双向的链表。每个 Node 只能知道自己的前一个节点和后一个节点，但对于链表来说，这已经足够了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">transient</span> Node&lt;E&gt; first; <span class="comment">//链表的头指针</span></span><br><span class="line"><span class="keyword">transient</span> Node&lt;E&gt; last; <span class="comment">//尾指针</span></span><br><span class="line"><span class="comment">//存储对象的结构 Node, LinkedList的内部类</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    E item;</span><br><span class="line">    Node&lt;E&gt; next; <span class="comment">// 指向下一个节点</span></span><br><span class="line">    Node&lt;E&gt; prev; <span class="comment">//指向上一个节点</span></span><br><span class="line"></span><br><span class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">        <span class="keyword">this</span>.item = element;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">        <span class="keyword">this</span>.prev = prev;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ArrayList-与-LinkedList-区别"><a href="#ArrayList-与-LinkedList-区别" class="headerlink" title="ArrayList 与 LinkedList 区别"></a>ArrayList 与 LinkedList 区别</h3><blockquote>
+<p>通过上面我们都知道，ArrayList 比 LinkedList 更加适用于做查询与遍历的场景中，那是因为什么原因，而有这一说法的呢？</p>
+</blockquote>
+<ul>
+<li>ArrayList 是基于索引（index）的数组，索引在数组中搜索和读取的时间复杂度是<code>O(1)</code>，但是要增加和删除数据的开销很大，因为这需要重排数组中的所有数据。</li>
+<li>LinkedList 的底层实现则是一个双向循环带头节点的链表，因此LinkedList 中插入或删除的时间复杂度仅为<code>O(1)</code>，但是获取数据的时间复杂度却是 <code>O(n)</code>。</li>
+</ul>
+<p>LinkedList 的复杂度说明：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>增</td>
+<td>O(n)</td>
+<td>如果只操作链表头尾O(1)</td>
+</tr>
+<tr>
+<td>删</td>
+<td>O(n)</td>
+<td>如果只操作链表头尾O(1)</td>
+</tr>
+<tr>
+<td>改</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>查</td>
+<td>O(n)</td>
+<td>如果只查询链表头尾O(1)</td>
+</tr>
+</tbody>
+</table>
+<p>有了上面的结果，那同样我们也可以知道 </p>
+<blockquote>
+<p>为什么ArrayList的遍历中for比Iterator快，而LinkedList中却是Iterator远快于for？</p>
+</blockquote>
+<p>ArrayList用for循环随机读取的速度是很快的，因为ArrayList的下标是明确的，读取一个数据的时间复杂度仅为O(1)。</p>
+<p>但LinkedList若是用for来遍历效率很低，读取一个数据的时间复杂度就达到了为O(n)。而用Iterator的next()则是顺着链表节点顺序读取数据的效率就很高了.</p>
+<p>说到底这种现象就是由于数据结构不同引起的。<code>ArrayList</code>用for（<strong>循环随机读取</strong>）的速度是很快的，因为<code>ArrayList</code>的下标是明确的，读取一个数据的时间复杂度仅为O(1)。</p>
+<p>但LinkedList若是用for来遍历效率很低，读取一个数据的时间复杂度就达到了为O(n)。而用Iterator的next()则是顺着链表节点（<strong>顺序读取数据</strong>）的效率就很高了</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://wiki.jikexueyuan.com/project/java-collection/arraylist.html" target="_blank" rel="noopener">ArrayList 的实现原理</a></p>
+<p><a href="http://wiki.jikexueyuan.com/project/java-collection/linkedlist.html" target="_blank" rel="noopener">LinkedList 的实现原理</a></p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://yoursite.com">ALemon</a>
-            </p><p>原文链接：<a href="http://yoursite.com/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">http://yoursite.com/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/</a>
-            </p><p>发表日期：<a href="http://yoursite.com/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">October 4th 2018, 8:45:53 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">March 16th 2019, 2:12:19 pm</a>
+            </p><p>原文链接：<a href="http://yoursite.com/2019/05/02/Java集合——List/">http://yoursite.com/2019/05/02/Java集合——List/</a>
+            </p><p>发表日期：<a href="http://yoursite.com/2019/05/02/Java集合——List/">May 2nd 2019, 7:45:00 pm</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/05/02/Java集合——List/">May 3rd 2019, 1:12:40 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -432,13 +486,13 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2018/10/24/Java初认识锁机制/" title="Java初认识锁机制">
-                    <div class="nextTitle">Java初认识锁机制</div>
-                </a>
-            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/05/01/数据库管理系统（DBMS）——事务隔离级别/" title="数据库管理系统（DBMS）——事务与隔离级别">
+                    <div class="prevTitle">数据库管理系统（DBMS）——事务与隔离级别</div>
+                </a>
             
         </li>
     </ul>
@@ -549,7 +603,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">==</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#equals"><span class="toc-number">2.</span> <span class="toc-text">equals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hashCode"><span class="toc-number">3.</span> <span class="toc-text">hashCode</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#List"><span class="toc-number">1.</span> <span class="toc-text">List</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList-（数组实现）"><span class="toc-number">1.1.</span> <span class="toc-text">ArrayList （数组实现）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList-继承的类与实现的接口"><span class="toc-number">1.1.1.</span> <span class="toc-text">ArrayList 继承的类与实现的接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList-分析"><span class="toc-number">1.1.2.</span> <span class="toc-text">ArrayList 分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vector（数组实现，线程同步）"><span class="toc-number">1.2.</span> <span class="toc-text">Vector（数组实现，线程同步）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedList（链表）"><span class="toc-number">1.3.</span> <span class="toc-text">LinkedList（链表）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList-与-LinkedList-区别"><span class="toc-number">1.4.</span> <span class="toc-text">ArrayList 与 LinkedList 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">1.5.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
