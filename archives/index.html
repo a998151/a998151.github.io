@@ -346,6 +346,34 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/03/Java集合——Set/">
+            
+                <span>Java集合——Set</span>
+        </a>
+        <div class="abstract-content">
+            Set 介绍
+Set 注重独一无二的性质，该体系集合用于存储无序（存入和取出的顺序不一定相同）元素，值不能重复。
+
+对象的相等性本质是对象的 hashCode值（Java 是依据对象的内存地址计算出此序号）判断的。如果想让两个不同的对象视为相等，就必须覆盖 Object的 hashCode方法和 equals 方法。
+HashSet（Hash表）哈希表边存放的是哈希值。HashSet存储元素的顺序并不是按照存入时的顺序（和 List显然不同） 而是按照哈希值来存，所以取数据也是按照哈希值取得。
+对于 HashSet而言，它是基于 HashMap实现的，底层采用 HashMap来保存元素。...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/02/Java集合——List/">
             
                 <span>Java集合——List</span>
@@ -617,47 +645,6 @@ RR 级别...
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/01/static 多线程/">
-            
-                <span>Java中多线程的static</span>
-        </a>
-        <div class="abstract-content">
-            来说说静态变量、实例变量、局部变量在多线程下的安全问题吧！
-在 Java 中，static 主要强调的是，它在 jvm 中就只有一个
-关于static修饰的变量，静态变量，表示静态变量在内存中只有一个拷贝，JVM只为静态变量分配一次内存，在加载类的过程中便完成静态变量的内存分配，同静态方法一样。
-静态变量
-使用 static 关键字定义的变量。
-
-static 可以修饰变量和方法
-
-static 静态代码块。
-
-
-
-在Java中并不存在全局变量的概念，但是我们可以通过static来实现一个“伪全局”的概念，在Java中static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/01</span>
             </div>
             <!-- tags  -->
             
@@ -961,9 +948,24 @@ static 静态代码块。
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 17
+        Total : 18
         </div>
         <!-- search  -->
         
@@ -976,6 +978,11 @@ static 静态代码块。
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href="/2019/05/03/Java集合——Set/">Java集合——Set</a>
+        </li>
     
     
         <li class="archive-post-item">
