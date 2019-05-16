@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>原子性、可见性、有序性 · ALemon Blog</title>
+    <title>ALemon Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,23 +203,12 @@
 </head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/">ALemon&#39;s Blog</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">原子性、可见性、有序性</a>
-            </div>
-    </div>
     
     <a class="home-link" href="/">ALemon's Blog</a>
 </header>
@@ -231,74 +220,24 @@
 
 
 
-
-height:50vh;
 ">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            原子性、可见性、有序性
-            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class="post-intro-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-                
-                
-                    <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">3.1k</span>阅读时长: <span class="post-count reading-time">10 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/02/28</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
         
     </div>
 </div>
@@ -399,134 +338,52 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h3 id="零、Java-内存模型"><a href="#零、Java-内存模型" class="headerlink" title="零、Java 内存模型"></a>零、Java 内存模型</h3><p>Java 内存模型的==主要目标==是==定义程序中各个变量的访问规则==。</p>
-<p>Java 内存模型规定了所有变量都存储在主内存中，每条线程还有自己的工作内存（Working Memory），线程的工作内存中保存了需要用到的变量主内存备份。</p>
-<p>线程对普通变量的所有操作，都必须在工作内存中执行，而不能直接读写主内存中的变量</p>
-<p>不同的线程也无法直接访问对方工作内存中的变量</p>
-<p><img src="https://images2018.cnblogs.com/blog/1224549/201808/1224549-20180806150417211-1522270112.jpg" alt=""></p>
-<p>主内存和工作内存之间的交互协议（变量从主拷贝到工作内存，使用完变量后，再从工作内存同步回主内存）</p>
-<p>Java内存模型定义了8种操作来完成，虚拟机实现必须保证每一个操作都是原子性、不可再分的（==double和long例外==）。</p>
-<blockquote>
-<ul>
-<li><code>lock</code>（锁定）:作用于主内存的变量，它把一个变量标识为一条线程独占的状态。</li>
-<li><code>unlock</code>（解锁）:作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定。</li>
-<li><code>read</code>（读取）:作用于主内存的变量，它把一个变量的值从主内存传输到线程的工作内存中，以便随后的<code>load</code>动作使用。</li>
-<li><code>load</code>（载入）:作用于工作内存的变量，它把<code>read</code>操作从主内存中得到的变量值放入工作内存的变量副本中。</li>
-<li><code>us</code>e（使用）:作用于工作内存的变量，它把工作内存中一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用到变量的值的字节码指令时将会执行这个操作。</li>
-<li><code>assig</code>n（赋值）:作用于工作内存的变量，它把一个从执行引擎接收到的值赋给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。</li>
-<li><code>store</code>（存储）:作用于工作内存的变量，它把工作内存中一个变量的值传送到主内存中，以便随后的 write操作使用。</li>
-<li><code>wirte</code>（写入）:作用于主内存的变量，他把<code>store</code>操作从工作内存中得到的变量的值放入主内存的变量中。</li>
-</ul>
-</blockquote>
-<p>变量从主内存到工作内存，必须经过read和load，从 工作内存同步回主内存，需要经过store和write操作，==这两个操作必须按顺序执行，但不一定是连续执行。==也就是在两个操作之间可以有其他的操作。 </p>
-<p>在使用上面的8中操作的时候需要满足的规则 ：</p>
-<blockquote>
-<ul>
-<li>不允许<code>read</code>和<code>load、 store</code>和 <code>write</code>操作之一单独出现，即不允许一个变量从主内存读取了但工作内存不接受，或者从工作存发起回写了但主内存不接受的情况出现。</li>
-<li>不允许一个线程丢弃它的最近的 <code>assign</code>操作，即变量在工作内存中改变了之后必须把该变化同步回主内存。</li>
-<li>不允许一个线程无原因地（没有发生过任何 <code>assign</code>操作）把数据从线程的工作内存同步回主内存中。</li>
-<li>一个新的变量只能在主内存中“诞生”，不允许在工作内存中直接使用一个未被初始化（<code>load</code>或 <code>assign</code>）的变量，换句话说，就是对一个变量实施<code>use</code>、<code>store</code>操作之前必须先执行过了 <code>assign</code>和<code>load</code>操作。</li>
-<li>一个变量在同一个时刻只允许一条线程其进行<code>1ock</code>操作，但<code>lock操作可以被同一条线程重复执行多次，多次执行</code>lock<code>后，只有执行相同次数的</code>unlock`操作，变量被解锁。</li>
-<li>如果对一个变量执行lock操作，那将会清空工作内存中此变量的值，在执行引擎使用这个变量前，需要重新执行load或 assign操作初始化变量的值。</li>
-<li>如果一个变量事先没有被lock操作锁定，那就不允许对它执行<code>unlock</code>操作，也不允许去 <code>unlock</code>一个被其他线程锁定住的变量。</li>
-<li>对一个变量执行 <code>unlock</code> 操作之前，必须先把此变量同步回主内存中（执行<code>stre</code>、<code>wite</code>操作）。</li>
-</ul>
-</blockquote>
-<p>Java 内存模型要求的8个操作都具有<strong>原子性</strong>，但是对于<strong>64位的数据类型</strong>（<code>long</code>和<code>double</code>），定义了宽松的规定：允许虚拟机将没有被 <code>volitale</code> 修饰的64位数据的读写操作划分为==两次32位的操作==来进行，也就是虚拟机实现选择可以不保证64位数据类型的<code>load</code>、<code>store</code>、<code>read</code> 和 <code>write</code> 这四个操作的原子性，这个就是所谓的 <code>long</code>和<code>double</code> 的非原子性协定。</p>
-<p>有了上面这些基本的概念，理解下面的内容就容易多了。</p>
-<h3 id="一、原子性"><a href="#一、原子性" class="headerlink" title="一、原子性"></a>一、原子性</h3><blockquote>
-<p> 即一个操作或者多个操作，要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。原子性就像数据库里面的事务一样，他们是一个团队，同生共死。</p>
-</blockquote>
-<p><strong>要想在多线程环境下保证原子性，则可以通过锁、synchronized来确保。volatile是无法保证复合操作的原子性。</strong></p>
-<h3 id="二、可见性"><a href="#二、可见性" class="headerlink" title="二、可见性"></a>二、可见性</h3><blockquote>
-<p>可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。</p>
-</blockquote>
-<p><strong>Java提供了volatile关键字来保证可见性</strong>。当一个共享变量被volatile修饰时，它会保证修改的值会立即被更新到主存，当有其他线程需要读取时，它会去内存中读取新值。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZicI3B23mHahdibYiaRKicYVVqHCIS4F18UGeSroHvicdUKDf0XkWWmgfftENvjHMU9kP4bnkfQEQ2WDg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
-<p>如果此时别的线程的工作内存中有这个data变量的本地缓存，也就是一个变量副本的话，那么会强制让其他线程的工作内存中的data变量缓存直接失效过期，不允许再次读取和使用了！</p>
-<p>如果线程2在代码运行过程中再次需要读取data变量的值，此时尝试从本地工作内存中读取，就会发现这个data = 0已经过期了！</p>
-<p>此时，他就必须重新从主内存中加载data变量最新的值！那么不就可以读取到data = 1这个最新的值了*</p>
-<p><em>Java</em> 内存模型是通过在变量修改后将新值同步回主内存，在变量读取前从主内存刷新变量值。这种依赖主内存作为传递媒介的方式来实现可见性，无论是普通变量还是 <code>volatile</code> 变量都是如此，普通变量与 <code>volatile</code> 变量的区别是， <code>volatile</code> 的特殊规则保证了新值能立即同步到主内存，以及每次使用前立即从主内存刷新。</p>
-<p>因此，可以说 <code>volatile</code> 保证了多线程操作时变量的可见性，而普通变量则不能保证这一点。</p>
-<h3 id="三、有序性"><a href="#三、有序性" class="headerlink" title="三、有序性"></a>三、有序性</h3><p>在说明有序性之前，先说一下重排序的概念吧。</p>
-<p><strong>重排序</strong></p>
-<p><strong>编译器和处理器为了提高并行度，会对程序进行重排序</strong>，不能保证变量赋值的操作顺序与程序代码中的执行顺序一致。</p>
-<p>如果两个操作访问同一个变量，且这两个操作中有一个为写操作，此时这两个操作之间就存在数据依赖性。编译器和处理器可能会对操作做重排序，但是不会改变存在数据依赖关系的两个操作的执行顺序。遵循as-if-serial语义：即不管程序怎么重排序（编译器和处理器为了提高并行度），<strong>（单线程）程序的执行结果不能被改变，但在多线程中，对存在控制依赖的操作重排序，可能会改变程序的执行结果</strong>。</p>
-<p>那，需要保证我们的程序在多线程的时候，能够按照指定的顺序执行，那就是有序性了。</p>
-<p>Java内存模型的有序性在前面说volatile时也说过了，Java程序中天然的有序性可以总结为一句话:如果在本线程内观察，所有的操作都是有序的；如果在一个线程中观察另一个线程，所有的操作都是无序的。前半句是指“线程内表现为串行的语义”（ Within- Thread As-If- Serial Semantics），后半句是指“指令重排序”现象和“工作内存与主内存同步延迟”现象。</p>
-<p>Java语言提供了 <code>volatile</code> 和 <code>synchronized</code> 两个关键字来保证线程之间操作的有序性</p>
-<p><strong><em><code>volatile</code></em> 如何保证有序性？</strong></p>
-<p>volatile关键字本身就包含了禁止指令重排序的语义，在使用volatile之后，在进行对volatile修饰的变量进行赋值后，会多执行一个lock操作，这个操作相当于一个内存屏障（Memory Barrier或Memory Fence，指重排序时不能把后面的指令重排序到内存屏障之前的位置），只有一个CPU访问是不需要这个内存屏障的，但是多个CPU 访问同一块内存，且其中一个在观测另一个，就需要内存屏障来保证一致性了。</p>
-<p><strong><em><code>synchronized</code></em> 如何保证有序性</strong></p>
-<p>而 <code>synchronized</code> 则是由“一个变量在同个时刻只允许一条线程对其进行lock操作”这条规则获得的，这条规则决定了持有同一个锁的两个同步块只能串行地进入。</p>
-<p>PS</p>
-<hr>
-<p>另外说到重排序，就有一个问题</p>
-<ul>
-<li>程序按照什么规则来决定是否重排序？</li>
-</ul>
-<p>下面是Java内存模型下一些“天然的”先行发生关系，这些先行发生关系无须任何同步协助就已经存在，可以在编码中直接使用</p>
-<p>==如果两个操作之间的关系不在此列，并且无法下列规则推导出来的话，它们就没有顺序性保障，虚拟机可以对它们随意地进行重排序== ：</p>
-<blockquote>
-<ul>
-<li>程序次序规则（ Program Order Rule）**：在一个线程内，按照程序代码顺序，书写在前面的操作先行发生于书写在后面的操作。准确地说，应该是控制流顺序而不是程序代码顺序，因为要考虑分支、循环等结构。</li>
-<li><strong>管程锁定规则（ Monitor Lock Rule）</strong>:一个 unlock操作先行发生于后面对同一个锁的lock操作。这里必须强调的是同一个锁，而“后面”是指时间上的先后顺序。</li>
-<li><strong>volatile变量规则（ Volatile Variable Rul）</strong>:对一个 volatile变量的写操作先行发生于后面对这个变量的读操作，这里的“后面”同样是指时间上的先后顺序。</li>
-<li><strong>线程启动规则（ Thread Start Rule）</strong>: Thread对象的 start（）方法先行发生于此线程的每一个动作。</li>
-<li><strong>线程终止规则（ Thread Termination Rul）</strong>:线程中的所有操作都先行发生于对此线程的终止检测，我们可以通过 Thread.join()方法结束、 Thread.isAlive()的返回值等手段检测到线程已经终止执行。</li>
-<li><strong>线程中断规则（ Thread Interruption Rul）</strong>:对线程 interrupt（）方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过 Thread.interrupted()方法检测到是否有中断发生。</li>
-<li><strong>对象终结规则（ Finalizer Rule）</strong>:一个对象的初始化完成（构造函数执行结束）先行发生于它的 finalize（）方法的开始。</li>
-<li><strong>传递性（Transitivity）</strong>:如果操作A先行发生于操作B，操作B先行发生于操作C，那就可以得出操作A先行发生于操作C的结论。</li>
-</ul>
-</blockquote>
-<p>在Java程序中，时间先后顺序与先行发生原则之间基本没有太大的关系，所以衡量并发安全问题的时候不要受到时间顺序的干扰，一切必须以先行发生原则为准。</p>
-
-    </article>
-    <!-- license  -->
+            <main class="main index-page">
     
-        <div class="license-wrapper">
-            <p>原文作者：<a href="http://yoursite.com">ALemon</a>
-            </p><p>原文链接：<a href="http://yoursite.com/2019/02/28/原子性、可见性、有序性/">http://yoursite.com/2019/02/28/原子性、可见性、有序性/</a>
-            </p><p>发表日期：<a href="http://yoursite.com/2019/02/28/原子性、可见性、有序性/">February 28th 2019, 8:20:05 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/02/28/原子性、可见性、有序性/">March 16th 2019, 2:18:27 pm</a>
-            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
+            
+                <span>Java 中的 ==、equals 与 hashCode</span>
+        </a>
+        <div class="abstract-content">
+            ==
+比较两个基本类型的数据是否相等
+两个引用变量是否相等
+
+​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
+​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
+​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
+1String str = new String();
+​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
+​    对...
         </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
     
     <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2019/03/01/static 多线程/" title="Java中多线程的static">
-                    <div class="nextTitle">Java中多线程的static</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href="/2019/02/04/final 关键字深入理解/" title="final 关键字的理解">
-                    <div class="prevTitle">final 关键字的理解</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
     
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/tags/Java/">&#60; PREV</a><a class="page-number" href="/tags/Java/">1</a><span class="page-number current">2</span>
+    </nav>
     
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
-
-
-    
-    
-
-    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -604,24 +461,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#零、Java-内存模型"><span class="toc-number">1.</span> <span class="toc-text">零、Java 内存模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、原子性"><span class="toc-number">2.</span> <span class="toc-text">一、原子性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、可见性"><span class="toc-number">3.</span> <span class="toc-text">二、可见性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、有序性"><span class="toc-number">4.</span> <span class="toc-text">三、有序性</span></a></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1070,8 +909,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

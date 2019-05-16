@@ -346,6 +346,51 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/09/单点登陆/">
+            
+                <span>单点登陆</span>
+        </a>
+        <div class="abstract-content">
+            本篇文章主要说：
+
+单点登陆是个什么概念，主要处理什么问题
+如何实现单点登陆
+介绍 OAuth2.0 
+如何基于 OAuth2.0 机制实现单点登陆
+
+单点登陆介绍在介绍单点登陆概念之前，先介绍下面几个概念
+HTTP 的无状态性HTTP是无状态协议，浏览器的每一次请求，服务器会独立处理，不与之前之后的请求产生关联。
+
+但这也同时意味着，任何用户都能通过浏览器访问服务器资源，如果想保护服务器的某些资源，必须限制浏览器请求；要限制浏览器请求，必须鉴别浏览器请求，响应合法请求，忽略非法请求；要鉴别浏览器请求，必须清楚浏览器请求状态。既然HTTP 协议无状态，那就让服务器和浏览器共同维护一个状态...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/09</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="单点登陆">单点登陆</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="SSO">SSO</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="OAuth2.0">OAuth2.0</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/03/20/Java 多线程（并发）/">
             
                 <span>Java 多线程（并发）</span>
@@ -676,45 +721,11 @@ TCP服务模型...
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
-            
-                <span>Java 中的 ==、equals 与 hashCode</span>
-        </a>
-        <div class="abstract-content">
-            ==
-比较两个基本类型的数据是否相等
-两个引用变量是否相等
-
-​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
-​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
-​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
-1String str = new String();
-​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
-​    对...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/tags/Java/page/2/">2</a><a class="extend next" rel="next" href="/tags/Java/page/2/">NEXT &#62;</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -1016,9 +1027,24 @@ TCP服务模型...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 18
+        Total : 19
         </div>
         <!-- search  -->
         
@@ -1031,6 +1057,11 @@ TCP服务模型...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/09</span><a class="archive-post-title" href="/2019/05/09/单点登陆/">单点登陆</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1145,6 +1176,12 @@ TCP服务模型...
         <span class="sidebar-tag-name" data-tags="多线程"><span class="iconfont-archer">&#xe606;</span>多线程</span>
     
         <span class="sidebar-tag-name" data-tags="锁"><span class="iconfont-archer">&#xe606;</span>锁</span>
+    
+        <span class="sidebar-tag-name" data-tags="单点登陆"><span class="iconfont-archer">&#xe606;</span>单点登陆</span>
+    
+        <span class="sidebar-tag-name" data-tags="SSO"><span class="iconfont-archer">&#xe606;</span>SSO</span>
+    
+        <span class="sidebar-tag-name" data-tags="OAuth2.0"><span class="iconfont-archer">&#xe606;</span>OAuth2.0</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
