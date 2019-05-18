@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Java 中的 ==、equals 与 hashCode · ALemon Blog</title>
+    <title>ALemon Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,23 +203,12 @@
 </head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/">ALemon&#39;s Blog</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">Java 中的 ==、equals 与 hashCode</a>
-            </div>
-    </div>
     
     <a class="home-link" href="/">ALemon's Blog</a>
 </header>
@@ -231,74 +220,24 @@
 
 
 
-
-height:50vh;
 ">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            Java 中的 ==、equals 与 hashCode
-            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class="post-intro-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-                
-                
-                    <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">606</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/10/04</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
         
     </div>
 </div>
@@ -399,63 +338,52 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h3 id=""><a href="#" class="headerlink" title="=="></a>==</h3><ul>
-<li>比较两个基本类型的数据是否相等</li>
-<li>两个引用变量是否相等</li>
-</ul>
-<p>​    如果两个变量是基本数据类型，可以直接使用“<code>==</code>”运算符来比较其<strong>对应的值</strong>是否相等。</p>
-<p>​    但是不可以用 ”<code>==</code>“ 来比较应用类型变量的值是否相等。具体原因如下：</p>
-<p>​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="keyword">new</span> String();</span><br></pre></td></tr></table></figure>
-<p>​    变量 <code>str</code> 占用一块内存，而 <code>new String()</code> 占用另外一块内存，此时变量 <code>str</code> 所对应内存中存储的数值就是对象占用的那块内存的首地址。</p>
-<p>​    对于指向对象类型的变量，如果想要比较两个变量是否指向同一对象，即要看这两个变量所对应的内存中的数值是否相等（<strong>这两个对象是否指向同一块存储空间</strong>），这时候就可以用“<code>==</code>”运算符进行比较。但是，如果要比较这两个对象的内容是否相等，那么用“<code>==</code>”运算符就无法实现了。</p>
-<h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a><em>equals</em></h3><p>​    <code>equals()</code>是 Object 类提供的方法之一。每一个 Java 类都集成 Object 类，所以每一个对象都有 equals 这个方法。</p>
-<p>​    Object类中定义的equals(Object)方法的情况下，equals(Object)与“<code>==</code>”运算符一样，<strong>比较的是引用</strong>。</p>
-<p>​    相比“<code>==</code>”运算符，<code>equals(Object)</code>方法的特殊之处就在于它可以被覆盖，所以可以通过覆盖的方法让它不是比较引用而是比较数据内容，例如String类的<code>equals</code>方法是用于比较两个独立对象的内容是否相同，即堆中的内容是否相同</p>
-<p>​    如果一个类没有自己定义<code>equals()</code>方法，它默认的<code>equals()</code>方法（从Object类继承的）就是使用“<code>==</code>”运算符，也是在比较两个变量指向的对象是否是同一对象，此时使用<code>equals()</code>方法和使用“<code>==</code>”运算符会得到同样的结果。</p>
-<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a><em>hashCode</em></h3><p><code>hashCode()</code>方法是从Object类中继承过来的，它也用来鉴定两个对象是否相等。<strong>Object类中的<code>hashCode()</code>方法返回对象在内存中地址转换成的一个int值</strong>，所以如果没有重写<code>hashCode()</code>方法，任何对象的<code>hashCode()</code>方法都是不相等的。</p>
-
-    </article>
-    <!-- license  -->
+            <main class="main index-page">
     
-        <div class="license-wrapper">
-            <p>原文作者：<a href="http://yoursite.com">ALemon</a>
-            </p><p>原文链接：<a href="http://yoursite.com/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">http://yoursite.com/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/</a>
-            </p><p>发表日期：<a href="http://yoursite.com/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">October 4th 2018, 8:45:53 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">March 16th 2019, 2:12:19 pm</a>
-            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/17/Java集合——Map/">
+            
+                <span>Java集合——Map</span>
+        </a>
+        <div class="abstract-content">
+            写在文章的前面：
+​    这篇文章，对于Map容器，介绍得不全的，参考资料中介绍的比较全面，map 这部分的内容可以网上搜到很全很详细的资料。这篇文章其实相当于自己个人参考着网上的资料配合看着理解源码做的一些理解而已。
+HashMap
+
+说明，这里不进行详细说明，主要用户总结，详细说明可看参考资料一些大神的文章。
+
+
+元素在加入容器的数组中，并不是按照顺序插入的，而是通过 hash进行确定数组下标确定位置插入数据的
+Java8 引入红黑树，主要是为了解决查询遍历链表效率太低
+HashMap散列图、Hashtable散列表是按“有利于随机查找的散列(hash)的顺序”。并非按输入顺序。遍...
         </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Map">Map</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="总结">总结</a>
+    
+</div>
+            
+        </div>
+    </article>
     
     <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2018/10/24/Java初认识锁机制/" title="Java初认识锁机制">
-                    <div class="nextTitle">Java初认识锁机制</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
     
-    
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
-
-
-    
-    
-
-    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -533,24 +461,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">==</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#equals"><span class="toc-number">2.</span> <span class="toc-text">equals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hashCode"><span class="toc-number">3.</span> <span class="toc-text">hashCode</span></a></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1005,8 +915,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

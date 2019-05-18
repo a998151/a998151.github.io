@@ -346,6 +346,48 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/17/Java集合——Map/">
+            
+                <span>Java集合——Map</span>
+        </a>
+        <div class="abstract-content">
+            写在文章的前面：
+​    这篇文章，对于Map容器，介绍得不全的，参考资料中介绍的比较全面，map 这部分的内容可以网上搜到很全很详细的资料。这篇文章其实相当于自己个人参考着网上的资料配合看着理解源码做的一些理解而已。
+HashMap
+
+说明，这里不进行详细说明，主要用户总结，详细说明可看参考资料一些大神的文章。
+
+
+元素在加入容器的数组中，并不是按照顺序插入的，而是通过 hash进行确定数组下标确定位置插入数据的
+Java8 引入红黑树，主要是为了解决查询遍历链表效率太低
+HashMap散列图、Hashtable散列表是按“有利于随机查找的散列(hash)的顺序”。并非按输入顺序。遍...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Map">Map</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="总结">总结</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/09/单点登陆/">
             
                 <span>单点登陆</span>
@@ -685,45 +727,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
-            
-                <span>Java 中的 ==、equals 与 hashCode</span>
-        </a>
-        <div class="abstract-content">
-            ==
-比较两个基本类型的数据是否相等
-两个引用变量是否相等
-
-​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
-​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
-​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
-1String str = new String();
-​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
-​    对...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/tags/Java/page/2/">2</a><a class="extend next" rel="next" href="/tags/Java/page/2/">NEXT &#62;</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -1027,9 +1035,24 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 18
+        Total : 19
         </div>
         <!-- search  -->
         
@@ -1042,6 +1065,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1162,6 +1190,10 @@ RTTI，它假定我们在编译时已经知道了所有类型
         <span class="sidebar-tag-name" data-tags="SSO"><span class="iconfont-archer">&#xe606;</span>SSO</span>
     
         <span class="sidebar-tag-name" data-tags="OAuth2.0"><span class="iconfont-archer">&#xe606;</span>OAuth2.0</span>
+    
+        <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
+    
+        <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
