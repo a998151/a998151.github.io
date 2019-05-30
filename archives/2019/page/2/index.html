@@ -346,6 +346,31 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/03/30/Java中的锁/">
+            
+                <span>Java 锁（updating）</span>
+        </a>
+        <div class="abstract-content">
+            1、乐观锁​    乐观锁，认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别的线程不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别的线程有没有去更新这个数据，采取在写的时候先读取当前的版本号，然后加锁操作（比较跟上一次的版本号是否一致，相同则更新）。如果失败则要重复 ==读 - 比较 - 写== 的操作。
+​    Java 中的乐观锁基本是通过 CAS 操作实现的，CAS 是一种原子更新的操作，比较当前值和传入值是否一样，一样则更新，否则失败。
+2、悲观锁​    悲观锁认为写多读少，遇到并发写的可能性比较高，每次去拿数据的时候，都认为别的线程会修改数据，所以...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/03/20/Java 多线程（并发）/">
             
                 <span>Java 多线程（并发）</span>
@@ -371,40 +396,6 @@
         <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="多线程">多线程</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/05/volatile是什么/">
-            
-                <span>volatitle 是什么？</span>
-        </a>
-        <div class="abstract-content">
-            文章来源：大白话聊聊Java并发面试问题之volatile到底是什么？【石杉的架构笔记】
-一、写在前面前段时间把几年前带过的一个项目架构演进的过程整理了一个系列出来，参见（《亿级流量架构系列专栏总结》）。
-不过很多同学看了之后，后台反馈说文章太烧脑，看的云里雾里。其实这个也正常，文章承载的信息毕竟有限，而架构的东西细节太多，想要仅仅通过文章看懂一个系统架构的设计和落地，确实难度不小。
-所以接下来用大白话跟大家聊点轻松的话题，比较易于理解，而且对大家工作和面试都很有帮助。
-二、场景引入，问题初现很多同学出去面试，都会被问到一个常见的问题：说说你对volatile的理解？
-不少初出茅庐的同学...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
 </div>
             
@@ -906,6 +897,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
         </li>
     
@@ -957,11 +953,6 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <li class="archive-post-item">
             <span class="archive-post-date">03/20</span><a class="archive-post-title" href="/2019/03/20/Java 多线程（并发）/">Java 多线程（并发）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/05</span><a class="archive-post-title" href="/2019/03/05/volatile是什么/">volatitle 是什么？</a>
         </li>
     
     
@@ -1032,6 +1023,8 @@ RTTI，它假定我们在编译时已经知道了所有类型
         <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
     
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
+    
+        <span class="sidebar-tag-name" data-tags="反思"><span class="iconfont-archer">&#xe606;</span>反思</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
