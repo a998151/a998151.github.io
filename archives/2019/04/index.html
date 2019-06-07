@@ -351,7 +351,8 @@
                 <span>数据库管理系统（DBMS）——读现象</span>
         </a>
         <div class="abstract-content">
-            事务的四种隔离级别说明之前，先简单介绍一下 MySQL 四级事务隔离级别，每个级别都有字符或数字编号
+            数据库是有效数据最终落脚点，不懂数据库那不能算作一个合格的程序员咯。但是一些数据库的规则和常见的读数据出现的情况，还是有许多人分不清楚的，这里自己个人对这些问题记录一下，说明各个情况是个什么样的表现。
+事务的四种隔离级别说明之前，先简单介绍一下 MySQL 四级事务隔离级别，每个级别都有字符或数字编号
 
 
 
@@ -374,17 +375,7 @@
 
 可重复读 REPEATABLE-READ
 2
-解决脏读，不可重复读的问题，存在幻读的问题，默认隔离级别，使用 MMVC机制 实现可重复读
-
-
-序列化 SERIALIZABLE
-3
-解决脏读，不可重复读，幻读，可保证事务安全，但完全串行执行，性能最低
-
-
-
-注意（重点）：
-RR 级别...
+解决脏读，不可重复读的问题，存在幻...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -816,6 +807,11 @@ RR 级别...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">05/28</span><a class="archive-post-title" href="/2019/05/28/原子性、可见性、有序性/">原子性、可见性、有序性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
         </li>
     
@@ -872,11 +868,6 @@ RR 级别...
     
         <li class="archive-post-item">
             <span class="archive-post-date">03/01</span><a class="archive-post-title" href="/2019/03/01/static 多线程/">Java中多线程的static</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/28</span><a class="archive-post-title" href="/2019/02/28/原子性、可见性、有序性/">原子性、可见性、有序性</a>
         </li>
     
     
@@ -939,6 +930,8 @@ RR 级别...
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
         <span class="sidebar-tag-name" data-tags="反思"><span class="iconfont-archer">&#xe606;</span>反思</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

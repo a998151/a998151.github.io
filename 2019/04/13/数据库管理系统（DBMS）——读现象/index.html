@@ -266,7 +266,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">995</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.4k</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -395,7 +395,8 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h2 id="事务的四种隔离级别"><a href="#事务的四种隔离级别" class="headerlink" title="事务的四种隔离级别"></a>事务的四种隔离级别</h2><p>说明之前，先简单介绍一下 <code>MySQL</code> 四级事务隔离级别，每个级别都有字符或数字编号</p>
+        <p>数据库是有效数据最终落脚点，不懂数据库那不能算作一个合格的程序员咯。但是一些数据库的规则和常见的读数据出现的情况，还是有许多人分不清楚的，这里自己个人对这些问题记录一下，说明各个情况是个什么样的表现。</p>
+<h2 id="事务的四种隔离级别"><a href="#事务的四种隔离级别" class="headerlink" title="事务的四种隔离级别"></a>事务的四种隔离级别</h2><p>说明之前，先简单介绍一下 <code>MySQL</code> 四级事务隔离级别，每个级别都有字符或数字编号</p>
 <table>
 <thead>
 <tr>
@@ -418,7 +419,7 @@ height:50vh;
 <tr>
 <td>可重复读 REPEATABLE-READ</td>
 <td>2</td>
-<td>解决脏读，不可重复读的问题，存在幻读的问题，默认隔离级别，<strong>使用 MMVC机制 实现可重复读</strong></td>
+<td>解决脏读，不可重复读的问题，存在幻读的问题（待学习），默认隔离级别，<strong>使用 MMVC机制 实现可重复读</strong></td>
 </tr>
 <tr>
 <td>序列化 SERIALIZABLE</td>
@@ -427,20 +428,34 @@ height:50vh;
 </tr>
 </tbody>
 </table>
+<p>（此处不对可重复读的隔离级别是否可以解决幻读问题做讨论）</p>
 <p><strong>注意（重点）：</strong></p>
 <p>RR 级别下存在幻读的可能，但也是可以使用对记录手动加 X锁（排他锁） 的方法消除幻读。SERIALIZABLE 正是对所有事务都加 X锁 才杜绝了幻读，但很多场景下我们的业务sql并不会存在幻读的风险。SERIALIZABLE 的一刀切虽然事务绝对安全，但性能会有很多不必要的损失。故可以在 RR 下根据业务需求决定是否加锁，存在幻读风险我们加锁，不存在就不加锁，事务安全与性能兼备，这也是 RR 作为mysql默认隔是个事务离级别的原因，所以需要正确的理解幻读。</p>
 <h2 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h2><p><img src="http://ww1.sinaimg.cn/large/006D41sGly1g21yz72586j30f10830sv.jpg" alt="脏读"></p>
 <p><strong>脏读是读取到有误的数据</strong>。具体为事务 <code>T1</code> 修改了某条记录中的某个数值，还没有进行 <code>COMMIT</code> 操作， 然后事务 <code>T2</code> 读取了这个数值，但是 <code>T1</code>因为某些原因对原来修改的数值进行了撤销的操作，最终就导致了事务 <code>T2</code> 读取到了错误的数据。</p>
+<blockquote>
+<p>所谓脏读，就是指<strong>事务A读到了事务B还没有提交的数据</strong></p>
+</blockquote>
 <p><strong>解决</strong>这类问题：乐观锁 记录 version 控制 </p>
 <h2 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h2><p><img src="http://ww1.sinaimg.cn/large/006D41sGly1g21yzu0dryj30k105qdfx.jpg" alt="不可重复读"></p>
 <p><strong>数据库访问中的一个事务，对某个记录查询的两次结果不一样</strong>。产生这种原因是因为事务<code>T1</code> 在读取某个记录数据的时候，事务<code>T2</code>对这个进行了修改并提交了，之后事务 <code>T1</code> 还需要读取这个记录会产生前后两次查询的结果不一致的问题。</p>
+<blockquote>
+<p>所谓不可重复读，就是指<strong>在一个事务里面读取了两次某个数据，读出来的数据不一致</strong>。</p>
+</blockquote>
 <p><strong>解决</strong>这类问题一般是给查询加上锁：共享锁或者排他锁</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">LOCK</span> <span class="keyword">IN</span> <span class="keyword">SHARE</span> <span class="keyword">MODE</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h2><p><strong>不可重复读侧重表达 读-读，幻读则是说 读-写，用写来证实读的是幻影。</strong></p>
+<h2 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h2><p>看了很多资料，发现网络上的文章对幻读说得云里雾里，可能文章的作者也没有具体搞明白。</p>
+<p><strong>不可重复读侧重表达 读-读，幻读则是说 读-写，用写来证实读的是幻影。</strong></p>
 <p>例如查一条数据，事务<code>T1</code>查询的时候，发现这条数据并没有记录，准备插入数据时候，事务<code>T2</code>插了一条主键与<code>T1</code>想要插入数据的主键相同的数据，并且<code>T2</code>进行了<code>COMMIT</code>，之后到<code>T1</code>插入数据的时候就报了主键冲突的错误，这就造成了事务<code>T1</code>的幻读。</p>
 <p><img src="https://wx3.sinaimg.cn/large/006D41sGgy1g25ocbd32jj30m905v0sw.jpg" alt="DBMS-幻读插记录"></p>
 <p>上面的例子只是单条记录，如果是<strong>范围操作</strong>的话，例如：</p>
 <p>幻读是指当事务不是独立执行时发生的一种现象，例如第一个事务对一个表中的数据进行了修改，比如这种修改涉及到表中的“全部数据行”。同时，第二个事务也修改这个表中的数据，这种修改是向表中插入“一行新数据”。那么，以后就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样.</p>
+<p>总结一下什么算是幻读？</p>
+<blockquote>
+<p>在一个事务里面的操作中，发现了预料外未被操作的数据。</p>
+<p>幻读出现的前提是并发的事务中有事务发生了插入、删除操作。</p>
+</blockquote>
+<p>比如学生信息，事务A开启事务–&gt;修改所有学生当天签到状况为false，此时切换到事务B，事务B开启事务–&gt;事务B插入了一条学生数据，此时切换回事务A，事务A提交的时候发现了一条自己没有修改过的数据，这就是幻读，就好像发生了幻觉一样。</p>
 <p>解决幻读的方法有：</p>
 <ul>
 <li>提高事务的隔离级别，但是随着隔离界别高，对应的并发性能也就下降了</li>
@@ -448,8 +463,7 @@ height:50vh;
 <li>范围性操作，可以增加范围锁 <code>RangeS</code></li>
 </ul>
 <p>对于 InnoDB 中的锁定规则具体参考下文给出的文章。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
-<p><a href="https://www.cnblogs.com/LBSer/p/5183300.html" target="_blank" rel="noopener">mysql死锁问题分析</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/LBSer/p/5183300.html" target="_blank" rel="noopener">mysql死锁问题分析</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/48269420" target="_blank" rel="noopener">MySQL的锁机制 - 记录锁、间隙锁、临键锁</a></p>
 
     </article>
@@ -459,7 +473,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">ALemon</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/04/13/数据库管理系统（DBMS）——读现象/">http://yoursite.com/2019/04/13/数据库管理系统（DBMS）——读现象/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/04/13/数据库管理系统（DBMS）——读现象/">April 13th 2019, 5:21:00 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/04/13/数据库管理系统（DBMS）——读现象/">May 1st 2019, 10:57:00 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/04/13/数据库管理系统（DBMS）——读现象/">May 31st 2019, 11:05:07 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -854,6 +868,11 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">05/28</span><a class="archive-post-title" href="/2019/05/28/原子性、可见性、有序性/">原子性、可见性、有序性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
         </li>
     
@@ -910,11 +929,6 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">03/01</span><a class="archive-post-title" href="/2019/03/01/static 多线程/">Java中多线程的static</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/28</span><a class="archive-post-title" href="/2019/02/28/原子性、可见性、有序性/">原子性、可见性、有序性</a>
         </li>
     
     
@@ -977,6 +991,8 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
         <span class="sidebar-tag-name" data-tags="反思"><span class="iconfont-archer">&#xe606;</span>反思</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

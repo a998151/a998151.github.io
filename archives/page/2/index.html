@@ -346,6 +346,32 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">
+            
+                <span>数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</span>
+        </a>
+        <div class="abstract-content">
+            0、什么是锁？例1 ： 现有两处火车票售票点，同时读取某一趟列车车票数据库中车票余额为 X。两处售票点同时卖出一张车票，同时修改余额为 X -1写回数据库，这样就造成了实际卖出两张火车票而数据库中的记录却只少了一张。 
+例2 ： 事务A将某张表中的数据修改了，但是因为某些原因，撤销对该值的修改。但是在撤销之前，事务B读取了这个修改过后的值，导致读到错误的数据的情况发生。
+产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。
+对于这些情况，可以去了解一下DBMS ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/03/30/Java中的锁/">
             
                 <span>Java 锁（updating）</span>
@@ -431,41 +457,6 @@ static 静态代码块。
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/02/28/原子性、可见性、有序性/">
-            
-                <span>原子性、可见性、有序性</span>
-        </a>
-        <div class="abstract-content">
-            零、Java 内存模型Java 内存模型的==主要目标==是==定义程序中各个变量的访问规则==。
-Java 内存模型规定了所有变量都存储在主内存中，每条线程还有自己的工作内存（Working Memory），线程的工作内存中保存了需要用到的变量主内存备份。
-线程对普通变量的所有操作，都必须在工作内存中执行，而不能直接读写主内存中的变量
-不同的线程也无法直接访问对方工作内存中的变量
-
-主内存和工作内存之间的交互协议（变量从主拷贝到工作内存，使用完变量后，再从工作内存同步回主内存）
-Java内存模型定义了8种操作来完成，虚拟机实现必须保证每一个操作都是原子性、不可再分的（==double和...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/28</span>
             </div>
             <!-- tags  -->
             
@@ -1015,6 +1006,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">05/28</span><a class="archive-post-title" href="/2019/05/28/原子性、可见性、有序性/">原子性、可见性、有序性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
         </li>
     
@@ -1071,11 +1067,6 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <li class="archive-post-item">
             <span class="archive-post-date">03/01</span><a class="archive-post-title" href="/2019/03/01/static 多线程/">Java中多线程的static</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/28</span><a class="archive-post-title" href="/2019/02/28/原子性、可见性、有序性/">原子性、可见性、有序性</a>
         </li>
     
     
@@ -1138,6 +1129,8 @@ RTTI，它假定我们在编译时已经知道了所有类型
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
         <span class="sidebar-tag-name" data-tags="反思"><span class="iconfont-archer">&#xe606;</span>反思</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

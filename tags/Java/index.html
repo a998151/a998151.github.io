@@ -346,6 +346,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
+            
+                <span>原子性、可见性、有序性</span>
+        </a>
+        <div class="abstract-content">
+            经常听到或者面试都有人会问道这三个东西，我们可能会一下子就知道这三个概念都是什么意思。我自己想了一下，貌似我仅仅对于这三个概念了解概念以及在 Java 上如何实现而已。所以在这里就整理一下资料，对这三个概念进行一些深入的学习。
+至于为什么会有存在这三个概念，一直不得其解，就搜索一些资料，自己也整理一下，算是补全一下自己的知识体系吧。
+主要介绍：
+
+这三个概念的由来
+对于这三个概念，具体在 Java 上又是如何实现的
+
+三个概念的由来从硬件上分析之前旧时代计算机的芯片都是单核的，那个时候的计算如果想要读写数据，每次都得从主内存（物理内存）中读取，修改完后再存放回主内存中。
+
+然而在 CPU...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java内存模型">Java内存模型</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/17/Java集合——Map/">
             
                 <span>Java集合——Map</span>
@@ -493,41 +533,6 @@ static 静态代码块。
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/02/28/原子性、可见性、有序性/">
-            
-                <span>原子性、可见性、有序性</span>
-        </a>
-        <div class="abstract-content">
-            零、Java 内存模型Java 内存模型的==主要目标==是==定义程序中各个变量的访问规则==。
-Java 内存模型规定了所有变量都存储在主内存中，每条线程还有自己的工作内存（Working Memory），线程的工作内存中保存了需要用到的变量主内存备份。
-线程对普通变量的所有操作，都必须在工作内存中执行，而不能直接读写主内存中的变量
-不同的线程也无法直接访问对方工作内存中的变量
-
-主内存和工作内存之间的交互协议（变量从主拷贝到工作内存，使用完变量后，再从工作内存同步回主内存）
-Java内存模型定义了8种操作来完成，虚拟机实现必须保证每一个操作都是原子性、不可再分的（==double和...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/28</span>
             </div>
             <!-- tags  -->
             
@@ -1073,6 +1078,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">05/28</span><a class="archive-post-title" href="/2019/05/28/原子性、可见性、有序性/">原子性、可见性、有序性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
         </li>
     
@@ -1129,11 +1139,6 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <li class="archive-post-item">
             <span class="archive-post-date">03/01</span><a class="archive-post-title" href="/2019/03/01/static 多线程/">Java中多线程的static</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/28</span><a class="archive-post-title" href="/2019/02/28/原子性、可见性、有序性/">原子性、可见性、有序性</a>
         </li>
     
     
@@ -1196,6 +1201,8 @@ RTTI，它假定我们在编译时已经知道了所有类型
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
         <span class="sidebar-tag-name" data-tags="反思"><span class="iconfont-archer">&#xe606;</span>反思</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
