@@ -431,7 +431,7 @@ height:50vh;
 <p>现在我们用的电脑很多都是多核心、多级缓存的CPU。<strong>现代计算机都有<code>L1</code>和<code>L2</code>缓存</strong>，许多计算机现在还有<code>L3</code>缓存。</p>
 <p><strong>当CPU要读取一个数据时，首先从一级缓存中查找，如果没有找到再从二级缓存中查找，如果还是没有就从三级缓存或内存中查找。</strong></p>
 <p><img src="http://ww1.sinaimg.cn/large/006D41sGly1g3jtu4jv69j30o60ao0tr.jpg" alt=""></p>
-<p><img src="https://images2015.cnblogs.com/blog/801753/201706/801753-20170619193035616-732238362.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/006D41sGly1g3sekdjulqj30fd0eo0z1.jpg" alt=""></p>
 <p>单核CPU只含有一套<code>L1</code>，<code>L2</code>，<code>L3</code>缓存；</p>
 <p>如果CPU含有多个核心，即多核CPU，则每个核心都含有一套<code>L1</code>（甚至和<code>L2</code>）缓存，而共享<code>L3</code>（或者和<code>L2</code>）缓存。</p>
 <p>按照读取顺序与CPU结合的紧密程度来分，缓存可以分为下面三层</p>
@@ -488,7 +488,7 @@ height:50vh;
 <p>可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。</p>
 </blockquote>
 <p><strong>Java提供了volatile关键字来保证可见性</strong>。当一个共享变量被volatile修饰时，它会保证修改的值会立即被更新到主存，当有其他线程需要读取时，它会去内存中读取新值。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/1J6IbIcPCLZicI3B23mHahdibYiaRKicYVVqHCIS4F18UGeSroHvicdUKDf0XkWWmgfftENvjHMU9kP4bnkfQEQ2WDg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006D41sGly1g3sejq80gkj30th0hytc6.jpg" alt="img"></p>
 <p>图是引用 【石衫的架构笔记】的，对于介绍，它说得较为表面了，这里也用这个图示例子进行说明一下底层对于 volatile 关键字修饰的对象是如何保证可见性的。</p>
 <ol>
 <li>在执行 <code>data = 1</code> 之前，线程1 发出 LOCK# 指令，锁总线（或者缓存行），同时让 线程2 中 data 对象对应的缓存行失效</li>
@@ -603,7 +603,7 @@ height:50vh;
             <p>原文作者：<a href="http://yoursite.com">ALemon</a>
             </p><p>原文链接：<a href="http://yoursite.com/2019/05/28/原子性、可见性、有序性/">http://yoursite.com/2019/05/28/原子性、可见性、有序性/</a>
             </p><p>发表日期：<a href="http://yoursite.com/2019/05/28/原子性、可见性、有序性/">May 28th 2019, 8:20:05 pm</a>
-            </p><p>更新日期：<a href="http://yoursite.com/2019/05/28/原子性、可见性、有序性/">June 7th 2019, 10:43:38 am</a>
+            </p><p>更新日期：<a href="http://yoursite.com/2019/05/28/原子性、可见性、有序性/">June 7th 2019, 10:53:33 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
