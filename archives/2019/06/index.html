@@ -346,34 +346,27 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
+        <a class="abstract-title" href="/2019/06/16/Java 内存区域/">
             
-                <span>原子性、可见性、有序性</span>
+                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
         </a>
         <div class="abstract-content">
-            经常听到或者面试都有人会问道这三个东西，我们可能会一下子就知道这三个概念都是什么意思。我自己想了一下，貌似我仅仅对于这三个概念了解概念以及在 Java 上如何实现而已。所以在这里就整理一下资料，对这三个概念进行一些深入的学习。
-至于为什么会有存在这三个概念，一直不得其解，就搜索一些资料，自己也整理一下，算是补全一下自己的知识体系吧。
-主要介绍：
-
-这三个概念的由来
-对于这三个概念，具体在 Java 上又是如何实现的
-
-三个概念的由来从硬件上分析之前旧时代计算机的芯片都是单核的，那个时候的计算如果想要读写数据，每次都得从主内存（物理内存）中读取，修改完后再存放回主内存中。
-
-然而在 CPU...
+            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
+对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
+Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/28</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java内存模型">Java内存模型</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
     
 </div>
             
