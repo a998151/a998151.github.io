@@ -78,8 +78,6 @@
     <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
     
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -203,8 +201,10 @@
 </head>
 
     
+        <body class="home-body">
     
-<header class="header">
+    
+<header class="header index-header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -220,21 +220,34 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            ALemon's Blog
+            <!-- 文章页  -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
+            
+            
+                What doesn't kill you makes you stronger.
+            
+            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -346,41 +359,32 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/05/31/一点想法/">
+        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
             
-                <span>一点想法或反思</span>
+                <span>Java 中的 ==、equals 与 hashCode</span>
         </a>
         <div class="abstract-content">
-            今晚回头看了一下自己写的一些文章，发现了几点问题
+            ==
+比较两个基本类型的数据是否相等
+两个引用变量是否相等
 
-很多文章点到即止，没能继续深入的说明
-整个文章的逻辑比较乱，看着感觉像是看文档一样，看完没能有一种【豁然开朗】的感觉
-文章的内容太散乱，根本组织不到一块
-
-对于这种现象，自己反思了一下
-
-对于博客文章，自己是否太急了一点？像是为了赶作业那般，草草完成了一篇文章
-整个知识的脉络没能琢磨清楚，形成一个完整的整体
-
-之后的改正
-
-审视自己的内心，我究竟想通过这篇文章说明什么？
-介绍清楚整个文章的来龙去脉了吗？
-为什么存在于这种现象？多玩底层原因挖。
-整理出思维导图，写完后，多思考有那些还是没介绍完整的
-
-
+​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
+​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
+​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
+1String str = new String();
+​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
+​    对...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/31</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="反思">反思</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
 </div>
             
@@ -389,8 +393,102 @@
     
     <!-- paginator  -->
     
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/page/2/">&#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+    
 </main>
             <!-- profile -->
+            
+            <div class="profile">
+    <img class="profile-avatar" alt="avatar" src="http://ww1.sinaimg.cn/large/006D41sGgy1g1lsx6imn9j30go0go0tb.jpg">
+    <div class="profile-name">ALemon</div>
+    
+    <div class="profile-signature">
+        witness me
+    </div>
+    
+    
+    <div class="profile-social">
+        
+    
+        
+            
+                <a href="mailto:756775896@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/a998151" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    
+        <div class="friends">
+            <div>FRIENDS</div>
+            
+                
+                    <span>
+                        <a href="//www.baidu.com" target="_black">friendA</a>
+                    </span>
+                
+            
+                
+                    <span>
+                        <a href="//www.google.com" target="_black">friendB</a>
+                    </span>
+                
+            
+                
+            
+        </div>
+    
+    
+        <div class="about-me">
+            <a href="/about">ABOUT ME</a>
+        </div>
+    
+</div>
             
         </div>
         <footer class="footer footer-unloaded">
