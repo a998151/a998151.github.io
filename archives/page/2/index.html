@@ -346,6 +346,53 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/04/13/数据库管理系统（DBMS）——读现象/">
+            
+                <span>数据库管理系统（DBMS）——读现象</span>
+        </a>
+        <div class="abstract-content">
+            数据库是有效数据最终落脚点，不懂数据库那不能算作一个合格的程序员咯。但是一些数据库的规则和常见的读数据出现的情况，还是有许多人分不清楚的，这里自己个人对这些问题记录一下，说明各个情况是个什么样的表现。
+事务的四种隔离级别说明之前，先简单介绍一下 MySQL 四级事务隔离级别，每个级别都有字符或数字编号
+
+
+
+名称
+编号
+说明
+
+
+
+
+读未提交 READ-UNCOMMITTED
+0
+存在脏读，不可重复读，幻读的问题
+
+
+读已提交 READ-COMMITTED
+1
+解决脏读的问题，存在不可重复读，幻读的问题
+
+
+可重复读 REPEATABLE-READ
+2
+解决脏读，不可重复读的问题，存在幻...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/04/11/数据库管理系统（DBMS）——共享锁与排他锁/">
             
                 <span>数据库管理系统（DBMS）——共享锁与排他锁</span>
@@ -633,41 +680,6 @@ RTTI，它假定我们在编译时已经知道了所有类型
             <div class="abstract-tags">
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/10/24/Java初认识锁机制/">
-            
-                <span>Java初认识锁机制</span>
-        </a>
-        <div class="abstract-content">
-            锁的概念在介绍锁的概念之前，先了解一下并发的概念。
-举一个例子来说，一个厨师在正常情况下我们不允许厨师同时做两道菜，先做完一道再做另一道。但是如果时间紧迫的情况下（特定情况下），如果希望能同时拿出两道菜，如果按照之前的情况来看，明显完成不了任务，但是我们允许厨师可以做着其中一道菜同时兼顾着其他菜，那就有可能完成任务。这里的厨师能做一道菜同时兼顾其他菜，我们就可以成为“并发”了。
-我对并发的理解就是：对于某个任务，我们能够并行执行多个部分去共同完成这个任务，已达到提高我们完成工作效率效果，这就算作并发。
-有了并发就可以同时做多件事情，多个线程彼此之间的影响的问题也就随着出现了。
-对于并发的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
     
 </div>
             
@@ -1027,9 +1039,24 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 21
+        Total : 22
         </div>
         <!-- search  -->
         
@@ -1042,6 +1069,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/03</span><a class="archive-post-title" href="/2019/07/03/JVM内存溢出异常探究/">JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1191,6 +1223,8 @@ RTTI，它假定我们在编译时已经知道了所有类型
         <span class="sidebar-tag-name" data-tags="内存区域"><span class="iconfont-archer">&#xe606;</span>内存区域</span>
     
         <span class="sidebar-tag-name" data-tags="Java对象"><span class="iconfont-archer">&#xe606;</span>Java对象</span>
+    
+        <span class="sidebar-tag-name" data-tags="内存溢出"><span class="iconfont-archer">&#xe606;</span>内存溢出</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
