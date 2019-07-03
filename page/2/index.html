@@ -433,14 +433,15 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">
+        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">
             
-                <span>数据库管理系统（DBMS）——死锁</span>
+                <span>数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</span>
         </a>
         <div class="abstract-content">
-            行级锁与死锁(非自己写，需要修改)MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
-在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。
-当两...
+            0、什么是锁？例1 ： 现有两处火车票售票点，同时读取某一趟列车车票数据库中车票余额为 X。两处售票点同时卖出一张车票，同时修改余额为 X -1写回数据库，这样就造成了实际卖出两张火车票而数据库中的记录却只少了一张。 
+例2 ： 事务A将某张表中的数据修改了，但是因为某些原因，撤销对该值的修改。但是在撤销之前，事务B读取了这个修改过后的值，导致读到错误的数据的情况发生。
+产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。
+对于这些情况，可以去了解一下DBMS ...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -458,15 +459,14 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">
+        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">
             
-                <span>数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</span>
+                <span>数据库管理系统（DBMS）——死锁</span>
         </a>
         <div class="abstract-content">
-            0、什么是锁？例1 ： 现有两处火车票售票点，同时读取某一趟列车车票数据库中车票余额为 X。两处售票点同时卖出一张车票，同时修改余额为 X -1写回数据库，这样就造成了实际卖出两张火车票而数据库中的记录却只少了一张。 
-例2 ： 事务A将某张表中的数据修改了，但是因为某些原因，撤销对该值的修改。但是在撤销之前，事务B读取了这个修改过后的值，导致读到错误的数据的情况发生。
-产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。
-对于这些情况，可以去了解一下DBMS ...
+            行级锁与死锁(非自己写，需要修改)MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
+在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。
+当两...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1149,14 +1149,6 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 22
@@ -1235,12 +1227,12 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/10</span><a class="archive-post-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">数据库管理系统（DBMS）——死锁</a>
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/10</span><a class="archive-post-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</a>
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">数据库管理系统（DBMS）——死锁</a>
         </li>
     
     
@@ -1297,15 +1289,15 @@ RTTI，它假定我们在编译时已经知道了所有类型
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="锁机制"><span class="iconfont-archer">&#xe606;</span>锁机制</span>
+        <span class="sidebar-tag-name" data-tags="JVM"><span class="iconfont-archer">&#xe606;</span>JVM</span>
+    
+        <span class="sidebar-tag-name" data-tags="内存溢出"><span class="iconfont-archer">&#xe606;</span>内存溢出</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
-        <span class="sidebar-tag-name" data-tags="TCP"><span class="iconfont-archer">&#xe606;</span>TCP</span>
-    
-        <span class="sidebar-tag-name" data-tags="多线程"><span class="iconfont-archer">&#xe606;</span>多线程</span>
-    
         <span class="sidebar-tag-name" data-tags="锁"><span class="iconfont-archer">&#xe606;</span>锁</span>
+    
+        <span class="sidebar-tag-name" data-tags="反思"><span class="iconfont-archer">&#xe606;</span>反思</span>
     
         <span class="sidebar-tag-name" data-tags="单点登陆"><span class="iconfont-archer">&#xe606;</span>单点登陆</span>
     
@@ -1313,21 +1305,17 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <span class="sidebar-tag-name" data-tags="OAuth2.0"><span class="iconfont-archer">&#xe606;</span>OAuth2.0</span>
     
-        <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
-    
-        <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
-    
-        <span class="sidebar-tag-name" data-tags="反思"><span class="iconfont-archer">&#xe606;</span>反思</span>
-    
-        <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
-    
-        <span class="sidebar-tag-name" data-tags="JVM"><span class="iconfont-archer">&#xe606;</span>JVM</span>
-    
         <span class="sidebar-tag-name" data-tags="内存区域"><span class="iconfont-archer">&#xe606;</span>内存区域</span>
     
         <span class="sidebar-tag-name" data-tags="Java对象"><span class="iconfont-archer">&#xe606;</span>Java对象</span>
     
-        <span class="sidebar-tag-name" data-tags="内存溢出"><span class="iconfont-archer">&#xe606;</span>内存溢出</span>
+        <span class="sidebar-tag-name" data-tags="Map"><span class="iconfont-archer">&#xe606;</span>Map</span>
+    
+        <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
+    
+        <span class="sidebar-tag-name" data-tags="多线程"><span class="iconfont-archer">&#xe606;</span>多线程</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1361,10 +1349,6 @@ jsonContent:
 </div>
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
-    
-        <span class="sidebar-category-name" data-categories="java-锁"><span class="iconfont-archer">&#xe60a;</span>java-锁</span>
-    
-        <span class="sidebar-category-name" data-categories="java"><span class="iconfont-archer">&#xe60a;</span>java</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
