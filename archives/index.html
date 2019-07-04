@@ -346,6 +346,44 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">
+            
+                <span>介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</span>
+        </a>
+        <div class="abstract-content">
+            
+
+文章的初衷：学一技术，我希望这技术是为了解决什么问题而诞生
+
+这篇文章不对GC进行深入说明，仅是对GC的一些背景或者设计初衷进行介绍，关于GC部分的具体深入理解部分，在之后的文章。
+从思维导图中的问题进行介绍吧！！
+GC是什么？为什么需要GC？GC（Garbage Collection）是什么？相信写 Java 的 coder 都知道是垃圾收集。
+我们常将 Java 与 C++ 进行比较，拥有垃圾收集器可以说是 Java 语言与 C++语言的一项显著区别。在 C++语言中，程序员必须小心谨慎地处理每一项内存分配，且内存使用完后必须手工释放曾经占用的内存空间。当内存释放不够完全时，即存...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="GC">GC</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/07/03/JVM内存溢出异常探究/">
             
                 <span>JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</span>
@@ -676,37 +714,6 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/02</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/01/数据库管理系统（DBMS）——事务隔离级别/">
-            
-                <span>数据库管理系统（DBMS）——事务与隔离级别</span>
-        </a>
-        <div class="abstract-content">
-            事务事务是一组原子性的SQL操作，或者说是一个独立的工作单元。如果数据库引擎在执行这个工作单元的时候，任何一条语句崩溃或者因为其他原因无法执行，那么所有的语句都不会执行。也就是说，事务内的语句，要么全部执行成功，要么全部执行失败。
-通过一个典型的银行例子说明：
-假设一个银行的数据库有两张表：支付表（checking）和储蓄表（savings）。现在要从用户 Jane 的支付账户转移200块到她的储蓄账户，那么需要经过以下三个步骤：
-
-检查支付账户的余额高于200元
-从支付账户中减去200元
-在储蓄账户余额中增加200元
-
-这三个步骤必须打包在一个事务中，任何一个步骤失败，都必须回滚所有的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/01</span>
             </div>
             <!-- tags  -->
             
@@ -1073,9 +1080,24 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 22
+        Total : 23
         </div>
         <!-- search  -->
         
@@ -1088,6 +1110,11 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1240,6 +1267,8 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
         <span class="sidebar-tag-name" data-tags="多线程"><span class="iconfont-archer">&#xe606;</span>多线程</span>
     
         <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
+    
+        <span class="sidebar-tag-name" data-tags="GC"><span class="iconfont-archer">&#xe606;</span>GC</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

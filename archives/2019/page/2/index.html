@@ -346,6 +346,37 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/01/数据库管理系统（DBMS）——事务隔离级别/">
+            
+                <span>数据库管理系统（DBMS）——事务与隔离级别</span>
+        </a>
+        <div class="abstract-content">
+            事务事务是一组原子性的SQL操作，或者说是一个独立的工作单元。如果数据库引擎在执行这个工作单元的时候，任何一条语句崩溃或者因为其他原因无法执行，那么所有的语句都不会执行。也就是说，事务内的语句，要么全部执行成功，要么全部执行失败。
+通过一个典型的银行例子说明：
+假设一个银行的数据库有两张表：支付表（checking）和储蓄表（savings）。现在要从用户 Jane 的支付账户转移200块到她的储蓄账户，那么需要经过以下三个步骤：
+
+检查支付账户的余额高于200元
+从支付账户中减去200元
+在储蓄账户余额中增加200元
+
+这三个步骤必须打包在一个事务中，任何一个步骤失败，都必须回滚所有的...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/01</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/04/13/数据库管理系统（DBMS）——读现象/">
             
                 <span>数据库管理系统（DBMS）——读现象</span>
@@ -1006,9 +1037,24 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 22
+        Total : 23
         </div>
         <!-- search  -->
         
@@ -1021,6 +1067,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1173,6 +1224,8 @@ RTTI，它假定我们在编译时已经知道了所有类型
         <span class="sidebar-tag-name" data-tags="多线程"><span class="iconfont-archer">&#xe606;</span>多线程</span>
     
         <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
+    
+        <span class="sidebar-tag-name" data-tags="GC"><span class="iconfont-archer">&#xe606;</span>GC</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
