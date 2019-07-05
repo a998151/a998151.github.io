@@ -346,6 +346,49 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">
+            
+                <span>GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</span>
+        </a>
+        <div class="abstract-content">
+            这篇文章内容：
+
+堆中判断一个对象是否可进行回收，有哪些算法？
+Java1.2 后对于引用，做了什么改进的扩展？
+Java 对象回收的过程？
+方法区中的回收
+
+
+垃圾收集主要针对堆和方法区进行。下面我们也就来看一下如何判断一个对象是否可以给回收。
+引用计数法给对象添加一个引用计数器，当对象增加一个引用时计数器加 1，引用失效时计数器减 1。引用计数为 0 的对象可被回收。
+两个对象出现循环引用的情况下，此时引用计数器永远不为 0，导致无法对它们进行回收。
+正因为循环引用的存在，因此 Java 虚拟机不使用引用计数算法。
+123456789public class ReferenceCou...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/05</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="GC">GC</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">
             
                 <span>介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</span>
@@ -788,9 +831,24 @@ JVM 运行时的内存区域出现内存溢异常原因
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 23
+        Total : 24
         </div>
         <!-- search  -->
         
@@ -803,6 +861,11 @@ JVM 运行时的内存区域出现内存溢异常原因
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span><a class="archive-post-title" href="/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
+        </li>
     
     
         <li class="archive-post-item">
