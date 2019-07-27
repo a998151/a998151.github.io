@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>GC——哪些对象可以回收？（深入理解Java虚拟机II笔记） · ALemon Blog</title>
+    <title>JVM内存间交互（深入理解Java虚拟机II笔记） · ALemon Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">ALemon&#39;s Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
+                <a href="#" class="post-name">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
             </div>
     </div>
     
@@ -241,13 +241,13 @@ height:50vh;
     <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(http://ww1.sinaimg.cn/large/006D41sGly1g4ovcnr8nzj33uw2ko7wh.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(http://ww1.sinaimg.cn/large/006D41sGly1g5eco9o0j8j32t01vk1ky.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）
+            JVM内存间交互（深入理解Java虚拟机II笔记）
             <!-- 404 -->
             
         </h1>
@@ -268,18 +268,18 @@ height:50vh;
     
         <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="GC">GC</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="内存">内存</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.8k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.6k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/07/05</span>
+                    <span class="post-intro-time">2019/07/27</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -403,71 +403,63 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>这篇文章内容：</p>
+        <p>本篇内容主要说明：</p>
 <ul>
-<li>堆中判断一个对象是否可进行回收，有哪些算法？</li>
-<li>Java1.2 后对于引用，做了什么改进的扩展？</li>
-<li>Java 对象回收的过程？</li>
-<li>方法区中的回收</li>
+<li>一个变量如何从主内存拷贝到工作内存、如何从工作内存同步回主内存之类的实现细节</li>
+<li>long 和 double 型变量的特殊规则</li>
+<li>先行发生规则</li>
 </ul>
-<p><img src="http://ww1.sinaimg.cn/large/006D41sGly1g4oud1o9exj32n21rctqy.jpg" alt=""></p>
-<p>垃圾收集主要针对堆和方法区进行。下面我们也就来看一下如何判断一个对象是否可以给回收。</p>
-<h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><p>给对象添加一个引用计数器，当对象增加一个引用时计数器加 1，引用失效时计数器减 1。引用计数为 0 的对象可被回收。</p>
-<p>两个对象出现循环引用的情况下，此时引用计数器永远不为 0，导致无法对它们进行回收。</p>
-<p>正因为循环引用的存在，因此 Java 虚拟机不使用引用计数算法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceCountingGC</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Object instance = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ReferenceCountingGC objectA = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">        ReferenceCountingGC objectB = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">        objectA.instance = objectB;</span><br><span class="line">        objectB.instance = objectA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h2><p>通过 GC Roots 作为起始点进行搜索，能够到达到的对象都是存活的，不可达的对象可被回收。</p>
-<p>Java 虚拟机使用该算法来判断对象是否可被回收，在 Java 中 GC Roots 一般包含以下内容：</p>
+<h2 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h2><p><img src="http://ww1.sinaimg.cn/large/006D41sGly1g5a7v30p6oj30xy0jeq52.jpg" alt=""></p>
+<p>一个变量如何从主内存拷贝到工作内存、如何从工作内存同步回到主内存</p>
+<p>在 Java 中，<strong>Java内存模型</strong>定义了以下8中操作来完成上面说的过程。虚拟机保证了下面的每一种操作都是原子的、不可再分的（注意 double 和 long 类型，后面说明）。</p>
 <ul>
-<li>虚拟机栈中局部变量表中引用的对象</li>
-<li>本地方法栈中 JNI 中引用的对象</li>
-<li>方法区中类静态属性引用的对象</li>
-<li>方法区中的常量引用的对象</li>
+<li>lock（锁定）：作用于主内存的变量，它把一个变量标识为一条线程独占的状态。<ul>
+<li>一个变量同一时刻，只允许一个线程对它进行 lock 操作，但是可以执行 lock 多次，需要对应次数的 unlock 操作对象才能解锁。</li>
 </ul>
-<p><img src="http://ww1.sinaimg.cn/large/006D41sGly1g4our3t4x3j30ez08d0sz.jpg" alt=""></p>
-<p><strong>能够作为 GC Roots 的，都有些什么特点呢？</strong></p>
+</li>
+<li>unlock（解锁）：作用于主内存的变量，在当前线程中，它把一个处于锁定状态的变量释放出来，释放后的变量才可以被其它线程锁定。<ul>
+<li>如果一个变量事先没有执行过 lock 操作，那就不允许对它执行 unlock 操作</li>
+<li>不允许 unlock 一个被其它线程锁定住的变量</li>
+<li>一个变量在 unlock 操作之前，必须先把变量同步回主内存中（执行 store、write 操作）</li>
+</ul>
+</li>
+<li>read（读取）：作用于主内存的变量，它把一个变量的值从主内存传输到线程的内存当中，以便于后面的 load 动作与使用。</li>
+<li>load（载入）：作用于工作内存的变量，它把 read 操作从主内中得到的变量值 存储到线程工作内存的变量副本中。</li>
+<li>use（使用）：作用于工作内存的变量，它把工作内存中一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用到变量的值的字节码时，都会执行这个操作（注意：该操作并不是赋值，重点是使用）。</li>
+<li>assign（赋值）：作用于工作内存中的变量，它把一个从执行引擎接收到的值 赋给工作内存中的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。<ul>
+<li>不允许一个线程丢弃它的最近 assign 操作，即变量在工作内存中改变了之后，必须将该变化同步回主内存中。</li>
+</ul>
+</li>
+<li>store（存储）：作用于工作内存的变量，它把工作内存中的变量的值传送回主内存中，以便随后的 write 使用。</li>
+<li>write（写入）：作用于主内存的变量，它把 store 操作从工作内存中得到变量的值写入到主内存的变量中。</li>
+</ul>
+<h2 id="对于-long-和-double-变量的特殊规则"><a href="#对于-long-和-double-变量的特殊规则" class="headerlink" title="对于 long 和 double 变量的特殊规则"></a>对于 long 和 double 变量的特殊规则</h2><p>上面的 8 哥操作都具有原子性，但是对于 64 位的数据类型（double、long），在模型中特别定义了一条相对宽松的规定：</p>
 <blockquote>
-<p>能作为 GC Roots 对象的，一般都是 “活得够久“的对象！如果线程或者程序停止，这些对象才进行回收，否则他们一般都还在！</p>
-<p>能作为根节点用于操作的，自然在设计上也希望它能够在可达性中同一线程或者程序其它 object 回收前都存在着。</p>
+<p>允许虚拟机将没有被 volatile 修饰的 64 位数据的读写操作划分为两次 32 位的操作来进行，也就是虚拟机实现选择可以不保证 64 位数据类型的 load、store、read 和 write 这 4 个操作的原子性，这点就是所谓的 long 和 double 的非原子性协定。</p>
 </blockquote>
-<h2 id="引用增强"><a href="#引用增强" class="headerlink" title="引用增强"></a>引用增强</h2><p>无论是通过引用计算算法判断对象的引用数量，还是通过可达性分析算法判断对象是否可达， 判定对象是否可被回收都与引用有关。</p>
-<p>Java 在1.2版本之后，对引用进行了扩展，提供了四种强度不同的引用类型。</p>
-<h3 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h3><p>被强引用关联的对象 <strong>不会被回收</strong> 。</p>
-<p>使用 new 一个新对象的方式来创建强引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object obj = new Object();</span><br></pre></td></tr></table></figure>
-<h3 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h3><p>被软引用关联的对象只有 <strong>在内存不够的情况下才会被回收</strong> 。</p>
-<p>使用 SoftReference 类来创建软引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = new Object();</span><br><span class="line">SoftReference&lt;Object&gt; sf = new SoftReference&lt;Object&gt;(obj);</span><br><span class="line">obj = null;  // 使对象只被软引用关联</span><br></pre></td></tr></table></figure>
-<h3 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h3><p>被弱引用关联的对象 <strong>一定会被回收</strong> ，也就是说它只能存活到下一次垃圾回收发生之前。</p>
-<p>使用 WeakReference 类来实现弱引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = new Object();</span><br><span class="line">WeakReference&lt;Object&gt; wf = new WeakReference&lt;Object&gt;(obj);</span><br><span class="line">obj = null;</span><br></pre></td></tr></table></figure>
-<h3 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h3><p>又称为幽灵引用或者幻影引用。一个对象是否有虚引用的存在， 完全 <strong>不会对其生存时间构成影响</strong> ，也无法通过虚引用取得一个对象。</p>
-<p>为一个对象设置虚引用关联的唯一目的就是能 <strong>在这个对象被回收时收到一个系统通知</strong> 。</p>
-<p>使用 PhantomReference 来实现虚引用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = new Object();</span><br><span class="line">PhantomReference&lt;Object&gt; pf = new PhantomReference&lt;Object&gt;(obj);</span><br><span class="line">obj = null;</span><br></pre></td></tr></table></figure>
-<h2 id="对象回收过程"><a href="#对象回收过程" class="headerlink" title="对象回收过程"></a>对象回收过程</h2><p>即使在可达性分析算法中不可达的对象，也并非是“非死不可”的，这时候它们暂时处于“缓刑”阶段，要真正宣告一个对象死亡，至少要经历再次标记过程。<br> <strong>标记的前提是对象在进行可达性分析后发现没有与GC Roots相连接的引用链。</strong><br> <strong>1. 第一次标记并进行一次筛选。</strong><br> 筛选的条件是此对象是否有必要执行<code>finalize()</code>方法。<br> 当对象没有覆盖<code>finalize</code>方法，或者<code>finzlize</code>方法已经被虚拟机调用过，虚拟机将这两种情况都视为“没有必要执行”，对象被回收。</p>
-<p><strong>2. 第二次标记</strong><br> 如果这个对象被判定为有必要执行<code>finalize()</code>方法，那么这个对象将会被放置在一个名为：<code>F-Queue</code>的队列之中，并在稍后由一条虚拟机自动建立的、低优先级的<code>Finalizer</code>线程去执行。这里所谓的“执行”是指虚拟机会触发这个方法，但并不承诺会等待它运行结束。这样做的原因是，如果一个对象<code>finalize()</code>方法中执行缓慢，或者发生死循环（更极端的情况），将很可能会导致<code>F-Queue</code>队列中的其他对象永久处于等待状态，甚至导致整个内存回收系统崩溃。<br><code>finalize()</code>方法是对象脱逃死亡命运的最后一次机会，稍后GC将对F-Queue中的对象进行第二次小规模标记，如果对象要在<code>finalize()</code>中成功拯救自己—-只要重新与引用链上的任何的一个对象建立关联即可，譬如把自己赋值给某个类变量或对象的成员变量，那在第二次标记时它将移除出“即将回收”的集合。如果对象这时候还没逃脱，那基本上它就真的被回收了。</p>
-<p>finalize() 类似 C++ 的析构函数，用来做关闭外部资源等工作。但是 try-finally 等方式可以做的更好， 并且该方法运行代价高昂，不确定性大，无法保证各个对象的调用顺序，<strong>因此最好不要使用</strong>。</p>
-<p>当一个对象可被回收时，如果需要执行该对象的 finalize() 方法， 那么就有可能在该方法中让对象重新被引用，从而实现自救。  <strong>自救只能进行一次</strong> ，如果回收的对象之前调用了 finalize() 方法自救，后面回收时不会调用 finalize() 方法。</p>
-<h2 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h2><p>因为方法区主要存放永久代对象，而永久代对象的回收率比新生代低很多，因此在方法区上进行回收性价比不高。</p>
-<p>主要是 <strong>对常量池的回收</strong> 和 <strong>对类的卸载</strong> 。</p>
-<p>在大量使用反射、动态代理、CGLib 等 ByteCode 框架、 动态生成 JSP 以及 OSGi 这类频繁自定义 ClassLoader 的场景都需要虚拟机具备类卸载功能，以保证不会出现内存溢出。</p>
-<p>类的卸载条件很多，需要满足以下三个条件，并且满足了也不一定会被卸载：</p>
-<ul>
-<li>该类所有的实例都已经被回收，也就是 <strong>堆中不存在该类的任何实例</strong> 。</li>
-<li>加载该类的  <strong>ClassLoader 已经被回收</strong> 。</li>
-<li>该类对应的  <strong>Class 对象没有在任何地方被引用</strong> ，也就无法在任何地方通过反射访问该类方法。</li>
-</ul>
-<p>可以通过 <code>-Xnoclassgc</code> 参数来控制是否对类进行卸载。</p>
+<p>如果按照规定说的，在实现虚拟机的时候，不保证 64 位 long 、double 变量的原子性操作，就有可能出现读取数据读取到一半或者修改数据只修改到一半的操作（因为分为两次 32 位操作），导致读取到工作内存或者存储到主内存的最终的值面目全非。</p>
+<p>也是因为上面说到的原因，很多商用的虚拟机在实现的时候，都把 long 和 double 变量的读写也实现成为原子性的，我们在写程序的时候也不需要添加 volatile 关键字。</p>
+<h2 id="happens-before-原则"><a href="#happens-before-原则" class="headerlink" title="happens-before 原则"></a>happens-before 原则</h2><p>我们已经知道，导致多线程间可见性问题的两个“罪魁祸首”是<em>CPU缓存</em>和<em>重排序</em>。那么如果要保证多个线程间共享的变量对每个线程都及时可见，一种极端的做法就是禁止使用所有的重排序和CPU缓存。即关闭所有的编译器、操作系统和处理器的优化，所有指令顺序全部按照程序代码书写的顺序执行。去掉CPU高速缓存，让CPU的每次读写操作都直接与主存交互。</p>
+<p>当然，上面的这种极端方案是绝对不可取的，因为这会极大影响处理器的计算性能，并且对于那些非多线程共享的变量是不公平的。</p>
+<p><em>重排序</em>和<em>CPU高速缓存</em>有利于计算机性能的提高，但却对多CPU处理的一致性带来了影响。为了解决这个矛盾，我们可以采取一种折中的办法。我们用分割线把整个程序划分成几个程序块，在每个程序块内部的指令是可以重排序的，但是分割线上的指令与程序块的其它指令之间是不可以重排序的。在一个程序块内部，CPU不用每次都与主内存进行交互，只需要在CPU缓存中执行读写操作即可，但是当程序执行到分割线处，CPU必须将执行结果同步到主内存或从主内存读取最新的变量值。</p>
+<p>那么，Happens-Before规则就是定义了这些程序块的分割线。</p>
+<blockquote>
+<p><strong>Happens-Before原则就是定义了程序中特定规则的代码必须遵循先后顺序。</strong></p>
+</blockquote>
+<p>另外也有一种解析：</p>
+<p>在程序运行过程中，所有的变更会先在寄存器或本地cache中完成，然后才会被拷贝到主存以跨越内存栅栏，此种跨越序列或顺序称为happens-before。</p>
+<p>注：happens-before本质是顺序，重点是跨越内存栅栏</p>
+<p>通常情况下，写操作必须要happens-before读操作，即写线程需要在所有读线程跨越内存栅栏之前完成自己的跨越动作，其所做的变更才能对其他线程可见。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://segmentfault.com/a/1190000011458941" target="_blank" rel="noopener">从Java多线程可见性谈Happens-Before原则</a></p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="https://a998151.github.io">ALemon</a>
-            </p><p>原文链接：<a href="https://a998151.github.io/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">https://a998151.github.io/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/</a>
-            </p><p>发表日期：<a href="https://a998151.github.io/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">July 5th 2019, 12:21:00 pm</a>
-            </p><p>更新日期：<a href="https://a998151.github.io/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">July 5th 2019, 12:58:55 pm</a>
+            </p><p>原文链接：<a href="https://a998151.github.io/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">https://a998151.github.io/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/</a>
+            </p><p>发表日期：<a href="https://a998151.github.io/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">July 27th 2019, 1:45:00 pm</a>
+            </p><p>更新日期：<a href="https://a998151.github.io/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">July 27th 2019, 1:50:52 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -475,17 +467,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/" title="JVM内存间交互（深入理解Java虚拟机II笔记）">
-                    <div class="nextTitle">JVM内存间交互（深入理解Java虚拟机II笔记）</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/" title="介绍垃圾收集器背景（深入理解Java虚拟机II笔记）">
-                    <div class="prevTitle">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</div>
+                <a href="/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/" title="GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）">
+                    <div class="prevTitle">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</div>
                 </a>
             
         </li>
@@ -597,7 +584,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引用计数法"><span class="toc-number">1.</span> <span class="toc-text">引用计数法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可达性分析算法"><span class="toc-number">2.</span> <span class="toc-text">可达性分析算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用增强"><span class="toc-number">3.</span> <span class="toc-text">引用增强</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#强引用"><span class="toc-number">3.1.</span> <span class="toc-text">强引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软引用"><span class="toc-number">3.2.</span> <span class="toc-text">软引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弱引用"><span class="toc-number">3.3.</span> <span class="toc-text">弱引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚引用"><span class="toc-number">3.4.</span> <span class="toc-text">虚引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象回收过程"><span class="toc-number">4.</span> <span class="toc-text">对象回收过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回收方法区"><span class="toc-number">5.</span> <span class="toc-text">回收方法区</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存间交互操作"><span class="toc-number">1.</span> <span class="toc-text">内存间交互操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对于-long-和-double-变量的特殊规则"><span class="toc-number">2.</span> <span class="toc-text">对于 long 和 double 变量的特殊规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#happens-before-原则"><span class="toc-number">3.</span> <span class="toc-text">happens-before 原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

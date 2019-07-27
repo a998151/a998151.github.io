@@ -346,6 +346,34 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/03/Java集合——Set/">
+            
+                <span>Java集合——Set</span>
+        </a>
+        <div class="abstract-content">
+            Set 介绍
+Set 注重独一无二的性质，该体系集合用于存储无序（存入和取出的顺序不一定相同）元素，值不能重复。
+
+对象的相等性本质是对象的 hashCode值（Java 是依据对象的内存地址计算出此序号）判断的。如果想让两个不同的对象视为相等，就必须覆盖 Object的 hashCode方法和 equals 方法。
+HashSet（Hash表）哈希表边存放的是哈希值。HashSet存储元素的顺序并不是按照存入时的顺序（和 List显然不同） 而是按照哈希值来存，所以取数据也是按照哈希值取得。
+对于 HashSet而言，它是基于 HashMap实现的，底层采用 HashMap来保存元素。...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/02/Java集合——List/">
             
                 <span>Java集合——List</span>
@@ -615,43 +643,6 @@ static 静态代码块。
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/02/04/final 关键字深入理解/">
-            
-                <span>final 关键字的理解</span>
-        </a>
-        <div class="abstract-content">
-            final 的初步理解​    通常我们对Java中final关键字的理解是“用final修饰的变量是不可变的”，如果尝试对final变量多次赋值，编译器将报错。
-​    似乎final的作用就是保证变量不可变，这没有错，但是如果我们在Java中灵活应用final的被修饰目标不可变的特性，往往能发掘出很多令人意想不到的效果，而非仅仅保证变量不可变这么粗浅而已。下面我们来说说final关键字的多重用法
-final 修饰变量
-修饰基本类变量
-修饰引用类变量（对象类变量）
-
-对于上面说得两点，先看一下下面的两个程序呗
-12final int myInt = 1;myInt = 2;
-123f...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/04</span>
             </div>
             <!-- tags  -->
             
@@ -1054,9 +1045,24 @@ final 修饰变量
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 24
+        Total : 25
         </div>
         <!-- search  -->
         
@@ -1069,6 +1075,11 @@ final 修饰变量
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1233,6 +1244,8 @@ final 修饰变量
         <span class="sidebar-tag-name" data-tags="Java内存模型"><span class="iconfont-archer">&#xe606;</span>Java内存模型</span>
     
         <span class="sidebar-tag-name" data-tags="GC"><span class="iconfont-archer">&#xe606;</span>GC</span>
+    
+        <span class="sidebar-tag-name" data-tags="内存"><span class="iconfont-archer">&#xe606;</span>内存</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
