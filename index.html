@@ -359,6 +359,81 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/08/28/雪花算法（SnowFlake）/">
+            
+                <span>雪花算法</span>
+        </a>
+        <div class="abstract-content">
+            先看一下 Java 中的数据类型对应直接长度和位数
+
+
+
+数据类型
+字节长度(单位：byte)
+位长度（单位：bit)
+
+
+
+
+int
+4
+32
+
+
+byte
+1
+8
+
+
+short
+2
+16
+
+
+long
+8
+64
+
+
+float
+4
+32
+
+
+double
+8
+64
+
+
+boolean
+1
+8
+
+
+char
+2
+16
+
+
+
+Snowflake概述对于分布式的ID生成，以Twitter Snowflake为代表的， Flake 系列算法，属于划分命名空间并行生成的一种算法，生成的数据为64bit的long型数据，在数据库中应该用大于等于64bit的数字类型的字段来保存该值，比如在MyS...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/28</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">
             
                 <span>JVM内存间交互（深入理解Java虚拟机II笔记）</span>
@@ -711,51 +786,6 @@ HashMap散列图、Hashtable散列表是按“有利于随机查找的散列(has
         <a class="post-tag" href="javascript:void(0);" data-tags="Map">Map</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="总结">总结</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/09/单点登陆/">
-            
-                <span>单点登陆</span>
-        </a>
-        <div class="abstract-content">
-            本篇文章主要说：
-
-单点登陆是个什么概念，主要处理什么问题
-如何实现单点登陆
-介绍 OAuth2.0 
-如何基于 OAuth2.0 机制实现单点登陆
-
-单点登陆介绍在介绍单点登陆概念之前，先介绍下面几个概念
-HTTP 的无状态性HTTP是无状态协议，浏览器的每一次请求，服务器会独立处理，不与之前之后的请求产生关联。
-
-但这也同时意味着，任何用户都能通过浏览器访问服务器资源，如果想保护服务器的某些资源，必须限制浏览器请求；要限制浏览器请求，必须鉴别浏览器请求，响应合法请求，忽略非法请求；要鉴别浏览器请求，必须清楚浏览器请求状态。既然HTTP 协议无状态，那就让服务器和浏览器共同维护一个状态...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="单点登陆">单点登陆</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="SSO">SSO</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OAuth2.0">OAuth2.0</a>
     
 </div>
             
@@ -1257,9 +1287,24 @@ HTTP 的无状态性HTTP是无状态协议，浏览器的每一次请求，服�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 25
+        Total : 26
         </div>
         <!-- search  -->
         
@@ -1272,6 +1317,11 @@ HTTP 的无状态性HTTP是无状态协议，浏览器的每一次请求，服�
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span><a class="archive-post-title" href="/2019/08/28/雪花算法（SnowFlake）/">雪花算法</a>
+        </li>
     
     
         <li class="archive-post-item">
