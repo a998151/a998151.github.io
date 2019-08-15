@@ -346,6 +346,50 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/08/13/线程池工作原理/">
+            
+                <span>线程池工作原理</span>
+        </a>
+        <div class="abstract-content">
+            环境：JDK1.8
+本篇文章目标：
+
+给线程池 submit 任务后，线程池如何添加、执行任务的？
+线程池相关类之间的继承与实现关系？
+构造函数说明
+关键属性说明
+关键方法说明
+Executors工厂类提供常见的线程池
+
+java.uitl.concurrent.ThreadPoolExecutor 类是线程池中最核心的一个类，因此如果要透彻地了解Java中的线程池，必须先了解这个类。
+继承与实现关系我们先来看一下这 ThreadPoolExecutor 的继承与实现的关系，并介绍各个部分有什么作用
+
+Executor是一个顶层接口，在它里面只声明了一个方法 execute(Runnab...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="线程池">线程池</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
             
                 <span>原子性、可见性、有序性</span>
@@ -698,45 +742,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
-            
-                <span>Java 中的 ==、equals 与 hashCode</span>
-        </a>
-        <div class="abstract-content">
-            ==
-比较两个基本类型的数据是否相等
-两个引用变量是否相等
-
-​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
-​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
-​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
-1String str = new String();
-​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
-​    对...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/tags/Java/page/2/">2</a><a class="extend next" rel="next" href="/tags/Java/page/2/">NEXT &#62;</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -1152,9 +1162,24 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 26
+        Total : 27
         </div>
         <!-- search  -->
         
@@ -1171,6 +1196,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <li class="archive-post-item">
             <span class="archive-post-date">08/28</span><a class="archive-post-title" href="/2019/08/28/雪花算法（SnowFlake）/">雪花算法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/13</span><a class="archive-post-title" href="/2019/08/13/线程池工作原理/">线程池工作原理</a>
         </li>
     
     
@@ -1343,6 +1373,8 @@ RTTI，它假定我们在编译时已经知道了所有类型
         <span class="sidebar-tag-name" data-tags="GC"><span class="iconfont-archer">&#xe606;</span>GC</span>
     
         <span class="sidebar-tag-name" data-tags="内存"><span class="iconfont-archer">&#xe606;</span>内存</span>
+    
+        <span class="sidebar-tag-name" data-tags="线程池"><span class="iconfont-archer">&#xe606;</span>线程池</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
