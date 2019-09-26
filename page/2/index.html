@@ -359,6 +359,46 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
+            
+                <span>原子性、可见性、有序性</span>
+        </a>
+        <div class="abstract-content">
+            经常听到或者面试都有人会问道这三个东西，我们可能会一下子就知道这三个概念都是什么意思。我自己想了一下，貌似我仅仅对于这三个概念了解概念以及在 Java 上如何实现而已。所以在这里就整理一下资料，对这三个概念进行一些深入的学习。
+至于为什么会有存在这三个概念，一直不得其解，就搜索一些资料，自己也整理一下，算是补全一下自己的知识体系吧。
+主要介绍：
+
+这三个概念的由来
+对于这三个概念，具体在 Java 上又是如何实现的
+
+三个概念的由来从硬件上分析之前旧时代计算机的芯片都是单核的，那个时候的计算如果想要读写数据，每次都得从主内存（物理内存）中读取，修改完后再存放回主内存中。
+
+然而在 CPU...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java内存模型">Java内存模型</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/17/Java集合——Map/">
             
                 <span>Java集合——Map</span>
@@ -646,31 +686,6 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/30/Java中的锁/">
-            
-                <span>Java 锁（updating）</span>
-        </a>
-        <div class="abstract-content">
-            1、乐观锁​    乐观锁，认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别的线程不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别的线程有没有去更新这个数据，采取在写的时候先读取当前的版本号，然后加锁操作（比较跟上一次的版本号是否一致，相同则更新）。如果失败则要重复 ==读 - 比较 - 写== 的操作。
-​    Java 中的乐观锁基本是通过 CAS 操作实现的，CAS 是一种原子更新的操作，比较当前值和传入值是否一样，一样则更新，否则失败。
-2、悲观锁​    悲观锁认为写多读少，遇到并发写的可能性比较高，每次去拿数据的时候，都认为别的线程会修改数据，所以...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
             </div>
             <!-- tags  -->
             
@@ -1202,9 +1217,24 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 27
+        Total : 28
         </div>
         <!-- search  -->
         
@@ -1217,6 +1247,11 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href="/2019/09/26/ClassLoader/">类加载器ClassLoader</a>
+        </li>
     
     
         <li class="archive-post-item">
