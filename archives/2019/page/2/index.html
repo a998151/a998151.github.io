@@ -346,6 +346,53 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/31/一点想法/">
+            
+                <span>一点想法或反思</span>
+        </a>
+        <div class="abstract-content">
+            今晚回头看了一下自己写的一些文章，发现了几点问题
+
+很多文章点到即止，没能继续深入的说明
+整个文章的逻辑比较乱，看着感觉像是看文档一样，看完没能有一种【豁然开朗】的感觉
+文章的内容太散乱，根本组织不到一块
+
+对于这种现象，自己反思了一下
+
+对于博客文章，自己是否太急了一点？像是为了赶作业那般，草草完成了一篇文章
+整个知识的脉络没能琢磨清楚，形成一个完整的整体
+
+之后的改正
+
+审视自己的内心，我究竟想通过这篇文章说明什么？
+介绍清楚整个文章的来龙去脉了吗？
+为什么存在于这种现象？多玩底层原因挖。
+整理出思维导图，写完后，多思考有那些还是没介绍完整的
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/31</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="反思">反思</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
             
                 <span>原子性、可见性、有序性</span>
@@ -643,31 +690,6 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
 例2 ： 事务A将某张表中的数据修改了，但是因为某些原因，撤销对该值的修改。但是在撤销之前，事务B读取了这个修改过后的值，导致读到错误的数据的情况发生。
 产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。
 对于这些情况，可以去了解一下DBMS ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">
-            
-                <span>数据库管理系统（DBMS）——死锁</span>
-        </a>
-        <div class="abstract-content">
-            行级锁与死锁(非自己写，需要修改)MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
-在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。
-当两...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1129,9 +1151,24 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 28
+        Total : 29
         </div>
         <!-- search  -->
         
@@ -1144,6 +1181,11 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">布隆个过滤器与Hash函数的学习</a>
+        </li>
     
     
         <li class="archive-post-item">

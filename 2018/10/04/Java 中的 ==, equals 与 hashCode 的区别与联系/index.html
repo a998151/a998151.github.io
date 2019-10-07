@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">606</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.7k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -415,7 +415,44 @@ height:50vh;
 <p>​    Object类中定义的equals(Object)方法的情况下，equals(Object)与“<code>==</code>”运算符一样，<strong>比较的是引用</strong>。</p>
 <p>​    相比“<code>==</code>”运算符，<code>equals(Object)</code>方法的特殊之处就在于它可以被覆盖，所以可以通过覆盖的方法让它不是比较引用而是比较数据内容，例如String类的<code>equals</code>方法是用于比较两个独立对象的内容是否相同，即堆中的内容是否相同</p>
 <p>​    如果一个类没有自己定义<code>equals()</code>方法，它默认的<code>equals()</code>方法（从Object类继承的）就是使用“<code>==</code>”运算符，也是在比较两个变量指向的对象是否是同一对象，此时使用<code>equals()</code>方法和使用“<code>==</code>”运算符会得到同样的结果。</p>
-<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a><em>hashCode</em></h3><p><code>hashCode()</code>方法是从Object类中继承过来的，它也用来鉴定两个对象是否相等。<strong>Object类中的<code>hashCode()</code>方法返回对象在内存中地址转换成的一个int值</strong>，所以如果没有重写<code>hashCode()</code>方法，任何对象的<code>hashCode()</code>方法都是不相等的。</p>
+<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a><em>hashCode</em></h3><p>所有散列函数都有如下一个基本特性：如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。</p>
+<p>而散列表就是一个哈希函数的主要使用。在 Java 中，散列表的实现是 <code>HashMap</code>，具体可以看对应文章，都介绍的非常详细了。在实现的过程中，判断一个对象是否相等，会先判断其 <code>hashCode</code> 是否相等再使用 equal 方法进行判断。</p>
+<p>这里，我们就主要介绍</p>
+<ul>
+<li><code>HashCode</code> 是什么</li>
+<li><code>HashCode</code> 有什么作用</li>
+<li>不同对象的 <code>HashCode</code> 一定不同吗？</li>
+</ul>
+<p>Java中的<code>hashCode</code>方法就是根据一定的规则将与对象相关的信息（比如对象的存储地址，对象的字段等）映射成一个数值，这个数值称作为散列值。</p>
+<blockquote>
+<p>有些朋友误以为默认情况下，<code>hashCode</code>返回的就是对象的存储地址，事实上这种看法是不全面的，确实有些<code>JVM</code>在实现时是直接返回对象的存储地址，但是大多时候并不是这样，只能说可能存储地址有一定关联。下面是<code>HotSpot JVM</code>中生成hash散列值的实现：</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> intptr_t <span class="title">get_next_hash</span><span class="params">(Thread * Self, oop obj)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">intptr_t</span> value = <span class="number">0</span> ;</span><br><span class="line">  <span class="keyword">if</span> (hashCode == <span class="number">0</span>) &#123;</span><br><span class="line">     <span class="comment">// This form uses an unguarded global Park-Miller RNG,</span></span><br><span class="line">     <span class="comment">// so it's possible for two threads to race and generate the same RNG.</span></span><br><span class="line">     <span class="comment">// On MP system we'll have lots of RW access to a global, so the</span></span><br><span class="line">     <span class="comment">// mechanism induces lots of coherency traffic.</span></span><br><span class="line">     value = os::random() ;</span><br><span class="line">  &#125; <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">if</span> (hashCode == <span class="number">1</span>) &#123;</span><br><span class="line">     <span class="comment">// This variation has the property of being stable (idempotent)</span></span><br><span class="line">     <span class="comment">// between STW operations.  This can be useful in some of the 1-0</span></span><br><span class="line">     <span class="comment">// synchronization schemes.</span></span><br><span class="line">     <span class="keyword">intptr_t</span> addrBits = <span class="keyword">intptr_t</span>(obj) &gt;&gt; <span class="number">3</span> ;</span><br><span class="line">     value = addrBits ^ (addrBits &gt;&gt; <span class="number">5</span>) ^ GVars.stwRandom ;</span><br><span class="line">  &#125; <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">if</span> (hashCode == <span class="number">2</span>) &#123;</span><br><span class="line">     value = <span class="number">1</span> ;            <span class="comment">// for sensitivity testing</span></span><br><span class="line">  &#125; <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">if</span> (hashCode == <span class="number">3</span>) &#123;</span><br><span class="line">     value = ++GVars.hcSequence ;</span><br><span class="line">  &#125; <span class="keyword">else</span></span><br><span class="line">  <span class="keyword">if</span> (hashCode == <span class="number">4</span>) &#123;</span><br><span class="line">     value = <span class="keyword">intptr_t</span>(obj) ;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="comment">// Marsaglia's xor-shift scheme with thread-specific state</span></span><br><span class="line">     <span class="comment">// This is probably the best overall implementation -- we'll</span></span><br><span class="line">     <span class="comment">// likely make this the default in future releases.</span></span><br><span class="line">     <span class="keyword">unsigned</span> t = Self-&gt;_hashStateX ;</span><br><span class="line">     t ^= (t &lt;&lt; <span class="number">11</span>) ;</span><br><span class="line">     Self-&gt;_hashStateX = Self-&gt;_hashStateY ;</span><br><span class="line">     Self-&gt;_hashStateY = Self-&gt;_hashStateZ ;</span><br><span class="line">     Self-&gt;_hashStateZ = Self-&gt;_hashStateW ;</span><br><span class="line">     <span class="keyword">unsigned</span> v = Self-&gt;_hashStateW ;</span><br><span class="line">     v = (v ^ (v &gt;&gt; <span class="number">19</span>)) ^ (t ^ (t &gt;&gt; <span class="number">8</span>)) ;</span><br><span class="line">     Self-&gt;_hashStateW = v ;</span><br><span class="line">     value = v ;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  value &amp;= markOopDesc::hash_mask;</span><br><span class="line">  <span class="keyword">if</span> (value == <span class="number">0</span>) value = <span class="number">0xBAD</span> ;</span><br><span class="line">  assert (value != markOopDesc::no_hash, <span class="string">"invariant"</span>) ;</span><br><span class="line">  TEVENT (hashCode: GENERATE) ;</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该实现位于<code>hotspot/src/share/vm/runtime/synchronizer.cpp</code>文件下。</p>
+<p><strong>因此有人会说，可以直接根据<code>hashcode</code>值判断两个对象是否相等吗？</strong></p>
+<blockquote>
+<p><strong>肯定是不可以的，因为不同的对象可能会生成相同的<code>hashcode</code>值。</strong>虽然不能根据<code>hashcode</code>值判断两个对象是否相等，但是可以直接根据<code>hashcode</code>值判断两个对象不等，如果两个对象的<code>hashcode</code>值不等，则必定是两个不同的对象。如果要判断两个对象是否真正相等，必须通过equals方法。</p>
+</blockquote>
+<p>也就是说对于两个对象，如果调用equals方法得到的结果为true，则两个对象的<code>hashcode</code>值必定相等；</p>
+<p>如果equals方法得到的结果为false，则两个对象的<code>hashcode</code>值不一定不同；</p>
+<p>如果两个对象的<code>hashcode</code>值不等，则equals方法得到的结果必定为false；</p>
+<p>如果两个对象的<code>hashcode</code>值相等，则equals方法得到的结果未知。</p>
+<p><strong>在重写hashCode方法的时候，要注意以下的点：</strong></p>
+<ul>
+<li><p>在有些情况下，程序设计者在设计一个类的时候为需要重写equals方法，比如String类，但是千万要注意，在重写equals方法的同时，必须重写hashCode方法。</p>
+</li>
+<li><blockquote>
+<p>　“设计<code>hashCode()</code>时最重要的因素就是：无论何时，对同一个对象调用<code>hashCode()</code>都应该产生同样的值。如果在讲一个对象用put()添加进<code>HashMap</code>时产生一个<code>hashCdoe</code>值，而用get()取出时却产生了另一个<code>hashCode</code>值，那么就无法获取该对象了。</p>
+<p>​        所以如果你的<code>hashCode</code>方法依赖于对象中易变的数据，用户就要当心了，因为此数据发生变化时，<code>hashCode()</code>方法就会生成一个不同的散列码”。</p>
+<p style="text-align:right;">——《Java编程思想》</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li>Java中的<code>hashCode</code>方法就是根据一定的规则将与对象相关的信息（比如对象的存储地址，对象的字段等）映射成一个数值，这个数值称作为散列值。</li>
+<li><code>hashCode</code> 返回的只能说可能存储地址有一定关联，但是大多 <code>JVM</code> 的实现都不是返回对象的存储地址。</li>
+<li>不可以根据 <code>hashCode</code> 判断两个对象是否相等，但可以用来判断两个对象是否为不同的两个对象。</li>
+</ul>
 
     </article>
     <!-- license  -->
@@ -424,7 +461,7 @@ height:50vh;
             <p>原文作者：<a href="https://a998151.github.io">ALemon</a>
             </p><p>原文链接：<a href="https://a998151.github.io/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">https://a998151.github.io/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/</a>
             </p><p>发表日期：<a href="https://a998151.github.io/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">October 4th 2018, 8:45:53 pm</a>
-            </p><p>更新日期：<a href="https://a998151.github.io/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">March 16th 2019, 2:12:19 pm</a>
+            </p><p>更新日期：<a href="https://a998151.github.io/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">October 7th 2019, 10:58:46 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -549,7 +586,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">==</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#equals"><span class="toc-number">2.</span> <span class="toc-text">equals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hashCode"><span class="toc-number">3.</span> <span class="toc-text">hashCode</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">==</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#equals"><span class="toc-number">2.</span> <span class="toc-text">equals</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hashCode"><span class="toc-number">3.</span> <span class="toc-text">hashCode</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#小结"><span class="toc-number">3.1.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -918,9 +955,24 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 28
+        Total : 29
         </div>
         <!-- search  -->
         
@@ -933,6 +985,11 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">布隆个过滤器与Hash函数的学习</a>
+        </li>
     
     
         <li class="archive-post-item">
