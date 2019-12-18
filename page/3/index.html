@@ -359,6 +359,32 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">
+            
+                <span>数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</span>
+        </a>
+        <div class="abstract-content">
+            0、什么是锁？例1 ： 现有两处火车票售票点，同时读取某一趟列车车票数据库中车票余额为 X。两处售票点同时卖出一张车票，同时修改余额为 X -1写回数据库，这样就造成了实际卖出两张火车票而数据库中的记录却只少了一张。 
+例2 ： 事务A将某张表中的数据修改了，但是因为某些原因，撤销对该值的修改。但是在撤销之前，事务B读取了这个修改过后的值，导致读到错误的数据的情况发生。
+产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。
+对于这些情况，可以去了解一下DBMS ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">
             
                 <span>数据库管理系统（DBMS）——死锁</span>
@@ -1227,9 +1253,24 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 29
+        Total : 30
         </div>
         <!-- search  -->
         
@@ -1242,6 +1283,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href="/2019/12/18/多路复用/">I/O多路复用原理</a>
+        </li>
     
     
         <li class="archive-post-item">

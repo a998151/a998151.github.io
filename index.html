@@ -359,6 +359,38 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/12/18/多路复用/">
+            
+                <span>I/O多路复用原理</span>
+        </a>
+        <div class="abstract-content">
+            概述IO我们常见的有：
+
+读磁盘文件
+写磁盘文件
+读网络请求
+写网络请求
+
+操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。
+为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。
+现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x000...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/12/18</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">
             
                 <span>布隆个过滤器与Hash函数的学习</span>
@@ -726,39 +758,6 @@ JVM 在执行 new 命令是如何创建对象的？整个步骤是怎样的？
         <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Java对象">Java对象</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/16/Java 内存区域/">
-            
-                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
-        </a>
-        <div class="abstract-content">
-            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
-对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
-Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
     
 </div>
             
@@ -1320,9 +1319,24 @@ Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 29
+        Total : 30
         </div>
         <!-- search  -->
         
@@ -1335,6 +1349,11 @@ Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href="/2019/12/18/多路复用/">I/O多路复用原理</a>
+        </li>
     
     
         <li class="archive-post-item">
