@@ -346,6 +346,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/06/20/Java对象探究（深入理解Java虚拟机II笔记）/">
+            
+                <span>Java对象探究（深入理解Java虚拟机II笔记）</span>
+        </a>
+        <div class="abstract-content">
+            在之前学习了HotSpot 虚拟机的运行时 JVM 内存分配后，我们现在再进一步学习。
+本章主要学习：
+
+JVM 在执行 new 命令是如何创建对象的？整个步骤是怎样的？
+对象内都存在着什么数据？各个数据有什么用？
+如何使用或访问 Java 堆上的 Java 对象？有什么方式？不同方式有什么区别？
+
+创建对象过程是怎样的？我们都知道 Java 对象是通过一个 new 的关键创建出来的，那么在编译时候，JVM 是如何创建出新的对象的呢？
+注意：这里说的 Java 对象是常用的 Java 对象而不是数组、Class 对象之类的特殊对象。
+引用与加载过程虚拟机遇到一条 new 指令的时候，首先...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/20</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java对象">Java对象</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/06/16/Java 内存区域/">
             
                 <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
@@ -675,33 +715,6 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/11/数据库管理系统（DBMS）——共享锁与排他锁/">
-            
-                <span>数据库管理系统（DBMS）——共享锁与排他锁</span>
-        </a>
-        <div class="abstract-content">
-            之前介绍过行锁，行级锁是 MySQL中颗粒度最小的一种锁，行级锁能大大减少数据库操作冲突。行级锁分为共享锁和排他锁两种，本文将详细介绍共享锁及排他锁的概念、使用方式及注意事项等。
-共享锁(Share Lock)共享锁又称读锁，是读取操作创建的锁。其他用户可以并发读取数据，但任何事务都不能对数据进行修改（获取数据上的排他锁），直到已释放所有共享锁。
-如果事务T对数据A加上共享锁后，则其他事务只能对A再加共享锁，不能加排他锁。获准共享锁的事务只能读数据，不能修改数据。
-用法1SELECT ... LOCK IN SHARE MODE;
-在查询语句后面增加LOCK IN SHARE MODE，...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/11</span>
             </div>
             <!-- tags  -->
             
@@ -1188,9 +1201,24 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 30
+        Total : 31
         </div>
         <!-- search  -->
         
@@ -1203,6 +1231,11 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/23</span><a class="archive-post-title" href="/2019/12/23/Java NIO 一 预备计算机操作系统概念（一）/">Java NIO 一 预备计算机操作系统概念</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1401,6 +1434,8 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
         <span class="sidebar-tag-name" data-tags="内存"><span class="iconfont-archer">&#xe606;</span>内存</span>
     
         <span class="sidebar-tag-name" data-tags="线程池"><span class="iconfont-archer">&#xe606;</span>线程池</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java NIO"><span class="iconfont-archer">&#xe606;</span>Java NIO</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
