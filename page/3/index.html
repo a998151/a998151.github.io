@@ -359,34 +359,31 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/06/20/Java对象探究（深入理解Java虚拟机II笔记）/">
+        <a class="abstract-title" href="/2019/03/20/Java 多线程（并发）/">
             
-                <span>Java对象探究（深入理解Java虚拟机II笔记）</span>
+                <span>Java 多线程（并发）</span>
         </a>
         <div class="abstract-content">
-            在之前学习了HotSpot 虚拟机的运行时 JVM 内存分配后，我们现在再进一步学习。
-本章主要学习：
-
-JVM 在执行 new 命令是如何创建对象的？整个步骤是怎样的？
-对象内都存在着什么数据？各个数据有什么用？
-如何使用或访问 Java 堆上的 Java 对象？有什么方式？不同方式有什么区别？
-
-创建对象过程是怎样的？我们都知道 Java 对象是通过一个 new 的关键创建出来的，那么在编译时候，JVM 是如何创建出新的对象的呢？
-注意：这里说的 Java 对象是常用的 Java 对象而不是数组、Class 对象之类的特殊对象。
-引用与加载过程虚拟机遇到一条 new 指令的时候，首先...
+            1.概述有一个大水缸，要和尚去挑水，倒满这个水缸，如果需要挑20趟才能给这个水缸加满水。
+让一个和尚来回跑20趟，挑20次水，就可以倒满。
+另外我也可以让 10 个和尚跑两趟，就可以把水缸的水给倒满。
+第二种场景就是并发。并发编程主要解决的问题为 “速度（效率）”。
+但是一条路就这么宽，十个和尚跑在路上，如果碰倒了，导致水洒了，两趟下来，就保证不了水缸能够装满水。
+所以在并发的情况下，我们需要考虑的在这条挑水的路上各个和尚正常挑水不发生意外，不像一个和尚挑水，在路上不用担心碰倒其它和尚。
+上面提到的地方就是并发需要注意的：阻塞、共享资源。另外为了解决这些问题，而又有涉及到一些概念：原子性...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java对象">Java对象</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="多线程">多线程</a>
     
 </div>
             
@@ -399,256 +396,33 @@ JVM 在执行 new 命令是如何创建对象的？整个步骤是怎样的？
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/06/20/深入理解Java虚拟机II笔记/Java对象探究（深入理解Java虚拟机II笔记）/">
+        <a class="abstract-title" href="/2019/03/01/static 多线程/">
             
-                <span>Java对象探究（深入理解Java虚拟机II笔记）</span>
+                <span>Java中多线程的static</span>
         </a>
         <div class="abstract-content">
-            在之前学习了HotSpot 虚拟机的运行时 JVM 内存分配后，我们现在再进一步学习。
-本章主要学习：
+            来说说静态变量、实例变量、局部变量在多线程下的安全问题吧！
+在 Java 中，static 主要强调的是，它在 jvm 中就只有一个
+关于static修饰的变量，静态变量，表示静态变量在内存中只有一个拷贝，JVM只为静态变量分配一次内存，在加载类的过程中便完成静态变量的内存分配，同静态方法一样。
+静态变量
+使用 static 关键字定义的变量。
 
-JVM 在执行 new 命令是如何创建对象的？整个步骤是怎样的？
-对象内都存在着什么数据？各个数据有什么用？
-如何使用或访问 Java 堆上的 Java 对象？有什么方式？不同方式有什么区别？
+static 可以修饰变量和方法
 
-创建对象过程是怎样的？我们都知道 Java 对象是通过一个 new 的关键创建出来的，那么在编译时候，JVM 是如何创建出新的对象的呢？
-注意：这里说的 Java 对象是常用的 Java 对象而不是数组、Class 对象之类的特殊对象。
-引用与加载过程虚拟机遇到一条 new 指令的时候，首先...
+static 静态代码块。
+
+
+
+在Java中并不存在全局变量的概念，但是我们可以通过static来实现一个“伪全局”的概念，在Java中static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/01</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java对象">Java对象</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/16/Java 内存区域/">
-            
-                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
-        </a>
-        <div class="abstract-content">
-            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
-对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
-Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/16/Java 内存管理模型/Java 内存区域/">
-            
-                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
-        </a>
-        <div class="abstract-content">
-            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
-对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
-Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/16/深入理解Java虚拟机II笔记/Java 内存区域/">
-            
-                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
-        </a>
-        <div class="abstract-content">
-            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
-对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
-Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/04/深入理解 Synchronized/">
-            
-                <span>深入理解 Synchronized</span>
-        </a>
-        <div class="abstract-content">
-            
-本人整理了资料，写了两三天，发现 Synchronized 的水很深，在彻底理解 Synchronized 前，还是需要很多知识点的铺垫的，例如：
-
-JVM 的内存结构
-在字节码层面层面上 理解 JVM 如何实现线程同步的
-Java 的内存模型
-Java 的对象头
-
-所以需要经过一段时间消化整理，才能写出这个文章
-虽然之前的文章也有介绍过 synchronized 这个关键字，但是说明的不是很清晰。这里就进行深入点分析一下Java 提供的这个关键字的作用与原理呗！
-Java 提供了一种 内置 的锁机制来支持原子性：同步代码块（Synchronized Block）。
-并发环境下的原子性...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="并发">并发</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/31/一点想法/">
-            
-                <span>一点想法或反思</span>
-        </a>
-        <div class="abstract-content">
-            今晚回头看了一下自己写的一些文章，发现了几点问题
-
-很多文章点到即止，没能继续深入的说明
-整个文章的逻辑比较乱，看着感觉像是看文档一样，看完没能有一种【豁然开朗】的感觉
-文章的内容太散乱，根本组织不到一块
-
-对于这种现象，自己反思了一下
-
-对于博客文章，自己是否太急了一点？像是为了赶作业那般，草草完成了一篇文章
-整个知识的脉络没能琢磨清楚，形成一个完整的整体
-
-之后的改正
-
-审视自己的内心，我究竟想通过这篇文章说明什么？
-介绍清楚整个文章的来龙去脉了吗？
-为什么存在于这种现象？多玩底层原因挖。
-整理出思维导图，写完后，多思考有那些还是没介绍完整的
-
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/31</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="反思">反思</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/29/JVM 几种模型基本介绍/">
-            
-                <span>（转）Java中的几种模型概念介绍</span>
-        </a>
-        <div class="abstract-content">
-            本篇文章为转发文章，非原创，来自[JVM内存结构 VS Java内存模型 VS Java对象模型]
-JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域，这些区域都有各自的用途。其中有些区域随着虚拟机进程的启动而存在，而有些区域则依赖用户线程的启动和结束而建立和销毁。在《Java虚拟机规范（Java SE 8）》中描述了JVM运行时内存区域结构如下：
-
-各个区域的功能不是本文重点，就不在这里详细介绍了。这里简单提几个需要特别注意的点：
-
-以上是Java虚拟机规范，不同的虚拟机实现会各有不同，但是一般会遵...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
@@ -663,34 +437,31 @@ JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
+        <a class="abstract-title" href="/2019/02/04/final 关键字深入理解/">
             
-                <span>原子性、可见性、有序性</span>
+                <span>final 关键字的理解</span>
         </a>
         <div class="abstract-content">
-            经常听到或者面试都有人会问道这三个东西，我们可能会一下子就知道这三个概念都是什么意思。我自己想了一下，貌似我仅仅对于这三个概念了解概念以及在 Java 上如何实现而已。所以在这里就整理一下资料，对这三个概念进行一些深入的学习。
-至于为什么会有存在这三个概念，一直不得其解，就搜索一些资料，自己也整理一下，算是补全一下自己的知识体系吧。
-主要介绍：
+            final 的初步理解​    通常我们对Java中final关键字的理解是“用final修饰的变量是不可变的”，如果尝试对final变量多次赋值，编译器将报错。
+​    似乎final的作用就是保证变量不可变，这没有错，但是如果我们在Java中灵活应用final的被修饰目标不可变的特性，往往能发掘出很多令人意想不到的效果，而非仅仅保证变量不可变这么粗浅而已。下面我们来说说final关键字的多重用法
+final 修饰变量
+修饰基本类变量
+修饰引用类变量（对象类变量）
 
-这三个概念的由来
-对于这三个概念，具体在 Java 上又是如何实现的
-
-三个概念的由来从硬件上分析之前旧时代计算机的芯片都是单核的，那个时候的计算如果想要读写数据，每次都得从主内存（物理内存）中读取，修改完后再存放回主内存中。
-
-然而在 CPU...
+对于上面说得两点，先看一下下面的两个程序呗
+12final int myInt = 1;myInt = 2;
+123f...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/28</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/04</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java内存模型">Java内存模型</a>
     
 </div>
             
@@ -703,37 +474,113 @@ JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/05/17/Java集合——Map/">
+        <a class="abstract-title" href="/2019/01/04/类型信息/">
             
-                <span>Java集合——Map</span>
+                <span>Java——Class</span>
         </a>
         <div class="abstract-content">
-            写在文章的前面：
-​    这篇文章，对于Map容器，介绍得不全的，参考资料中介绍的比较全面，map 这部分的内容可以网上搜到很全很详细的资料。这篇文章其实相当于自己个人参考着网上的资料配合看着理解源码做的一些理解而已。
-HashMap主要了解下面的这些信息
+            学习初衷：
 
-HashMap的数据结构是什么，Java 7/8 有何不同，为什么需要改变？
-put 过程
-get 过程
-为什么说 HashMap 是线程不安全的？
+想知道程序在运行的时候，如何识别对象和类的信息。
+在基本的框架中随处都可见有使用 Class 对象，弄清楚作用
+如果通过反射去调用类中的属性、方法、构造函数等
 
+写在前头如果看过一些成熟的框架，大家都应该知道 泛型、反射、注解等这些 Java 高级特性是无处不在的，多数都是使用这些特性让程序复用性更高更简洁。如果想要看懂一些成熟的框架源码，这些就是基础。
+==Java 是如何让我们在运行时识别对象和类信息的呢？==
 
+RTTI，它假定我们在编译时已经知道了所有类型
+反射机制
 
-说明，这里不进行详细说明，主要用户总结，详细说明可看参考资料一些大神的文章。
-
-
-元素在加入容器的数组中，并不是按照顺序插入的，而是通过 hash进行确定数组下标确定位置插入数...
+一、RTTI 和反射每个认真读过 B 大的《Thinking in Java》都会有这么一个疑问：...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/17</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/04</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Map">Map</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2018/12/21/泛型/">
+            
+                <span>泛型使用</span>
+        </a>
+        <div class="abstract-content">
+            这篇文章主要解决的问题：
+
+泛型的简单使用
+泛型的好处，有什么奇怪的地方
+泛型使用场景
+输入的类型是泛型，根据泛型指定的类型，调用的对应方法形参的类型
+
+
+一、使用初衷（场景）1、我们都希望我们的代码复用性高，而在 Java 中，我们想要编写可以应用于多种类型的代码，就需要用到泛型了。
+2、仅一次方法调用就能返回多个对象。
+3、而且在研读一些成熟的框架源码的时候，会发现源码存在着大量的泛型使用，不了解好泛型，很难理解得了框架设计。
+二、泛型的简单使用泛型是在 Java5 提出的，泛型实现了参数化类型（类型参数化）的概念。在你创建参数化类型的一个实例时，编译器会为你负责转型操作，并且保证类...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
+            
+                <span>Java 中的 ==、equals 与 hashCode</span>
+        </a>
+        <div class="abstract-content">
+            ==
+比较两个基本类型的数据是否相等
+两个引用变量是否相等
+
+​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
+​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
+​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
+1String str = new String();
+​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
+​    对...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
 </div>
             
@@ -743,7 +590,7 @@ get 过程
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/2/">&#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">NEXT &#62;</a>
+        <a class="extend prev" rel="prev" href="/page/2/">&#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
     </nav>
     
 </main>
@@ -1248,319 +1095,9 @@ get 过程
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 46
+        Total : 26
         </div>
         <!-- search  -->
         
@@ -1590,21 +1127,6 @@ get 过程
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/23</span><a class="archive-post-title" href="/2019/12/23/Java NIO 一 预备计算机操作系统概念（一）/">Java NIO 一 预备计算机操作系统概念</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/18</span><a class="archive-post-title" href="/2019/12/18/多路复用/">I/O多路复用原理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/数据结构与算法/第二章 数据结构基础/">数据结构和算法——第二章 数据结构基础</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">布隆个过滤器与Hash函数的学习</a>
         </li>
     
@@ -1615,27 +1137,7 @@ get 过程
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/26</span><a class="archive-post-title" href="/2019/09/26/ClassLoader/">类加载器ClassLoader</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/28</span><a class="archive-post-title" href="/2019/08/28/雪花算法（SnowFlake）/">雪花算法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/13</span><a class="archive-post-title" href="/2019/08/13/线程池工作原理/">线程池工作原理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/深入理解Java虚拟机II笔记/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1645,17 +1147,7 @@ get 过程
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/05</span><a class="archive-post-title" href="/2019/07/05/深入理解Java虚拟机II笔记/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/深入理解Java虚拟机II笔记/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1665,42 +1157,12 @@ get 过程
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/03</span><a class="archive-post-title" href="/2019/07/03/深入理解Java虚拟机II笔记/JVM内存溢出异常探究/">JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">06/20</span><a class="archive-post-title" href="/2019/06/20/Java对象探究（深入理解Java虚拟机II笔记）/">Java对象探究（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/20</span><a class="archive-post-title" href="/2019/06/20/深入理解Java虚拟机II笔记/Java对象探究（深入理解Java虚拟机II笔记）/">Java对象探究（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存管理模型/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/深入理解Java虚拟机II笔记/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/04</span><a class="archive-post-title" href="/2019/06/04/深入理解 Synchronized/">深入理解 Synchronized</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
         </li>
     
     
@@ -1716,11 +1178,6 @@ get 过程
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/09</span><a class="archive-post-title" href="/2019/05/09/单点登陆/">单点登陆</a>
         </li>
     
     
@@ -1799,54 +1256,7 @@ get 过程
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href="/2018/10/24/Java初认识锁机制/">Java初认识锁机制</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">10/04</span><a class="archive-post-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">Java 中的 ==、equals 与 hashCode</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/dubbo/一、Dubbo 介绍/">[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第一章 算法概述小结/">[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第三章 树/">[Untitled Post]</a>
         </li>
     
     </ul></div>

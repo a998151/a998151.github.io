@@ -346,118 +346,6 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/12/23/Java NIO 一 预备计算机操作系统概念（一）/">
-            
-                <span>Java NIO 一 预备计算机操作系统概念</span>
-        </a>
-        <div class="abstract-content">
-            希望了解到的信息：
-
-缓冲区
-缓冲区的概念、缓冲区在哪里、缓冲区有什么用
-用户空间、内核空间概念，区别，作用
-
-
-虚拟内存（《深入理解计算机系统》）
-虚拟内存的概念，虚拟内存的好处
-内存页的概念、为什么要有内存页？
-内存页面的调度
-
-
-文件IO
-文件系统概念，有什么作用？
-所有 I/O 都是通过请求页面调度完成的。这句话怎么理解？
-流IO 和 块IO 区别？
-流的传输一般（也不必然如此）比块设备慢，为什么？什么情况存在不必然的说法？
-
-
-
-缓冲区如果想要了解缓冲区，首先了解用户编写的程序如何与外部（网络、磁盘）中的数据进行通讯过程。
-
-我们先来看一下上图对于I/O缓冲区操作的简图（fro...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/12/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java NIO">Java NIO</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/12/18/多路复用/">
-            
-                <span>I/O多路复用原理</span>
-        </a>
-        <div class="abstract-content">
-            概述IO我们常见的有：
-
-读磁盘文件
-写磁盘文件
-读网络请求
-写网络请求
-
-操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。
-为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。
-现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x000...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/12/18</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/10/02/数据结构与算法/第二章 数据结构基础/">
-            
-                <span>数据结构和算法——第二章 数据结构基础</span>
-        </a>
-        <div class="abstract-content">
-            数组什么是数组数组对应的英文是 Array，是有限个相同类型的变量所组成的有序集合，数组中的每一个变量被称为元素。数组的另一个特点，是在内存中顺序存储，因此可以很好地实现逻辑上的顺序表。
-数组的操作读取元素对于数组来说，读取元素是最简单的操作。由于数组在内存中顺序存储，所以只要给出一个数组的下标，就可以读取到对应的数组元素。
-我们来分析一下读取的过程：
-
-首先程序执行到某个方法的时候，Java 栈中的本地变量表保存了数组的 reference，指向Java 中的句柄池中的对应实例的句柄，简单来说，就是知道了数组的起始地址（首个元素的地址）。
-然后看要读的下标是$n$，则将指针往后移动 $...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/02</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">
             
                 <span>布隆个过滤器与Hash函数的学习</span>
@@ -513,151 +401,6 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/09/26/ClassLoader/">
-            
-                <span>类加载器ClassLoader</span>
-        </a>
-        <div class="abstract-content">
-            转载地址 老大难的 Java ClassLoader 再不理解就老了
-原文中将 ClassLoader 说的很通俗易懂，这里进行转载和整理而已，其中加入了自己的一些想法，大体上并不是原创。
-ClassLoader有什么用？它是用来加载 Class 的。它负责将 Class 的字节码形式转换成内存形式的 Class 对象。字节码可以来自于磁盘文件 .class，也可以是 jar 包里的 .class，也可以来自远程服务器提供的字节流，字节码的本质就是一个字节数组 []byte，它有特定的复杂的内部格式。
-Class 与 ClassLoader 有什么关系？记得自己在刚学习 Java 的时候...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/26</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/08/28/雪花算法（SnowFlake）/">
-            
-                <span>雪花算法</span>
-        </a>
-        <div class="abstract-content">
-            先看一下 Java 中的数据类型对应直接长度和位数
-
-
-
-数据类型
-字节长度(单位：byte)
-位长度（单位：bit)
-
-
-
-
-int
-4
-32
-
-
-byte
-1
-8
-
-
-short
-2
-16
-
-
-long
-8
-64
-
-
-float
-4
-32
-
-
-double
-8
-64
-
-
-boolean
-1
-8
-
-
-char
-2
-16
-
-
-
-Snowflake概述对于分布式的ID生成，以Twitter Snowflake为代表的， Flake 系列算法，属于划分命名空间并行生成的一种算法，生成的数据为64bit的long型数据，在数据库中应该用大于等于64bit的数字类型的字段来保存该值，比如在MyS...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/28</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/08/13/线程池工作原理/">
-            
-                <span>线程池工作原理</span>
-        </a>
-        <div class="abstract-content">
-            环境：JDK1.8
-本篇文章目标：
-
-给线程池 submit 任务后，线程池如何添加、执行任务的？
-线程池相关类之间的继承与实现关系？
-构造函数说明
-关键属性说明
-关键方法说明
-Executors工厂类提供常见的线程池
-
-java.uitl.concurrent.ThreadPoolExecutor 类是线程池中最核心的一个类，因此如果要透彻地了解Java中的线程池，必须先了解这个类。
-继承与实现关系我们先来看一下这 ThreadPoolExecutor 的继承与实现的关系，并介绍各个部分有什么作用
-
-Executor是一个顶层接口，在它里面只声明了一个方法 execute(Runnab...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/13</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="线程池">线程池</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href="/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">
             
                 <span>JVM内存间交互（深入理解Java虚拟机II笔记）</span>
@@ -700,28 +443,29 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/07/27/深入理解Java虚拟机II笔记/内存间的交互操作（深入理解Java虚拟机II笔记）/">
+        <a class="abstract-title" href="/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">
             
-                <span>JVM内存间交互（深入理解Java虚拟机II笔记）</span>
+                <span>GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</span>
         </a>
         <div class="abstract-content">
-            本篇内容主要说明：
+            这篇文章内容：
 
-一个变量如何从主内存拷贝到工作内存、如何从工作内存同步回主内存之类的实现细节
-long 和 double 型变量的特殊规则
-先行发生规则
+堆中判断一个对象是否可进行回收，有哪些算法？
+Java1.2 后对于引用，做了什么改进的扩展？
+Java 对象回收的过程？
+方法区中的回收
 
-内存间交互操作
-一个变量如何从主内存拷贝到工作内存、如何从工作内存同步回到主内存
-在 Java 中，Java内存模型定义了以下8中操作来完成上面说的过程。虚拟机保证了下面的每一种操作都是原子的、不可再分的（注意 double 和 long 类型，后面说明）。
 
-lock（锁定）：作用于主内存的变量，它把一个变量标识为一条线程独占的状态。
-一个变量同一时刻，只允许一个线程对它进行 lock 操作，但是可以执行 lock 多次，需要...
+垃圾收集主要针对堆和方法区进行。下面我们也就来看一下如何判断一个对象是否可以给回收。
+引用计数法给对象添加一个引用计数器，当对象增加一个引用时计数器加 1，引用失效时计数器减 1。引用计数为 0 的对象可被回收。
+两个对象出现循环引用的情况下，此时引用计数器永远不为 0，导致无法对它们进行回收。
+正因为循环引用的存在，因此 Java 虚拟机不使用引用计数算法。
+123456789public class ReferenceCou...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/27</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/05</span>
             </div>
             <!-- tags  -->
             
@@ -729,7 +473,233 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
         <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="内存">内存</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="GC">GC</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">
+            
+                <span>介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</span>
+        </a>
+        <div class="abstract-content">
+            
+
+文章的初衷：学一技术，我希望理解这技术是为了解决什么问题而诞生
+
+这篇文章不对GC进行深入说明，仅是对GC的一些背景或者设计初衷进行介绍，关于GC部分的具体深入理解部分，在之后的文章。
+从思维导图中的问题进行介绍吧！！
+GC是什么？为什么需要GC？GC（Garbage Collection）是什么？相信写 Java 的 coder 都知道是垃圾收集。
+我们常将 Java 与 C++ 进行比较，拥有垃圾收集器可以说是 Java 语言与 C++语言的一项显著区别。在 C++语言中，程序员必须小心谨慎地处理每一项内存分配，且内存使用完后必须手工释放曾经占用的内存空间。当内存释放不够完全时，...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="GC">GC</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/07/03/JVM内存溢出异常探究/">
+            
+                <span>JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</span>
+        </a>
+        <div class="abstract-content">
+            为什么需要了解内存溢出？
+JVM 运行时的内存区域出现内存溢异常原因
+对于这些异常我们该如何处理或者提供一个排查处理的思路
+为了之后理解 Java 垃圾收集机制为了避免内存溢出异常的出现都做了哪些努力！
+
+贴出自己学习的时候整理的思维导图
+
+因为思维导图整理得比较完整，大家看了应该也知道，所以这篇文章就相当于划一下水，仅进行记录一下！
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/03</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="内存溢出">内存溢出</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/06/20/Java对象探究（深入理解Java虚拟机II笔记）/">
+            
+                <span>Java对象探究（深入理解Java虚拟机II笔记）</span>
+        </a>
+        <div class="abstract-content">
+            在之前学习了HotSpot 虚拟机的运行时 JVM 内存分配后，我们现在再进一步学习。
+本章主要学习：
+
+JVM 在执行 new 命令是如何创建对象的？整个步骤是怎样的？
+对象内都存在着什么数据？各个数据有什么用？
+如何使用或访问 Java 堆上的 Java 对象？有什么方式？不同方式有什么区别？
+
+创建对象过程是怎样的？我们都知道 Java 对象是通过一个 new 的关键创建出来的，那么在编译时候，JVM 是如何创建出新的对象的呢？
+注意：这里说的 Java 对象是常用的 Java 对象而不是数组、Class 对象之类的特殊对象。
+引用与加载过程虚拟机遇到一条 new 指令的时候，首先...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/20</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java对象">Java对象</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/06/16/Java 内存区域/">
+            
+                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
+        </a>
+        <div class="abstract-content">
+            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
+对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
+Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/29/JVM 几种模型基本介绍/">
+            
+                <span>（转）Java中的几种模型概念介绍</span>
+        </a>
+        <div class="abstract-content">
+            本篇文章为转发文章，非原创，来自[JVM内存结构 VS Java内存模型 VS Java对象模型]
+JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域，这些区域都有各自的用途。其中有些区域随着虚拟机进程的启动而存在，而有些区域则依赖用户线程的启动和结束而建立和销毁。在《Java虚拟机规范（Java SE 8）》中描述了JVM运行时内存区域结构如下：
+
+各个区域的功能不是本文重点，就不在这里详细介绍了。这里简单提几个需要特别注意的点：
+
+以上是Java虚拟机规范，不同的虚拟机实现会各有不同，但是一般会遵...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/29</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
+            
+                <span>原子性、可见性、有序性</span>
+        </a>
+        <div class="abstract-content">
+            经常听到或者面试都有人会问道这三个东西，我们可能会一下子就知道这三个概念都是什么意思。我自己想了一下，貌似我仅仅对于这三个概念了解概念以及在 Java 上如何实现而已。所以在这里就整理一下资料，对这三个概念进行一些深入的学习。
+至于为什么会有存在这三个概念，一直不得其解，就搜索一些资料，自己也整理一下，算是补全一下自己的知识体系吧。
+主要介绍：
+
+这三个概念的由来
+对于这三个概念，具体在 Java 上又是如何实现的
+
+三个概念的由来从硬件上分析之前旧时代计算机的芯片都是单核的，那个时候的计算如果想要读写数据，每次都得从主内存（物理内存）中读取，修改完后再存放回主内存中。
+
+然而在 CPU...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java内存模型">Java内存模型</a>
     
 </div>
             
@@ -739,7 +709,7 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/2019/page/2/">2</a><a class="page-number" href="/archives/2019/page/3/">3</a><a class="page-number" href="/archives/2019/page/4/">4</a><a class="extend next" rel="next" href="/archives/2019/page/2/">NEXT &#62;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/archives/2019/page/2/">2</a><a class="page-number" href="/archives/2019/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/page/2/">NEXT &#62;</a>
     </nav>
     
 </main>
@@ -1154,319 +1124,9 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 46
+        Total : 26
         </div>
         <!-- search  -->
         
@@ -1496,21 +1156,6 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/23</span><a class="archive-post-title" href="/2019/12/23/Java NIO 一 预备计算机操作系统概念（一）/">Java NIO 一 预备计算机操作系统概念</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/18</span><a class="archive-post-title" href="/2019/12/18/多路复用/">I/O多路复用原理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/数据结构与算法/第二章 数据结构基础/">数据结构和算法——第二章 数据结构基础</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">布隆个过滤器与Hash函数的学习</a>
         </li>
     
@@ -1521,27 +1166,7 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/26</span><a class="archive-post-title" href="/2019/09/26/ClassLoader/">类加载器ClassLoader</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/28</span><a class="archive-post-title" href="/2019/08/28/雪花算法（SnowFlake）/">雪花算法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/13</span><a class="archive-post-title" href="/2019/08/13/线程池工作原理/">线程池工作原理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/深入理解Java虚拟机II笔记/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1551,17 +1176,7 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/05</span><a class="archive-post-title" href="/2019/07/05/深入理解Java虚拟机II笔记/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/深入理解Java虚拟机II笔记/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1571,42 +1186,12 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/03</span><a class="archive-post-title" href="/2019/07/03/深入理解Java虚拟机II笔记/JVM内存溢出异常探究/">JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">06/20</span><a class="archive-post-title" href="/2019/06/20/Java对象探究（深入理解Java虚拟机II笔记）/">Java对象探究（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/20</span><a class="archive-post-title" href="/2019/06/20/深入理解Java虚拟机II笔记/Java对象探究（深入理解Java虚拟机II笔记）/">Java对象探究（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存管理模型/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/深入理解Java虚拟机II笔记/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/04</span><a class="archive-post-title" href="/2019/06/04/深入理解 Synchronized/">深入理解 Synchronized</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
         </li>
     
     
@@ -1622,11 +1207,6 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/09</span><a class="archive-post-title" href="/2019/05/09/单点登陆/">单点登陆</a>
         </li>
     
     
@@ -1705,54 +1285,7 @@ lock（锁定）：作用于主内存的变量，它把一个变量标识为一�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href="/2018/10/24/Java初认识锁机制/">Java初认识锁机制</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">10/04</span><a class="archive-post-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">Java 中的 ==、equals 与 hashCode</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/dubbo/一、Dubbo 介绍/">[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第一章 算法概述小结/">[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第三章 树/">[Untitled Post]</a>
         </li>
     
     </ul></div>

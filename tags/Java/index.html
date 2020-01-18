@@ -346,50 +346,6 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/08/13/线程池工作原理/">
-            
-                <span>线程池工作原理</span>
-        </a>
-        <div class="abstract-content">
-            环境：JDK1.8
-本篇文章目标：
-
-给线程池 submit 任务后，线程池如何添加、执行任务的？
-线程池相关类之间的继承与实现关系？
-构造函数说明
-关键属性说明
-关键方法说明
-Executors工厂类提供常见的线程池
-
-java.uitl.concurrent.ThreadPoolExecutor 类是线程池中最核心的一个类，因此如果要透彻地了解Java中的线程池，必须先了解这个类。
-继承与实现关系我们先来看一下这 ThreadPoolExecutor 的继承与实现的关系，并介绍各个部分有什么作用
-
-Executor是一个顶层接口，在它里面只声明了一个方法 execute(Runnab...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/13</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="线程池">线程池</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href="/2019/05/29/JVM 几种模型基本介绍/">
             
                 <span>（转）Java中的几种模型概念介绍</span>
@@ -454,51 +410,6 @@ JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而
         <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Java内存模型">Java内存模型</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/09/单点登陆/">
-            
-                <span>单点登陆</span>
-        </a>
-        <div class="abstract-content">
-            本篇文章主要说：
-
-单点登陆是个什么概念，主要处理什么问题
-如何实现单点登陆
-介绍 OAuth2.0 
-如何基于 OAuth2.0 机制实现单点登陆
-
-单点登陆介绍在介绍单点登陆概念之前，先介绍下面几个概念
-HTTP 的无状态性HTTP是无状态协议，浏览器的每一次请求，服务器会独立处理，不与之前之后的请求产生关联。
-
-但这也同时意味着，任何用户都能通过浏览器访问服务器资源，如果想保护服务器的某些资源，必须限制浏览器请求；要限制浏览器请求，必须鉴别浏览器请求，响应合法请求，忽略非法请求；要鉴别浏览器请求，必须清楚浏览器请求状态。既然HTTP 协议无状态，那就让服务器和浏览器共同维护一个状态...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="单点登陆">单点登陆</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="SSO">SSO</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="OAuth2.0">OAuth2.0</a>
     
 </div>
             
@@ -707,21 +618,26 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2018/10/24/Java初认识锁机制/">
+        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
             
-                <span>Java初认识锁机制</span>
+                <span>Java 中的 ==、equals 与 hashCode</span>
         </a>
         <div class="abstract-content">
-            锁的概念在介绍锁的概念之前，先了解一下并发的概念。
-举一个例子来说，一个厨师在正常情况下我们不允许厨师同时做两道菜，先做完一道再做另一道。但是如果时间紧迫的情况下（特定情况下），如果希望能同时拿出两道菜，如果按照之前的情况来看，明显完成不了任务，但是我们允许厨师可以做着其中一道菜同时兼顾着其他菜，那就有可能完成任务。这里的厨师能做一道菜同时兼顾其他菜，我们就可以成为“并发”了。
-我对并发的理解就是：对于某个任务，我们能够并行执行多个部分去共同完成这个任务，已达到提高我们完成工作效率效果，这就算作并发。
-有了并发就可以同时做多件事情，多个线程彼此之间的影响的问题也就随着出现了。
-对于并发的...
+            ==
+比较两个基本类型的数据是否相等
+两个引用变量是否相等
+
+​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
+​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
+​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
+1String str = new String();
+​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
+​    对...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/24</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
             </div>
             <!-- tags  -->
             
@@ -729,18 +645,12 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
-    
 </div>
             
         </div>
     </article>
     
     <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/tags/Java/page/2/">2</a><a class="extend next" rel="next" href="/tags/Java/page/2/">NEXT &#62;</a>
-    </nav>
     
 </main>
             <!-- profile -->
@@ -1154,319 +1064,9 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 46
+        Total : 26
         </div>
         <!-- search  -->
         
@@ -1496,21 +1096,6 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/23</span><a class="archive-post-title" href="/2019/12/23/Java NIO 一 预备计算机操作系统概念（一）/">Java NIO 一 预备计算机操作系统概念</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/18</span><a class="archive-post-title" href="/2019/12/18/多路复用/">I/O多路复用原理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/数据结构与算法/第二章 数据结构基础/">数据结构和算法——第二章 数据结构基础</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">布隆个过滤器与Hash函数的学习</a>
         </li>
     
@@ -1521,27 +1106,7 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/26</span><a class="archive-post-title" href="/2019/09/26/ClassLoader/">类加载器ClassLoader</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/28</span><a class="archive-post-title" href="/2019/08/28/雪花算法（SnowFlake）/">雪花算法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/13</span><a class="archive-post-title" href="/2019/08/13/线程池工作原理/">线程池工作原理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/深入理解Java虚拟机II笔记/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1551,17 +1116,7 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/05</span><a class="archive-post-title" href="/2019/07/05/深入理解Java虚拟机II笔记/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/深入理解Java虚拟机II笔记/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1571,42 +1126,12 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/03</span><a class="archive-post-title" href="/2019/07/03/深入理解Java虚拟机II笔记/JVM内存溢出异常探究/">JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">06/20</span><a class="archive-post-title" href="/2019/06/20/Java对象探究（深入理解Java虚拟机II笔记）/">Java对象探究（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/20</span><a class="archive-post-title" href="/2019/06/20/深入理解Java虚拟机II笔记/Java对象探究（深入理解Java虚拟机II笔记）/">Java对象探究（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存管理模型/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/深入理解Java虚拟机II笔记/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/04</span><a class="archive-post-title" href="/2019/06/04/深入理解 Synchronized/">深入理解 Synchronized</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
         </li>
     
     
@@ -1622,11 +1147,6 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <li class="archive-post-item">
             <span class="archive-post-date">05/17</span><a class="archive-post-title" href="/2019/05/17/Java集合——Map/">Java集合——Map</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/09</span><a class="archive-post-title" href="/2019/05/09/单点登陆/">单点登陆</a>
         </li>
     
     
@@ -1705,54 +1225,7 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href="/2018/10/24/Java初认识锁机制/">Java初认识锁机制</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">10/04</span><a class="archive-post-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">Java 中的 ==、equals 与 hashCode</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/dubbo/一、Dubbo 介绍/">[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第一章 算法概述小结/">[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第三章 树/">[Untitled Post]</a>
         </li>
     
     </ul></div>
