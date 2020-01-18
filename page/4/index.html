@@ -78,8 +78,6 @@
     <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
     
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -203,8 +201,10 @@
 </head>
 
     
+        <body class="home-body">
     
-<header class="header">
+    
+<header class="header index-header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -220,21 +220,34 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            ALemon's Blog
+            <!-- 文章页  -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
+            
+            
+                What doesn't kill you makes you stronger.
+            
+            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -346,109 +359,32 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/06/20/Java对象探究（深入理解Java虚拟机II笔记）/">
+        <a class="abstract-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">
             
-                <span>Java对象探究（深入理解Java虚拟机II笔记）</span>
+                <span>Java 中的 ==、equals 与 hashCode</span>
         </a>
         <div class="abstract-content">
-            在之前学习了HotSpot 虚拟机的运行时 JVM 内存分配后，我们现在再进一步学习。
-本章主要学习：
+            ==
+比较两个基本类型的数据是否相等
+两个引用变量是否相等
 
-JVM 在执行 new 命令是如何创建对象的？整个步骤是怎样的？
-对象内都存在着什么数据？各个数据有什么用？
-如何使用或访问 Java 堆上的 Java 对象？有什么方式？不同方式有什么区别？
-
-创建对象过程是怎样的？我们都知道 Java 对象是通过一个 new 的关键创建出来的，那么在编译时候，JVM 是如何创建出新的对象的呢？
-注意：这里说的 Java 对象是常用的 Java 对象而不是数组、Class 对象之类的特殊对象。
-引用与加载过程虚拟机遇到一条 new 指令的时候，首先...
+​    如果两个变量是基本数据类型，可以直接使用“==”运算符来比较其对应的值是否相等。
+​    但是不可以用 ”==“ 来比较应用类型变量的值是否相等。具体原因如下：
+​    如果一个变量指向的数据是对象，那么这时候就涉及了两块内存，对象本身占用了一块内存（堆内存），变量也占用了一块内存，例如
+1String str = new String();
+​    变量 str 占用一块内存，而 new String() 占用另外一块内存，此时变量 str 所对应内存中存储的数值就是对象占用的那块内存的首地址。
+​    对...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/04</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java对象">Java对象</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/16/Java 内存区域/">
-            
-                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
-        </a>
-        <div class="abstract-content">
-            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
-对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
-Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/04/深入理解 Synchronized/">
-            
-                <span>深入理解 Synchronized</span>
-        </a>
-        <div class="abstract-content">
-            
-本人整理了资料，写了两三天，发现 Synchronized 的水很深，在彻底理解 Synchronized 前，还是需要很多知识点的铺垫的，例如：
-
-JVM 的内存结构
-在字节码层面层面上 理解 JVM 如何实现线程同步的
-Java 的内存模型
-Java 的对象头
-
-所以需要经过一段时间消化整理，才能写出这个文章
-虽然之前的文章也有介绍过 synchronized 这个关键字，但是说明的不是很清晰。这里就进行深入点分析一下Java 提供的这个关键字的作用与原理呗！
-Java 提供了一种 内置 的锁机制来支持原子性：同步代码块（Synchronized Block）。
-并发环境下的原子性...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="并发">并发</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
 </div>
             
@@ -457,8 +393,102 @@ Java 提供了一种 内置 的锁机制来支持原子性：同步代码块（S
     
     <!-- paginator  -->
     
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/page/3/">&#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+    
 </main>
             <!-- profile -->
+            
+            <div class="profile">
+    <img class="profile-avatar" alt="avatar" src="http://ww1.sinaimg.cn/large/006D41sGgy1g1lsx6imn9j30go0go0tb.jpg">
+    <div class="profile-name">ALemon</div>
+    
+    <div class="profile-signature">
+        witness me
+    </div>
+    
+    
+    <div class="profile-social">
+        
+    
+        
+            
+                <a href="mailto:756775896@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/a998151" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    
+        <div class="friends">
+            <div>FRIENDS</div>
+            
+                
+                    <span>
+                        <a href="//www.baidu.com" target="_black">friendA</a>
+                    </span>
+                
+            
+                
+                    <span>
+                        <a href="//www.google.com" target="_black">friendB</a>
+                    </span>
+                
+            
+                
+            
+        </div>
+    
+    
+        <div class="about-me">
+            <a href="/about">ABOUT ME</a>
+        </div>
+    
+</div>
             
         </div>
         <footer class="footer footer-unloaded">
