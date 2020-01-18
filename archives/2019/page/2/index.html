@@ -346,6 +346,204 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/06/16/Java 内存区域/">
+            
+                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
+        </a>
+        <div class="abstract-content">
+            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
+对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
+Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/06/04/深入理解 Synchronized/">
+            
+                <span>深入理解 Synchronized</span>
+        </a>
+        <div class="abstract-content">
+            
+本人整理了资料，写了两三天，发现 Synchronized 的水很深，在彻底理解 Synchronized 前，还是需要很多知识点的铺垫的，例如：
+
+JVM 的内存结构
+在字节码层面层面上 理解 JVM 如何实现线程同步的
+Java 的内存模型
+Java 的对象头
+
+所以需要经过一段时间消化整理，才能写出这个文章
+虽然之前的文章也有介绍过 synchronized 这个关键字，但是说明的不是很清晰。这里就进行深入点分析一下Java 提供的这个关键字的作用与原理呗！
+Java 提供了一种 内置 的锁机制来支持原子性：同步代码块（Synchronized Block）。
+并发环境下的原子性...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="锁">锁</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="并发">并发</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/31/一点想法/">
+            
+                <span>一点想法或反思</span>
+        </a>
+        <div class="abstract-content">
+            今晚回头看了一下自己写的一些文章，发现了几点问题
+
+很多文章点到即止，没能继续深入的说明
+整个文章的逻辑比较乱，看着感觉像是看文档一样，看完没能有一种【豁然开朗】的感觉
+文章的内容太散乱，根本组织不到一块
+
+对于这种现象，自己反思了一下
+
+对于博客文章，自己是否太急了一点？像是为了赶作业那般，草草完成了一篇文章
+整个知识的脉络没能琢磨清楚，形成一个完整的整体
+
+之后的改正
+
+审视自己的内心，我究竟想通过这篇文章说明什么？
+介绍清楚整个文章的来龙去脉了吗？
+为什么存在于这种现象？多玩底层原因挖。
+整理出思维导图，写完后，多思考有那些还是没介绍完整的
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/31</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="反思">反思</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/29/JVM 几种模型基本介绍/">
+            
+                <span>（转）Java中的几种模型概念介绍</span>
+        </a>
+        <div class="abstract-content">
+            本篇文章为转发文章，非原创，来自[JVM内存结构 VS Java内存模型 VS Java对象模型]
+JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域，这些区域都有各自的用途。其中有些区域随着虚拟机进程的启动而存在，而有些区域则依赖用户线程的启动和结束而建立和销毁。在《Java虚拟机规范（Java SE 8）》中描述了JVM运行时内存区域结构如下：
+
+各个区域的功能不是本文重点，就不在这里详细介绍了。这里简单提几个需要特别注意的点：
+
+以上是Java虚拟机规范，不同的虚拟机实现会各有不同，但是一般会遵...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/29</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
+            
+                <span>原子性、可见性、有序性</span>
+        </a>
+        <div class="abstract-content">
+            经常听到或者面试都有人会问道这三个东西，我们可能会一下子就知道这三个概念都是什么意思。我自己想了一下，貌似我仅仅对于这三个概念了解概念以及在 Java 上如何实现而已。所以在这里就整理一下资料，对这三个概念进行一些深入的学习。
+至于为什么会有存在这三个概念，一直不得其解，就搜索一些资料，自己也整理一下，算是补全一下自己的知识体系吧。
+主要介绍：
+
+这三个概念的由来
+对于这三个概念，具体在 Java 上又是如何实现的
+
+三个概念的由来从硬件上分析之前旧时代计算机的芯片都是单核的，那个时候的计算如果想要读写数据，每次都得从主内存（物理内存）中读取，修改完后再存放回主内存中。
+
+然而在 CPU...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java内存模型">Java内存模型</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/17/Java集合——Map/">
             
                 <span>Java集合——Map</span>
@@ -513,145 +711,6 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/13</span>
             </div>
             <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/11/数据库管理系统（DBMS）——共享锁与排他锁/">
-            
-                <span>数据库管理系统（DBMS）——共享锁与排他锁</span>
-        </a>
-        <div class="abstract-content">
-            无论何时，只要多个多个操作需要在同一时刻修改数据，都会产生并发控制的问题。
-先介描述一下这两种锁：读锁是共享的，或者说是相互不阻塞的。多个客户在同一时刻可以同时访问同一个资源，而互不干扰。写锁则是排他的，也就是说一个写锁会阻塞其他的写锁和读锁，这是出于安全策略的考虑，只有这样，才能保证在给定的时间内，只有一个用户执行写操作，防止其它用户读取正在写入的同一资源。
-之前介绍过行锁，行级锁是 MySQL中颗粒度最小的一种锁，行级锁能大大减少数据库操作冲突。行级锁分为共享锁和排他锁两种，本文将详细介绍共享锁及排他锁的概念、使用方式及注意事项等。
-共享锁(Share Lock)共享锁又称读锁，是读...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">
-            
-                <span>数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</span>
-        </a>
-        <div class="abstract-content">
-            0、什么是锁？例1 ： 现有两处火车票售票点，同时读取某一趟列车车票数据库中车票余额为 X。两处售票点同时卖出一张车票，同时修改余额为 X -1写回数据库，这样就造成了实际卖出两张火车票而数据库中的记录却只少了一张。 
-例2 ： 事务A将某张表中的数据修改了，但是因为某些原因，撤销对该值的修改。但是在撤销之前，事务B读取了这个修改过后的值，导致读到错误的数据的情况发生。
-产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。
-对于这些情况，可以去了解一下DBMS ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">
-            
-                <span>数据库管理系统（DBMS）——死锁</span>
-        </a>
-        <div class="abstract-content">
-            行级锁与死锁(非自己写，需要修改)MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
-在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。
-当两...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/30/Java中的锁/">
-            
-                <span>Java 锁（updating）</span>
-        </a>
-        <div class="abstract-content">
-            1、乐观锁​    乐观锁，认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别的线程不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别的线程有没有去更新这个数据，采取在写的时候先读取当前的版本号，然后加锁操作（比较跟上一次的版本号是否一致，相同则更新）。如果失败则要重复 ==读 - 比较 - 写== 的操作。
-​    Java 中的乐观锁基本是通过 CAS 操作实现的，CAS 是一种原子更新的操作，比较当前值和传入值是否一样，一样则更新，否则失败。
-2、悲观锁​    悲观锁认为写多读少，遇到并发写的可能性比较高，每次去拿数据的时候，都认为别的线程会修改数据，所以...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/03/20/Java 多线程（并发）/">
-            
-                <span>Java 多线程（并发）</span>
-        </a>
-        <div class="abstract-content">
-            1.概述有一个大水缸，要和尚去挑水，倒满这个水缸，如果需要挑20趟才能给这个水缸加满水。
-让一个和尚来回跑20趟，挑20次水，就可以倒满。
-另外我也可以让 10 个和尚跑两趟，就可以把水缸的水给倒满。
-第二种场景就是并发。并发编程主要解决的问题为 “速度（效率）”。
-但是一条路就这么宽，十个和尚跑在路上，如果碰倒了，导致水洒了，两趟下来，就保证不了水缸能够装满水。
-所以在并发的情况下，我们需要考虑的在这条挑水的路上各个和尚正常挑水不发生意外，不像一个和尚挑水，在路上不用担心碰倒其它和尚。
-上面提到的地方就是并发需要注意的：阻塞、共享资源。另外为了解决这些问题，而又有涉及到一些概念：原子性...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/20</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="多线程">多线程</a>
-    
-</div>
             
         </div>
     </article>
@@ -1074,9 +1133,69 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 26
+        Total : 30
         </div>
         <!-- search  -->
         
@@ -1087,22 +1206,13 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
     
-    <div class="archive-year"> 2020 </div>
+    <div class="archive-year"> 2019 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/18</span><a class="archive-post-title" href="/2020/01/18/CAS原理/">[Untitled Post]</a>
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href="/2019/12/18/多路复用/">I/O多路复用原理</a>
         </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
     
     
         <li class="archive-post-item">
@@ -1112,6 +1222,16 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
         <li class="archive-post-item">
             <span class="archive-post-date">09/29</span><a class="archive-post-title" href="/2019/09/29/布隆过滤器/">布隆过滤器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href="/2019/09/26/ClassLoader/">类加载器ClassLoader</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span><a class="archive-post-title" href="/2019/08/28/雪花算法（SnowFlake）/">雪花算法</a>
         </li>
     
     
@@ -1142,6 +1262,16 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
         <li class="archive-post-item">
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/04</span><a class="archive-post-title" href="/2019/06/04/深入理解 Synchronized/">深入理解 Synchronized</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
         </li>
     
     

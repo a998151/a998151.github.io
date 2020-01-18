@@ -346,6 +346,108 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/04/11/数据库管理系统（DBMS）——共享锁与排他锁/">
+            
+                <span>数据库管理系统（DBMS）——共享锁与排他锁</span>
+        </a>
+        <div class="abstract-content">
+            无论何时，只要多个多个操作需要在同一时刻修改数据，都会产生并发控制的问题。
+先介描述一下这两种锁：读锁是共享的，或者说是相互不阻塞的。多个客户在同一时刻可以同时访问同一个资源，而互不干扰。写锁则是排他的，也就是说一个写锁会阻塞其他的写锁和读锁，这是出于安全策略的考虑，只有这样，才能保证在给定的时间内，只有一个用户执行写操作，防止其它用户读取正在写入的同一资源。
+之前介绍过行锁，行级锁是 MySQL中颗粒度最小的一种锁，行级锁能大大减少数据库操作冲突。行级锁分为共享锁和排他锁两种，本文将详细介绍共享锁及排他锁的概念、使用方式及注意事项等。
+共享锁(Share Lock)共享锁又称读锁，是读...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/11</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——行锁、表锁、页锁/">
+            
+                <span>数据库管理系统（DBMS）中的锁——行锁、表锁、页锁</span>
+        </a>
+        <div class="abstract-content">
+            0、什么是锁？例1 ： 现有两处火车票售票点，同时读取某一趟列车车票数据库中车票余额为 X。两处售票点同时卖出一张车票，同时修改余额为 X -1写回数据库，这样就造成了实际卖出两张火车票而数据库中的记录却只少了一张。 
+例2 ： 事务A将某张表中的数据修改了，但是因为某些原因，撤销对该值的修改。但是在撤销之前，事务B读取了这个修改过后的值，导致读到错误的数据的情况发生。
+产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。
+对于这些情况，可以去了解一下DBMS ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/04/10/数据库管理系统（DBMS）——死锁/">
+            
+                <span>数据库管理系统（DBMS）——死锁</span>
+        </a>
+        <div class="abstract-content">
+            行级锁与死锁(非自己写，需要修改)MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。
+在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。
+当两...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/04/10</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/03/30/Java中的锁/">
+            
+                <span>Java 锁（updating）</span>
+        </a>
+        <div class="abstract-content">
+            1、乐观锁​    乐观锁，认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别的线程不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别的线程有没有去更新这个数据，采取在写的时候先读取当前的版本号，然后加锁操作（比较跟上一次的版本号是否一致，相同则更新）。如果失败则要重复 ==读 - 比较 - 写== 的操作。
+​    Java 中的乐观锁基本是通过 CAS 操作实现的，CAS 是一种原子更新的操作，比较当前值和传入值是否一样，一样则更新，否则失败。
+2、悲观锁​    悲观锁认为写多读少，遇到并发写的可能性比较高，每次去拿数据的时候，都认为别的线程会修改数据，所以...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/30</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/03/20/Java 多线程（并发）/">
             
                 <span>Java 多线程（并发）</span>
@@ -992,9 +1094,69 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 26
+        Total : 30
         </div>
         <!-- search  -->
         
@@ -1005,22 +1167,13 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
-    <div class="archive-year"> 2020 </div>
+    <div class="archive-year"> 2019 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/18</span><a class="archive-post-title" href="/2020/01/18/CAS原理/">[Untitled Post]</a>
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href="/2019/12/18/多路复用/">I/O多路复用原理</a>
         </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
     
     
         <li class="archive-post-item">
@@ -1030,6 +1183,16 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <li class="archive-post-item">
             <span class="archive-post-date">09/29</span><a class="archive-post-title" href="/2019/09/29/布隆过滤器/">布隆过滤器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href="/2019/09/26/ClassLoader/">类加载器ClassLoader</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span><a class="archive-post-title" href="/2019/08/28/雪花算法（SnowFlake）/">雪花算法</a>
         </li>
     
     
@@ -1060,6 +1223,16 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
         <li class="archive-post-item">
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/04</span><a class="archive-post-title" href="/2019/06/04/深入理解 Synchronized/">深入理解 Synchronized</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
         </li>
     
     

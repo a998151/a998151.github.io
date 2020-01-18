@@ -346,17 +346,26 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2020/01/18/CAS原理/">
+        <a class="abstract-title" href="/2019/12/18/多路复用/">
             
-                <span>[Untitled Post]</span>
+                <span>I/O多路复用原理</span>
         </a>
         <div class="abstract-content">
-            
+            概述IO我们常见的有：
+
+读磁盘文件
+写磁盘文件
+读网络请求
+写网络请求
+
+操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。
+为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。
+现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x000...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/18</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/12/18</span>
             </div>
             <!-- tags  -->
             
@@ -412,6 +421,107 @@
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/29</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/09/26/ClassLoader/">
+            
+                <span>类加载器ClassLoader</span>
+        </a>
+        <div class="abstract-content">
+            转载地址 老大难的 Java ClassLoader 再不理解就老了
+原文中将 ClassLoader 说的很通俗易懂，这里进行转载和整理而已，其中加入了自己的一些想法，大体上并不是原创。
+ClassLoader有什么用？它是用来加载 Class 的。它负责将 Class 的字节码形式转换成内存形式的 Class 对象。字节码可以来自于磁盘文件 .class，也可以是 jar 包里的 .class，也可以来自远程服务器提供的字节流，字节码的本质就是一个字节数组 []byte，它有特定的复杂的内部格式。
+Class 与 ClassLoader 有什么关系？记得自己在刚学习 Java 的时候...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/26</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/08/28/雪花算法（SnowFlake）/">
+            
+                <span>雪花算法</span>
+        </a>
+        <div class="abstract-content">
+            先看一下 Java 中的数据类型对应直接长度和位数
+
+
+
+数据类型
+字节长度(单位：byte)
+位长度（单位：bit)
+
+
+
+
+int
+4
+32
+
+
+byte
+1
+8
+
+
+short
+2
+16
+
+
+long
+8
+64
+
+
+float
+4
+32
+
+
+double
+8
+64
+
+
+boolean
+1
+8
+
+
+char
+2
+16
+
+
+
+Snowflake概述对于分布式的ID生成，以Twitter Snowflake为代表的， Flake 系列算法，属于划分命名空间并行生成的一种算法，生成的数据为64bit的long型数据，在数据库中应该用大于等于64bit的数字类型的字段来保存该值，比如在MyS...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/28</span>
             </div>
             <!-- tags  -->
             
@@ -614,75 +724,6 @@ JVM 在执行 new 命令是如何创建对象的？整个步骤是怎样的？
         <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="Java对象">Java对象</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/06/16/Java 内存区域/">
-            
-                <span>Java内存区域（深入理解Java虚拟机II笔记）</span>
-        </a>
-        <div class="abstract-content">
-            概述Java 与 C++ 之间有一堵由 内存动态分配 和 垃圾收集技术 所围成的 “高墙”。墙里的人想出来，墙外的人想要进去。
-对于来说，我们不需要写一堆配对的 delete/free 代码，不容易出现内存泄漏和内存溢出的问题，这些工作都交由 Java 虚拟机来自动管理分配内存。但是对于这种情况有好，自然有坏处，一旦出现内存的问题，因为不了解底层的原理，将无从下手进行修复工作。
-Java 虚拟机在执行 Java 程序的过程中会把它所管理的内存划分为若干个不同的数据区域。根据 《Java虚拟机规范 (Java SE 7)》的规定，Java 虚拟机所管理的内存将会包括以下几个运行时数据区域。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/06/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="内存区域">内存区域</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/05/29/JVM 几种模型基本介绍/">
-            
-                <span>（转）Java中的几种模型概念介绍</span>
-        </a>
-        <div class="abstract-content">
-            本篇文章为转发文章，非原创，来自[JVM内存结构 VS Java内存模型 VS Java对象模型]
-JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域，这些区域都有各自的用途。其中有些区域随着虚拟机进程的启动而存在，而有些区域则依赖用户线程的启动和结束而建立和销毁。在《Java虚拟机规范（Java SE 8）》中描述了JVM运行时内存区域结构如下：
-
-各个区域的功能不是本文重点，就不在这里详细介绍了。这里简单提几个需要特别注意的点：
-
-以上是Java虚拟机规范，不同的虚拟机实现会各有不同，但是一般会遵...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
     
 </div>
             
@@ -1107,9 +1148,69 @@ JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 26
+        Total : 30
         </div>
         <!-- search  -->
         
@@ -1120,22 +1221,13 @@ JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而
     
     
     
-    <div class="archive-year"> 2020 </div>
+    <div class="archive-year"> 2019 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/18</span><a class="archive-post-title" href="/2020/01/18/CAS原理/">[Untitled Post]</a>
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href="/2019/12/18/多路复用/">I/O多路复用原理</a>
         </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
     
     
         <li class="archive-post-item">
@@ -1145,6 +1237,16 @@ JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而
     
         <li class="archive-post-item">
             <span class="archive-post-date">09/29</span><a class="archive-post-title" href="/2019/09/29/布隆过滤器/">布隆过滤器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span><a class="archive-post-title" href="/2019/09/26/ClassLoader/">类加载器ClassLoader</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span><a class="archive-post-title" href="/2019/08/28/雪花算法（SnowFlake）/">雪花算法</a>
         </li>
     
     
@@ -1175,6 +1277,16 @@ JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而
     
         <li class="archive-post-item">
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/04</span><a class="archive-post-title" href="/2019/06/04/深入理解 Synchronized/">深入理解 Synchronized</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
         </li>
     
     
