@@ -266,17 +266,13 @@ height:50vh;
                 
                     <div class="post-intro-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags="Map">Map</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="总结">总结</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">2.5k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2.6k</span>阅读时长: <span class="post-count reading-time">11 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -407,7 +403,14 @@ height:50vh;
     <article class="article-entry">
         <p>写在文章的前面：</p>
 <p>​    这篇文章，对于Map容器，介绍得不全的，参考资料中介绍的比较全面，map 这部分的内容可以网上搜到很全很详细的资料。这篇文章其实相当于自己个人参考着网上的资料配合看着理解源码做的一些理解而已。</p>
-<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p><img src="https://wx3.sinaimg.cn/large/006D41sGgy1g31zkiarnaj30qc0ep40b.jpg" alt=""></p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>主要了解下面的这些信息</p>
+<ul>
+<li><code>HashMap</code>的数据结构是什么，Java 7/8 有何不同，为什么需要改变？</li>
+<li>put 过程</li>
+<li>get 过程</li>
+<li>为什么说 HashMap 是线程不安全的？</li>
+</ul>
+<p><img src="https://wx3.sinaimg.cn/large/006D41sGgy1g31zkiarnaj30qc0ep40b.jpg" alt="TIM截图20190515091347"></p>
 <blockquote>
 <p>说明，这里不进行详细说明，主要用户总结，详细说明可看参考资料一些大神的文章。</p>
 </blockquote>
@@ -416,11 +419,26 @@ height:50vh;
 <li>Java8 引入红黑树，主要是为了解决查询遍历链表效率太低</li>
 <li>HashMap散列图、Hashtable散列表是按“有利于随机查找的散列(hash)的顺序”。并非按输入顺序。遍历时只能全部输出，而没有顺序</li>
 </ul>
-<p><strong>1. 什么时候会使用HashMap？他有什么特点？</strong><br>是基于Map接口的实现，存储键值对时，它可以接收null的键值，是非同步的，HashMap存储着Entry(hash, key, value, next)对象。</p>
-<p><strong>2. 你知道HashMap的工作原理吗？</strong><br>通过hash的方法，通过put和get存储和获取对象。存储对象时，我们将K/V传给put方法时，它调用hashCode计算hash从而得到bucket位置，进一步存储，HashMap会根据当前bucket的占用情况自动调整容量(超过Load Facotr则resize为原来的2倍)。获取对象时，我们将K传给get，它调用hashCode计算hash从而得到bucket位置，并进一步调用equals()方法确定键值对。如果发生碰撞的时候，Hashmap通过链表将产生碰撞冲突的元素组织起来，在Java 8中，如果一个bucket中碰撞冲突的元素超过某个限制(默认是8)，则使用红黑树来替换链表，从而提高速度。</p>
-<p><strong>3. 你知道get和put的原理吗？equals()和hashCode()的都有什么作用？</strong><br>通过对key的hashCode()进行hashing，并计算下标( n-1 &amp; hash)，从而获得buckets的位置。如果产生碰撞，则利用key.equals()方法去链表或树中去查找对应的节点。</p>
-<p><strong>4. 你知道hash的实现吗？为什么要这样实现？</strong><br>在Java 1.8的实现中，是通过hashCode()的高16位异或低16位实现的：<code>(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)</code>，主要是从速度、功效、质量来考虑的，这么做可以在bucket的n比较小的时候，也能保证考虑到高低bit都参与到hash的计算中，同时不会有太大的开销。</p>
-<p><strong>5. 如果HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？</strong><br>如果超过了负载因子(默认0.75)，则会重新resize一个原来长度两倍的HashMap，并且重新调用hash方法。</p>
+<blockquote>
+<p><strong>1. 什么时候会使用<code>HashMap</code>？他有什么特点？</strong></p>
+</blockquote>
+<p>​        是基于Map接口的实现，存储键值对时，它可以接收null的键值，是非同步的，<code>HashMap</code>存储着Entry(hash, key, value, next)对象。</p>
+<blockquote>
+<p><strong>2. 你知道<code>HashMap</code>的工作原理吗？</strong></p>
+</blockquote>
+<p>​        通过hash的方法，通过put和get存储和获取对象。存储对象时，我们将K/V传给put方法时，它调用<code>hashCode</code>计算hash从而得到<code>bucket</code>位置，进一步存储，<code>HashMap</code>会根据当前bucket的占用情况自动调整容量(超过<code>Load Facotr</code>则<code>resize</code>为原来的2倍)。获取对象时，我们将K传给get，它调用<code>hashCode</code>计算hash从而得到bucket位置，并进一步调用equals()方法确定键值对。如果发生碰撞的时候，<code>Hashmap</code>通过链表将产生碰撞冲突的元素组织起来，在Java 8中，如果一个bucket中碰撞冲突的元素超过某个限制(默认是8)，则使用红黑树来替换链表，从而提高速度。</p>
+<blockquote>
+<p><strong>3. 你知道<code>get</code>和<code>put</code>的原理吗？<code>equals()</code>和<code>hashCode()</code>的都有什么作用？</strong></p>
+</blockquote>
+<p>​        通过对key的<code>hashCode()</code>进行hashing，并计算下标( n-1 &amp; hash)，从而获得buckets的位置。如果产生碰撞，则利用<code>key.equals()</code>方法去链表或树中去查找对应的节点。Java 为了提高在集合中查询匹配元素的效率问题，引入了哈希算法，通过某种算法及我们的<code>HashCode</code>方法得到对象的hash码，再通过hash码推算出数据应该存储的位置。然后再进行equals操作进行匹配，减少了比较次数，提高了效率。</p>
+<blockquote>
+<p><strong>4. 你知道hash的实现吗？为什么要这样实现？</strong></p>
+</blockquote>
+<p>​        在Java 1.8的实现中，是通过<code>hashCode()</code>的高16位异或低16位实现的：<code>(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)</code>，主要是从速度、功效、质量来考虑的，这么做可以在<code>bucket</code>的n比较小的时候，也能保证考虑到高低bit都参与到hash的计算中，同时不会有太大的开销。</p>
+<blockquote>
+<p><strong>5. 如果<code>HashMap</code>的大小超过了负载因子(load factor)定义的容量，怎么办 ?</strong></p>
+</blockquote>
+<p>​        如果超过了负载因子(默认0.75)，则会重新<code>resize</code>一个原来长度两倍的<code>HashMap</code>，并且重新调用hash方法。</p>
 <h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>文章中有些地方说得不太清楚，这里说一下 Java8 put 的实现</p>
 <p>先看内部的节点（链表节点）对象</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br><span class="line">    <span class="keyword">final</span> K key;</span><br><span class="line">    <span class="keyword">volatile</span> V val;</span><br><span class="line">    <span class="keyword">volatile</span> Node&lt;K,V&gt; next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -452,8 +470,8 @@ height:50vh;
 <li>只在写的时候给要写的桶节点加锁而已，并不是整个数组都加，采用的是 CAS 和 Synchronized 进行加锁</li>
 <li>进行 get 的时候是不加锁的</li>
 </ul>
-<h3 id="ConcurrentHashMap-和-HashTable-区别"><a href="#ConcurrentHashMap-和-HashTable-区别" class="headerlink" title="ConcurrentHashMap 和 HashTable 区别"></a>ConcurrentHashMap 和 HashTable 区别</h3><p>ConcurrentHashMap 是并发大师 Doug Lea 的杰作，可以说鬼斧神工，总的来说，使用了 CAS 加 synchronized 来保证了 put 操作并发时的危险（特别是链表），相比 同步容器 hashTable 来说，如果容器大小是16，并发的性能是他的16倍，注意，读的时候是没有锁的，完全并发，而 HashTable 在 get 方法上直接加上了 synchronized 关键字，性能差距不言而喻。</p>
-<h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><p>TreeMap 是基于红黑树实现的map容器。</p>
+<h3 id="ConcurrentHashMap-和-HashTable-区别"><a href="#ConcurrentHashMap-和-HashTable-区别" class="headerlink" title="ConcurrentHashMap 和 HashTable 区别"></a>ConcurrentHashMap 和 HashTable 区别</h3><p><code>ConcurrentHashMap</code>是并发大师 Doug Lea 的杰作，可以说鬼斧神工，总的来说，使用了 <code>CAS</code>加 <code>synchronized</code>来保证了 put 操作并发时的危险（特别是链表），相比 同步容器 <code>hashTable</code>来说，如果容器大小是16，并发的性能是他的16倍，注意，读的时候是没有锁的，完全并发，而 <code>HashTable</code>在 get 方法上直接加上了 synchronized 关键字，性能差距不言而喻。</p>
+<h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><p><code>TreeMap</code>是基于红黑树实现的map容器。</p>
 <p>先看一下红黑树的节点的表示</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    K key;</span><br><span class="line">    V value;</span><br><span class="line">    Entry&lt;K,V&gt; left;</span><br><span class="line">    Entry&lt;K,V&gt; right;</span><br><span class="line">    Entry&lt;K,V&gt; parent;</span><br><span class="line">    <span class="keyword">boolean</span> color = BLACK;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>节点中的内容：</p>
@@ -464,8 +482,8 @@ height:50vh;
 </ul>
 <h3 id="put-方法"><a href="#put-方法" class="headerlink" title="put 方法"></a>put 方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Associates the specified value with the specified key in this map.</span></span><br><span class="line"><span class="comment"> * If the map previously contained a mapping for the key, the old</span></span><br><span class="line"><span class="comment"> * value is replaced.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> key key with which the specified value is to be associated</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> value value to be associated with the specified key</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the previous value associated with &#123;<span class="doctag">@code</span> key&#125;, or</span></span><br><span class="line"><span class="comment"> *         &#123;<span class="doctag">@code</span> null&#125; if there was no mapping for &#123;<span class="doctag">@code</span> key&#125;.</span></span><br><span class="line"><span class="comment"> *         (A &#123;<span class="doctag">@code</span> null&#125; return can also indicate that the map</span></span><br><span class="line"><span class="comment"> *         previously associated &#123;<span class="doctag">@code</span> null&#125; with &#123;<span class="doctag">@code</span> key&#125;.)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> ClassCastException if the specified key cannot be compared</span></span><br><span class="line"><span class="comment"> *         with the keys currently in the map</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> NullPointerException if the specified key is null</span></span><br><span class="line"><span class="comment"> *         and this map uses natural ordering, or its comparator</span></span><br><span class="line"><span class="comment"> *         does not permit null keys</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">    Entry&lt;K,V&gt; t = root;		<span class="comment">//获取根节点</span></span><br><span class="line">    <span class="keyword">if</span> (t == <span class="keyword">null</span>) &#123;			<span class="comment">//如果没有根节点，设置当前的元素为根节点</span></span><br><span class="line">        compare(key, key); <span class="comment">// type (and possibly null) check</span></span><br><span class="line"></span><br><span class="line">        root = <span class="keyword">new</span> Entry&lt;&gt;(key, value, <span class="keyword">null</span>);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> cmp;</span><br><span class="line">    Entry&lt;K,V&gt; parent;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果自定义了比较器，则用自定义的比较器</span></span><br><span class="line">    <span class="comment">// split comparator and comparable paths</span></span><br><span class="line">    Comparator&lt;? <span class="keyword">super</span> K&gt; cpr = comparator;</span><br><span class="line">    <span class="keyword">if</span> (cpr != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            parent = t;</span><br><span class="line">            cmp = cpr.compare(key, t.key);</span><br><span class="line">            <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</span><br><span class="line">                t = t.left;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</span><br><span class="line">                t = t.right;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> t.setValue(value);</span><br><span class="line">        &#125; <span class="keyword">while</span> (t != <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//默认比较器</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">            Comparable&lt;? <span class="keyword">super</span> K&gt; k = (Comparable&lt;? <span class="keyword">super</span> K&gt;) key;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            parent = t;</span><br><span class="line">            <span class="comment">//查找节点，比较后再插入数据</span></span><br><span class="line">            cmp = k.compareTo(t.key);</span><br><span class="line">            <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</span><br><span class="line">                t = t.left;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</span><br><span class="line">                t = t.right;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> t.setValue(value);</span><br><span class="line">        &#125; <span class="keyword">while</span> (t != <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 根据key找到父节点后新建一个节点</span></span><br><span class="line">    Entry&lt;K,V&gt; e = <span class="keyword">new</span> Entry&lt;&gt;(key, value, parent);	</span><br><span class="line">    <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</span><br><span class="line">        parent.left = e;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        parent.right = e;</span><br><span class="line">    fixAfterInsertion(e);</span><br><span class="line">    size++;</span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们可以看到数据的插入是经过比较后插入的，所以说TreeMap 是有序的 map 集合，另外如果不想用默认的比较器（自然字典排序）可以自己实现比较器接口 <code>Comparable</code> ，然后构造方法引入自定义的比较器。</p>
-<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><p>概括的说，LinkedHashMap 是一个关联数组、哈希表，它是线程不安全的，允许key为null,value为null。<br>它继承自HashMap，实现了Map&lt;K,V&gt;接口。其内部还维护了一个双向链表，在每次插入数据，或者访问、修改数据时，会增加节点、或调整链表的节点顺序。以决定迭代时输出的顺序。</p>
-<p>默认情况，遍历时的顺序是按照插入节点的顺序。这也是其与HashMap最大的区别。 </p>
+<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><p>概括的说，<code>LinkedHashMap</code>是一个关联数组、哈希表，它是线程不安全的，允许key为null,value为null。<br>它继承自<code>HashMap</code>，实现了Map&lt;K,V&gt;接口。其内部还维护了一个双向链表，在每次插入数据，或者访问、修改数据时，会增加节点、或调整链表的节点顺序。以决定迭代时输出的顺序。</p>
+<p>默认情况，遍历时的顺序是按照插入节点的顺序。这也是其与<code>HashMap</code>最大的区别。 </p>
 <hr>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://crossoverjie.top/2018/07/23/java-senior/ConcurrentHashMap/" target="_blank" rel="noopener">HashMap? ConcurrentHashMap? 相信看完这篇没人能难住你！</a></p>
 <p><a href="https://yikun.github.io/2015/04/01/Java-HashMap工作原理及实现/" target="_blank" rel="noopener">Java-HashMap工作原理及实现</a></p>
@@ -478,7 +496,7 @@ height:50vh;
             <p>原文作者：<a href="https://a998151.github.io">ALemon</a>
             </p><p>原文链接：<a href="https://a998151.github.io/2019/05/17/Java集合——Map/">https://a998151.github.io/2019/05/17/Java集合——Map/</a>
             </p><p>发表日期：<a href="https://a998151.github.io/2019/05/17/Java集合——Map/">May 17th 2019, 8:32:46 pm</a>
-            </p><p>更新日期：<a href="https://a998151.github.io/2019/05/17/Java集合——Map/">May 18th 2019, 3:42:41 pm</a>
+            </p><p>更新日期：<a href="https://a998151.github.io/2019/05/17/Java集合——Map/">January 10th 2020, 11:15:16 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1022,9 +1040,242 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 46
         </div>
         <!-- search  -->
         
@@ -1034,6 +1285,20 @@ top:50vh;
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span><a class="archive-post-title" href="/2020/01/18/CAS原理/">[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
@@ -1050,7 +1315,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/数据结构与算法/第二章 数据结构基础/">数据结构和算法——第二章 数据结构基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">布隆个过滤器与Hash函数的学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href="/2019/09/29/布隆过滤器/">布隆过滤器</a>
         </li>
     
     
@@ -1075,7 +1350,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/深入理解Java虚拟机II笔记/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">07/05</span><a class="archive-post-title" href="/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span><a class="archive-post-title" href="/2019/07/05/深入理解Java虚拟机II笔记/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1085,7 +1370,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/深入理解Java虚拟机II笔记/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">07/03</span><a class="archive-post-title" href="/2019/07/03/JVM内存溢出异常探究/">JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/03</span><a class="archive-post-title" href="/2019/07/03/深入理解Java虚拟机II笔记/JVM内存溢出异常探究/">JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1095,12 +1390,37 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">06/20</span><a class="archive-post-title" href="/2019/06/20/深入理解Java虚拟机II笔记/Java对象探究（深入理解Java虚拟机II笔记）/">Java对象探究（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存管理模型/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/深入理解Java虚拟机II笔记/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/04</span><a class="archive-post-title" href="/2019/06/04/深入理解 Synchronized/">深入理解 Synchronized</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href="/2019/05/29/JVM 几种模型基本介绍/">（转）Java中的几种模型概念介绍</a>
         </li>
     
     
@@ -1202,6 +1522,48 @@ top:50vh;
             <span class="archive-post-date">10/04</span><a class="archive-post-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">Java 中的 ==、equals 与 hashCode</a>
         </li>
     
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/dubbo/一、Dubbo 介绍/">[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第一章 算法概述小结/">[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第三章 树/">[Untitled Post]</a>
+        </li>
+    
     </ul></div>
   </div>
         <div class="sidebar-panel-tags">
@@ -1242,6 +1604,8 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="线程池"><span class="iconfont-archer">&#xe606;</span>线程池</span>
     
         <span class="sidebar-tag-name" data-tags="Java NIO"><span class="iconfont-archer">&#xe606;</span>Java NIO</span>
+    
+        <span class="sidebar-tag-name" data-tags="并发"><span class="iconfont-archer">&#xe606;</span>并发</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

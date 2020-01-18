@@ -393,6 +393,42 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/29/JVM 几种模型基本介绍/">
+            
+                <span>（转）Java中的几种模型概念介绍</span>
+        </a>
+        <div class="abstract-content">
+            本篇文章为转发文章，非原创，来自[JVM内存结构 VS Java内存模型 VS Java对象模型]
+JVM 内存结构我们都知道，Java代码是要运行在虚拟机上的，而虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域，这些区域都有各自的用途。其中有些区域随着虚拟机进程的启动而存在，而有些区域则依赖用户线程的启动和结束而建立和销毁。在《Java虚拟机规范（Java SE 8）》中描述了JVM运行时内存区域结构如下：
+
+各个区域的功能不是本文重点，就不在这里详细介绍了。这里简单提几个需要特别注意的点：
+
+以上是Java虚拟机规范，不同的虚拟机实现会各有不同，但是一般会遵...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/29</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/05/28/原子性、可见性、有序性/">
             
                 <span>原子性、可见性、有序性</span>
@@ -440,14 +476,19 @@
         <div class="abstract-content">
             写在文章的前面：
 ​    这篇文章，对于Map容器，介绍得不全的，参考资料中介绍的比较全面，map 这部分的内容可以网上搜到很全很详细的资料。这篇文章其实相当于自己个人参考着网上的资料配合看着理解源码做的一些理解而已。
-HashMap
+HashMap主要了解下面的这些信息
+
+HashMap的数据结构是什么，Java 7/8 有何不同，为什么需要改变？
+put 过程
+get 过程
+为什么说 HashMap 是线程不安全的？
+
+
 
 说明，这里不进行详细说明，主要用户总结，详细说明可看参考资料一些大神的文章。
 
 
-元素在加入容器的数组中，并不是按照顺序插入的，而是通过 hash进行确定数组下标确定位置插入数据的
-Java8 引入红黑树，主要是为了解决查询遍历链表效率太低
-HashMap散列图、Hashtable散列表是按“有利于随机查找的散列(hash)的顺序”。并非按输入顺序。遍...
+元素在加入容器的数组中，并不是按照顺序插入的，而是通过 hash进行确定数组下标确定位置插入数...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -458,11 +499,7 @@ HashMap散列图、Hashtable散列表是按“有利于随机查找的散列(has
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags="Map">Map</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="总结">总结</a>
     
 </div>
             
@@ -1092,9 +1129,242 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 46
         </div>
         <!-- search  -->
         
@@ -1104,6 +1374,20 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span><a class="archive-post-title" href="/2020/01/18/CAS原理/">[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
@@ -1120,7 +1404,17 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/数据结构与算法/第二章 数据结构基础/">数据结构和算法——第二章 数据结构基础</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">10/02</span><a class="archive-post-title" href="/2019/10/02/布隆个过滤器与Hash函数的学习/">布隆个过滤器与Hash函数的学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href="/2019/09/29/布隆过滤器/">布隆过滤器</a>
         </li>
     
     
@@ -1145,7 +1439,17 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">07/27</span><a class="archive-post-title" href="/2019/07/27/深入理解Java虚拟机II笔记/内存间的交互操作（深入理解Java虚拟机II笔记）/">JVM内存间交互（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">07/05</span><a class="archive-post-title" href="/2019/07/05/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span><a class="archive-post-title" href="/2019/07/05/深入理解Java虚拟机II笔记/垃圾收集器——哪些对象可以回收？（深入理解Java虚拟机II笔记）/">GC——哪些对象可以回收？（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1155,7 +1459,17 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href="/2019/07/04/深入理解Java虚拟机II笔记/介绍垃圾收集器背景（深入理解Java虚拟机II笔记）/">介绍垃圾收集器背景（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">07/03</span><a class="archive-post-title" href="/2019/07/03/JVM内存溢出异常探究/">JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/03</span><a class="archive-post-title" href="/2019/07/03/深入理解Java虚拟机II笔记/JVM内存溢出异常探究/">JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
@@ -1165,12 +1479,37 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">06/20</span><a class="archive-post-title" href="/2019/06/20/深入理解Java虚拟机II笔记/Java对象探究（深入理解Java虚拟机II笔记）/">Java对象探究（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
         </li>
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/Java 内存管理模型/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href="/2019/06/16/深入理解Java虚拟机II笔记/Java 内存区域/">Java内存区域（深入理解Java虚拟机II笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/04</span><a class="archive-post-title" href="/2019/06/04/深入理解 Synchronized/">深入理解 Synchronized</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">05/31</span><a class="archive-post-title" href="/2019/05/31/一点想法/">一点想法或反思</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href="/2019/05/29/JVM 几种模型基本介绍/">（转）Java中的几种模型概念介绍</a>
         </li>
     
     
@@ -1272,6 +1611,48 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
             <span class="archive-post-date">10/04</span><a class="archive-post-title" href="/2018/10/04/Java 中的 ==, equals 与 hashCode 的区别与联系/">Java 中的 ==、equals 与 hashCode</a>
         </li>
     
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/dubbo/一、Dubbo 介绍/">[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第一章 算法概述小结/">[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href="/2020/01/18/数据结构与算法/第三章 树/">[Untitled Post]</a>
+        </li>
+    
     </ul></div>
   </div>
         <div class="sidebar-panel-tags">
@@ -1312,6 +1693,8 @@ ArrayList 实现了RandmoAccess接口：即提供了随...
         <span class="sidebar-tag-name" data-tags="线程池"><span class="iconfont-archer">&#xe606;</span>线程池</span>
     
         <span class="sidebar-tag-name" data-tags="Java NIO"><span class="iconfont-archer">&#xe606;</span>Java NIO</span>
+    
+        <span class="sidebar-tag-name" data-tags="并发"><span class="iconfont-archer">&#xe606;</span>并发</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
