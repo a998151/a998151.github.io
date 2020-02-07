@@ -359,6 +359,44 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2020/02/01/Java NIO（三）通道/">
+            
+                <span>Java NIO（三）通道</span>
+        </a>
+        <div class="abstract-content">
+            希望通过这篇文章了解到的信息
+
+通道是什么？使用场景。
+有哪些类型？如何创建对应类型的 Channel
+Scatter、Gather 是什么？有什么作用？
+FileChannel 具体使用与原理。
+SocketChannel、ServerSocketChannel 具体使用与原理。
+
+Channel 作用首先 Buffer 是不可以直接和外部资源进行 I/O 操作的，那如果需要用到 Buffer 和外部资源进行 I/O 操作，则需要一个负责外部资源和内存中数据操作做中转的角色，它就是 Channel。Channel 负责 Buffer 与外部资源的数据交互。
+Channel 与 Stre...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/02/01</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="NIO">NIO</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2020/01/18/Java NIO（二）缓冲区/">
             
                 <span>Java NIO（二）缓冲区</span>
@@ -734,45 +772,6 @@ GC是什么？为什么需要GC？GC（Garbage Collection）是什么？相信�
         <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags="GC">GC</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/07/03/JVM内存溢出异常探究/">
-            
-                <span>JVM内存溢出异常探究（深入理解Java虚拟机II笔记）</span>
-        </a>
-        <div class="abstract-content">
-            为什么需要了解内存溢出？
-JVM 运行时的内存区域出现内存溢异常原因
-对于这些异常我们该如何处理或者提供一个排查处理的思路
-为了之后理解 Java 垃圾收集机制为了避免内存溢出异常的出现都做了哪些努力！
-
-贴出自己学习的时候整理的思维导图
-
-因为思维导图整理得比较完整，大家看了应该也知道，所以这篇文章就相当于划一下水，仅进行记录一下！
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/07/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="JVM">JVM</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="内存溢出">内存溢出</a>
     
 </div>
             
@@ -1362,9 +1361,24 @@ JVM 运行时的内存区域出现内存溢异常原因
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 32
         </div>
         <!-- search  -->
         
@@ -1377,6 +1391,11 @@ JVM 运行时的内存区域出现内存溢异常原因
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href="/2020/02/01/Java NIO（三）通道/">Java NIO（三）通道</a>
+        </li>
     
     
         <li class="archive-post-item">

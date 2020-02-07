@@ -346,6 +346,37 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/05/01/数据库管理系统（DBMS）——事务隔离级别/">
+            
+                <span>数据库管理系统（DBMS）——事务与隔离级别</span>
+        </a>
+        <div class="abstract-content">
+            事务事务是一组原子性的SQL操作，或者说是一个独立的工作单元。如果数据库引擎在执行这个工作单元的时候，任何一条语句崩溃或者因为其他原因无法执行，那么所有的语句都不会执行。也就是说，事务内的语句，要么全部执行成功，要么全部执行失败。
+通过一个典型的银行例子说明：
+假设一个银行的数据库有两张表：支付表（checking）和储蓄表（savings）。现在要从用户 Jane 的支付账户转移200块到她的储蓄账户，那么需要经过以下三个步骤：
+
+检查支付账户的余额高于200元
+从支付账户中减去200元
+在储蓄账户余额中增加200元
+
+这三个步骤必须打包在一个事务中，任何一个步骤失败，都必须回滚所有的...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/05/01</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/04/13/数据库管理系统（DBMS）——读现象/">
             
                 <span>数据库管理系统（DBMS）——读现象</span>
@@ -633,46 +664,6 @@ RTTI，它假定我们在编译时已经知道了所有类型
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/12/21/泛型/">
-            
-                <span>泛型使用</span>
-        </a>
-        <div class="abstract-content">
-            这篇文章主要解决的问题：
-
-泛型的简单使用
-泛型的好处，有什么奇怪的地方
-泛型使用场景
-输入的类型是泛型，根据泛型指定的类型，调用的对应方法形参的类型
-
-
-一、使用初衷（场景）1、我们都希望我们的代码复用性高，而在 Java 中，我们想要编写可以应用于多种类型的代码，就需要用到泛型了。
-2、仅一次方法调用就能返回多个对象。
-3、而且在研读一些成熟的框架源码的时候，会发现源码存在着大量的泛型使用，不了解好泛型，很难理解得了框架设计。
-二、泛型的简单使用泛型是在 Java5 提出的，泛型实现了参数化类型（类型参数化）的概念。在你创建参数化类型的一个实例时，编译器会为你负责转型操作，并且保证类...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/21</span>
             </div>
             <!-- tags  -->
             
@@ -1178,9 +1169,24 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 32
         </div>
         <!-- search  -->
         
@@ -1193,6 +1199,11 @@ RTTI，它假定我们在编译时已经知道了所有类型
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href="/2020/02/01/Java NIO（三）通道/">Java NIO（三）通道</a>
+        </li>
     
     
         <li class="archive-post-item">
