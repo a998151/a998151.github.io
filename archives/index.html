@@ -357,10 +357,11 @@
 有哪些类型？如何创建对应类型的 Channel
 Scatter、Gather 是什么？有什么作用？
 FileChannel 具体使用与原理。
-SocketChannel、ServerSocketChannel 具体使用与原理。
+SocketChannel、ServerSocketChannel具体使用与原理。
 
-Channel 作用首先 Buffer 是不可以直接和外部资源进行 I/O 操作的，那如果需要用到 Buffer 和外部资源进行 I/O 操作，则需要一个负责外部资源和内存中数据操作做中转的角色，它就是 Channel。Channel 负责 Buffer 与外部资源的数据交互。
-Channel 与 Stre...
+ps：
+——以下内容来自于《Java NIO》，相当于个人整理的笔记
+Channel 作用首先 Buffer 是不可以直接和外部资源进行 I/O 操作的，那如果需要用到 Buffer 和外部资源进行 I/O 操作，则需要一个负责外部资源和内存中数据操作做中转的角色，它就是 Channel。Channel 负责...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
